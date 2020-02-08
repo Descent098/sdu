@@ -1,19 +1,15 @@
 # Changelog
 
-Include information about your changes as you release 
+## V0.0.1; February 8th 2020
 
-## Version number; Date
-
-Description of release goals.
+Released existing code for the project, looking to properly implement in v0.1.0
 
 ### Features
 
-...
-
-### Bug fixes
-
-...
+- Traversing directories in terminal and GUI
+- Validating number selections
+- Normalized serialization and de-serialization of paths
 
 ### Documentation improvements
 
-...
+- Created documentation site
