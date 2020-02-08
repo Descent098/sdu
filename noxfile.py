@@ -47,5 +47,6 @@ def test(session):
 @nox.session
 def docs(session):
     # Serve documentation to verify it's how you want
-    session.install("mkdocs")
-    session.run("mkdocs", "serve")
+    session.install(".") # install SDU
+    session.install("pdoc3")
+    session.run("pdoc3", "sdu", "--http", "localhost:8080")
