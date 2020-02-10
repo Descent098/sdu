@@ -1,4 +1,4 @@
-"""This module contains many useful utilities for dealing with system paths.
+"""Utilities for dealing with system paths.
 
 Functions
 ---------

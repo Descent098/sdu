@@ -1,4 +1,4 @@
-"""A module for helpful utilities with generating CLI's
+"""Utilities for generating CLI's
 
 Functions
 ---------

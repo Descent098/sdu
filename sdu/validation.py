@@ -1,4 +1,4 @@
-"""Contains a set of common validation schemes.
+"""A set of common validation schemes.
 
 Functions
 ---------
