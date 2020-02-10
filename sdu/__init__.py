@@ -49,4 +49,35 @@ while selection != number:
 print('You win!') # After number has been guessed correctly
 ```
 
+Clearing terminal after filling it with hello's
+
+```
+from sdu.terminal import clear_terminal
+
+print('hello\n'*250) # Fill screen with hello's
+
+clear_terminal() # Clears the terminal NOTE: cross platform
+```
+
+An example of path processing on a windows machine (because of the wildcard and OS results will vary)
+
+```
+from sdu.paths import process_paths
+
+paths = ['~/Desktop/Development/Canadian Coding/SSB', 'C:\\Users\\Kieran\\Desktop\\Development\\*', '~\\Desktop\\Development\\Personal\\noter', '.']
+
+print(process_paths(paths)) # Prints: ['C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB', 'C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding', 'C:\\Users\\Kieran\\Desktop\\Development\\Personal', 'C:\\Users\\Kieran\\Desktop\\Development\\pystall', 'C:\\Users\\Kieran\\Desktop\\Development\\python-package-template', 'C:\\Users\\Kieran\\Desktop\\Development\\Work', 'C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter', 'C:\\Users\\Kieran\\Desktop\\sdu'] 
+```
+
+An example of the preprocessing to postprocessing pipeline on a windows machine (because of the wildcard and OS results will vary)
+
+```
+from sdu.paths import preprocess_paths, postprocess_paths
+
+paths = ['~/Desktop/Development/Canadian Coding/SSB', 'C:\\Users\\Kieran\\Desktop\\Development\\*', '~\\Desktop\\Development\\Personal\\noter', '.']
+
+print(preprocess_paths(paths)) # Prints: ['~/Desktop/Development/Canadian Coding/SSB', '~/Desktop/Development/*' , '~/Desktop/Development/Personal/noter', '.']
+print(postprocess_paths(paths)) # Prints: ['C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB', 'C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding', 'C:\\Users\\Kieran\\Desktop\\Development\\Personal', 'C:\\Users\\Kieran\\Desktop\\Development\\pystall', 'C:\\Users\\Kieran\\Desktop\\Development\\python-package-template', 'C:\\Users\\Kieran\\Desktop\\Development\\Work', 'C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter', 'C:\\Users\\Kieran\\Desktop\\sdu'] 
+```
+
 """

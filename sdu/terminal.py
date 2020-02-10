@@ -13,7 +13,10 @@ center_text -> str:
 
 """
 
+# Standard lib dependencies
 import os
+
+# Internal Dependencies
 from .validation import validate_number_selection
 
 def clear_terminal() -> None:
@@ -21,13 +24,14 @@ def clear_terminal() -> None:
     
     Examples
     --------
-    
-    ```
-    >> from sdu.terminal import clear_terminal
-    
-    >> print('hello\n'*250) # Fill screen with hello's
+    Clearing terminal after filling it with hello's
 
-    >> clear_terminal() # Clears the terminal NOTE: cross platform
+    ```
+    from sdu.terminal import clear_terminal
+    
+    print('hello\n'*250) # Fill screen with hello's
+
+    clear_terminal() # Clears the terminal NOTE: cross platform
     ```
     """
     if os.name=='nt': # PORT: Windows
@@ -44,11 +48,11 @@ def _cli_directory() -> str:
     Taking input to save content to a directory
 
     ```
-    >> import os
+    import os
 
-    >> save_folder = _cli_directory()
+    save_folder = _cli_directory()
 
-    >> with open('save_folder{}blah.txt'.format(os.sep), 'w') as output_file:
+    with open('save_folder{}blah.txt'.format(os.sep), 'w') as output_file:
         output_file.write('blah')
     ```
 
@@ -107,11 +111,11 @@ def select_directory(gui=False) -> str:
     Taking input to save content to a directory
 
     ```
-    >> import os
+    import os
 
-    >> save_folder = select_directory(gui=True)
+    save_folder = select_directory(gui=True)
 
-    >> with open('save_folder{}blah.txt'.format(os.sep), 'w') as output_file:
+    with open('save_folder{}blah.txt'.format(os.sep), 'w') as output_file:
         output_file.write('blah')
     ```
 
@@ -147,11 +151,11 @@ def center_text(message = "Hello World!") -> str:
     Printing someones name centered in terminal.
 
     ```
-    >> from sdu.terminal import center_text
+    from sdu.terminal import center_text
 
-    >> name = input('what is your name?:')
+    name = input('what is your name?:')
 
-    >> print(center_text(name))
+    print(center_text(name))
     ```
 
     Returns
