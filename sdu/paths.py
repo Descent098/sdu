@@ -2,12 +2,15 @@
 
 Functions
 ---------
-preprocess_paths -> str:
-    Preprocesses paths from input and splits + formats them into a useable list for later parsing.
+preprocess_paths -> list:
+    Preprocesses paths to normalize them as standard unix-style paths. See notes for details
 
 postprocess_paths -> list:
-    Postprocesses existing paths to be useable by system. This means things like expanding wildcards,
-     and processing correct path seperators (os agnostic).
+    Postprocesses existing paths to be used by dispatcher.
+        This means things like expanding wildcards, and processing correct path seperators.
+
+process_paths -> list:
+    Takes a list or tuple of paths and normalizes and globs them. See notes for details.
 
 Examples
 --------
