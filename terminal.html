@@ -47,7 +47,10 @@ center_text -&gt; str:
 
 &#34;&#34;&#34;
 
+# Standard lib dependencies
 import os
+
+# Internal Dependencies
 from .validation import validate_number_selection
 
 def clear_terminal() -&gt; None:
@@ -55,13 +58,14 @@ def clear_terminal() -&gt; None:
     
     Examples
     --------
-    
-    ```
-    &gt;&gt; from sdu.terminal import clear_terminal
-    
-    &gt;&gt; print(&#39;hello\n&#39;*250) # Fill screen with hello&#39;s
+    Clearing terminal after filling it with hello&#39;s
 
-    &gt;&gt; clear_terminal() # Clears the terminal NOTE: cross platform
+    ```
+    from sdu.terminal import clear_terminal
+    
+    print(&#39;hello\n&#39;*250) # Fill screen with hello&#39;s
+
+    clear_terminal() # Clears the terminal NOTE: cross platform
     ```
     &#34;&#34;&#34;
     if os.name==&#39;nt&#39;: # PORT: Windows
@@ -78,11 +82,11 @@ def _cli_directory() -&gt; str:
     Taking input to save content to a directory
 
     ```
-    &gt;&gt; import os
+    import os
 
-    &gt;&gt; save_folder = _cli_directory()
+    save_folder = _cli_directory()
 
-    &gt;&gt; with open(&#39;save_folder{}blah.txt&#39;.format(os.sep), &#39;w&#39;) as output_file:
+    with open(&#39;save_folder{}blah.txt&#39;.format(os.sep), &#39;w&#39;) as output_file:
         output_file.write(&#39;blah&#39;)
     ```
 
@@ -141,11 +145,11 @@ def select_directory(gui=False) -&gt; str:
     Taking input to save content to a directory
 
     ```
-    &gt;&gt; import os
+    import os
 
-    &gt;&gt; save_folder = select_directory(gui=True)
+    save_folder = select_directory(gui=True)
 
-    &gt;&gt; with open(&#39;save_folder{}blah.txt&#39;.format(os.sep), &#39;w&#39;) as output_file:
+    with open(&#39;save_folder{}blah.txt&#39;.format(os.sep), &#39;w&#39;) as output_file:
         output_file.write(&#39;blah&#39;)
     ```
 
@@ -181,11 +185,11 @@ def center_text(message = &#34;Hello World!&#34;) -&gt; str:
     Printing someones name centered in terminal.
 
     ```
-    &gt;&gt; from sdu.terminal import center_text
+    from sdu.terminal import center_text
 
-    &gt;&gt; name = input(&#39;what is your name?:&#39;)
+    name = input(&#39;what is your name?:&#39;)
 
-    &gt;&gt; print(center_text(name))
+    print(center_text(name))
     ```
 
     Returns
@@ -222,11 +226,11 @@ if __name__ == &#34;__main__&#34;:
 </dl>
 <h2 id="examples">Examples</h2>
 <p>Printing someones name centered in terminal.</p>
-<pre><code>&gt;&gt; from sdu.terminal import center_text
+<pre><code>from sdu.terminal import center_text
 
-&gt;&gt; name = input('what is your name?:')
+name = input('what is your name?:')
 
-&gt;&gt; print(center_text(name))
+print(center_text(name))
 </code></pre>
 <h2 id="returns">Returns</h2>
 <dl>
@@ -250,11 +254,11 @@ if __name__ == &#34;__main__&#34;:
     Printing someones name centered in terminal.
 
     ```
-    &gt;&gt; from sdu.terminal import center_text
+    from sdu.terminal import center_text
 
-    &gt;&gt; name = input(&#39;what is your name?:&#39;)
+    name = input(&#39;what is your name?:&#39;)
 
-    &gt;&gt; print(center_text(name))
+    print(center_text(name))
     ```
 
     Returns
@@ -275,14 +279,15 @@ if __name__ == &#34;__main__&#34;:
 <section class="desc"><p>Clears the current terminal.</p>
 <pre><code>Examples
 --------
+Clearing terminal after filling it with hello's
 
 ```
-&gt;&gt; from sdu.terminal import clear_terminal
+from sdu.terminal import clear_terminal
 
-&gt;&gt; print('hello
+print('hello
 </code></pre>
 <p>'*250) # Fill screen with hello's</p>
-<pre><code>&gt;&gt; clear_terminal() # Clears the terminal NOTE: cross platform
+<pre><code>clear_terminal() # Clears the terminal NOTE: cross platform
 ```
 </code></pre></section>
 <details class="source">
@@ -294,13 +299,14 @@ if __name__ == &#34;__main__&#34;:
     
     Examples
     --------
-    
-    ```
-    &gt;&gt; from sdu.terminal import clear_terminal
-    
-    &gt;&gt; print(&#39;hello\n&#39;*250) # Fill screen with hello&#39;s
+    Clearing terminal after filling it with hello&#39;s
 
-    &gt;&gt; clear_terminal() # Clears the terminal NOTE: cross platform
+    ```
+    from sdu.terminal import clear_terminal
+    
+    print(&#39;hello\n&#39;*250) # Fill screen with hello&#39;s
+
+    clear_terminal() # Clears the terminal NOTE: cross platform
     ```
     &#34;&#34;&#34;
     if os.name==&#39;nt&#39;: # PORT: Windows
@@ -321,11 +327,11 @@ Specify whether or not you want a tkinter dialogue box for picking
 the directory or a cli based directory selection.</p>
 <h2 id="examples">Examples</h2>
 <p>Taking input to save content to a directory</p>
-<pre><code>&gt;&gt; import os
+<pre><code>import os
 
-&gt;&gt; save_folder = select_directory(gui=True)
+save_folder = select_directory(gui=True)
 
-&gt;&gt; with open('save_folder{}blah.txt'.format(os.sep), 'w') as output_file:
+with open('save_folder{}blah.txt'.format(os.sep), 'w') as output_file:
     output_file.write('blah')
 </code></pre>
 <h2 id="returns">Returns</h2>
@@ -351,11 +357,11 @@ the directory or a cli based directory selection.</p>
     Taking input to save content to a directory
 
     ```
-    &gt;&gt; import os
+    import os
 
-    &gt;&gt; save_folder = select_directory(gui=True)
+    save_folder = select_directory(gui=True)
 
-    &gt;&gt; with open(&#39;save_folder{}blah.txt&#39;.format(os.sep), &#39;w&#39;) as output_file:
+    with open(&#39;save_folder{}blah.txt&#39;.format(os.sep), &#39;w&#39;) as output_file:
         output_file.write(&#39;blah&#39;)
     ```
 

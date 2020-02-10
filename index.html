@@ -60,6 +60,29 @@ while selection != number:
 
 print('You win!') # After number has been guessed correctly
 </code></pre>
+<p>Clearing terminal after filling it with hello's</p>
+<pre><code>from sdu.terminal import clear_terminal
+
+print('hello
+'*250) # Fill screen with hello's
+
+clear_terminal() # Clears the terminal NOTE: cross platform
+</code></pre>
+<p>An example of path processing on a windows machine (because of the wildcard and OS results will vary)</p>
+<pre><code>from sdu.paths import process_paths
+
+paths = ['~/Desktop/Development/Canadian Coding/SSB', 'C:\Users\Kieran\Desktop\Development\*', '~\Desktop\Development\Personal\noter', '.']
+
+print(process_paths(paths)) # Prints: ['C:\Users\Kieran\Desktop\Development\Canadian Coding\SSB', 'C:\Users\Kieran\Desktop\Development\Canadian Coding', 'C:\Users\Kieran\Desktop\Development\Personal', 'C:\Users\Kieran\Desktop\Development\pystall', 'C:\Users\Kieran\Desktop\Development\python-package-template', 'C:\Users\Kieran\Desktop\Development\Work', 'C:\Users\Kieran\Desktop\Development\Personal\noter', 'C:\Users\Kieran\Desktop\sdu'] 
+</code></pre>
+<p>An example of the preprocessing to postprocessing pipeline on a windows machine (because of the wildcard and OS results will vary)</p>
+<pre><code>from sdu.paths import preprocess_paths, postprocess_paths
+
+paths = ['~/Desktop/Development/Canadian Coding/SSB', 'C:\Users\Kieran\Desktop\Development\*', '~\Desktop\Development\Personal\noter', '.']
+
+print(preprocess_paths(paths)) # Prints: ['~/Desktop/Development/Canadian Coding/SSB', '~/Desktop/Development/*' , '~/Desktop/Development/Personal/noter', '.']
+print(postprocess_paths(paths)) # Prints: ['C:\Users\Kieran\Desktop\Development\Canadian Coding\SSB', 'C:\Users\Kieran\Desktop\Development\Canadian Coding', 'C:\Users\Kieran\Desktop\Development\Personal', 'C:\Users\Kieran\Desktop\Development\pystall', 'C:\Users\Kieran\Desktop\Development\python-package-template', 'C:\Users\Kieran\Desktop\Development\Work', 'C:\Users\Kieran\Desktop\Development\Personal\noter', 'C:\Users\Kieran\Desktop\sdu'] 
+</code></pre>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -113,6 +136,37 @@ while selection != number:
     selection = validate_number_selection(maximum = 10, minimum = 0, message=&#34;guess a number between 0-10: &#34;)
 
 print(&#39;You win!&#39;) # After number has been guessed correctly
+```
+
+Clearing terminal after filling it with hello&#39;s
+
+```
+from sdu.terminal import clear_terminal
+
+print(&#39;hello\n&#39;*250) # Fill screen with hello&#39;s
+
+clear_terminal() # Clears the terminal NOTE: cross platform
+```
+
+An example of path processing on a windows machine (because of the wildcard and OS results will vary)
+
+```
+from sdu.paths import process_paths
+
+paths = [&#39;~/Desktop/Development/Canadian Coding/SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\*&#39;, &#39;~\\Desktop\\Development\\Personal\\noter&#39;, &#39;.&#39;]
+
+print(process_paths(paths)) # Prints: [&#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\pystall&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\python-package-template&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Work&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter&#39;, &#39;C:\\Users\\Kieran\\Desktop\\sdu&#39;] 
+```
+
+An example of the preprocessing to postprocessing pipeline on a windows machine (because of the wildcard and OS results will vary)
+
+```
+from sdu.paths import preprocess_paths, postprocess_paths
+
+paths = [&#39;~/Desktop/Development/Canadian Coding/SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\*&#39;, &#39;~\\Desktop\\Development\\Personal\\noter&#39;, &#39;.&#39;]
+
+print(preprocess_paths(paths)) # Prints: [&#39;~/Desktop/Development/Canadian Coding/SSB&#39;, &#39;~/Desktop/Development/*&#39; , &#39;~/Desktop/Development/Personal/noter&#39;, &#39;.&#39;]
+print(postprocess_paths(paths)) # Prints: [&#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\pystall&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\python-package-template&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Work&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter&#39;, &#39;C:\\Users\\Kieran\\Desktop\\sdu&#39;] 
 ```
 
 &#34;&#34;&#34;</code></pre>

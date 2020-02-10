@@ -27,6 +27,20 @@ Preprocesses paths from input and splits + formats them into a useable list for 
 <p>postprocess_paths -&gt; list:
 Postprocesses existing paths to be useable by system. This means things like expanding wildcards,
 and processing correct path seperators (os agnostic).</p>
+<h2 id="examples">Examples</h2>
+<p>An example of the preprocessing to postprocessing pipeline on a windows machine (because of the wildcard and OS results will vary)</p>
+<pre><code>paths = ['~/Desktop/Development/Canadian Coding/SSB', 'C:\Users\Kieran\Desktop\Development\*', '~\Desktop\Development\Personal\noter', '.']
+
+print(preprocess_paths(paths)) # Prints: ['~/Desktop/Development/Canadian Coding/SSB', '~/Desktop/Development/*' , '~/Desktop/Development/Personal/noter', '.']
+print(postprocess_paths(paths)) # Prints: ['C:\Users\Kieran\Desktop\Development\Canadian Coding\SSB', 'C:\Users\Kieran\Desktop\Development\Canadian Coding', 'C:\Users\Kieran\Desktop\Development\Personal', 'C:\Users\Kieran\Desktop\Development\pystall', 'C:\Users\Kieran\Desktop\Development\python-package-template', 'C:\Users\Kieran\Desktop\Development\Work', 'C:\Users\Kieran\Desktop\Development\Personal\noter', 'C:\Users\Kieran\Desktop\sdu'] 
+</code></pre>
+<p>An example of path processing on a windows machine (because of the wildcard and OS results will vary)</p>
+<pre><code>paths = ['~/Desktop/Development/Canadian Coding/SSB', 'C:\Users\Kieran\Desktop\Development\*', '~\Desktop\Development\Personal\noter', '.']
+
+print(process_paths(paths)) # Prints: ['C:\Users\Kieran\Desktop\Development\Canadian Coding\SSB', 'C:\Users\Kieran\Desktop\Development\Canadian Coding', 'C:\Users\Kieran\Desktop\Development\Personal', 'C:\Users\Kieran\Desktop\Development\pystall', 'C:\Users\Kieran\Desktop\Development\python-package-template', 'C:\Users\Kieran\Desktop\Development\Work', 'C:\Users\Kieran\Desktop\Development\Personal\noter', 'C:\Users\Kieran\Desktop\sdu'] 
+</code></pre>
+<h2 id="see-also">See Also</h2>
+<p><code>Glob module information: &lt;https://docs.python.org/3/library/glob.html&gt;</code></p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -42,30 +56,69 @@ postprocess_paths -&gt; list:
     Postprocesses existing paths to be useable by system. This means things like expanding wildcards,
      and processing correct path seperators (os agnostic).
 
+Examples
+--------
+An example of the preprocessing to postprocessing pipeline on a windows machine (because of the wildcard and OS results will vary)
+
+```
+paths = [&#39;~/Desktop/Development/Canadian Coding/SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\*&#39;, &#39;~\\Desktop\\Development\\Personal\\noter&#39;, &#39;.&#39;]
+
+print(preprocess_paths(paths)) # Prints: [&#39;~/Desktop/Development/Canadian Coding/SSB&#39;, &#39;~/Desktop/Development/*&#39; , &#39;~/Desktop/Development/Personal/noter&#39;, &#39;.&#39;]
+print(postprocess_paths(paths)) # Prints: [&#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\pystall&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\python-package-template&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Work&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter&#39;, &#39;C:\\Users\\Kieran\\Desktop\\sdu&#39;] 
+```
+
+An example of path processing on a windows machine (because of the wildcard and OS results will vary)
+
+```
+paths = [&#39;~/Desktop/Development/Canadian Coding/SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\*&#39;, &#39;~\\Desktop\\Development\\Personal\\noter&#39;, &#39;.&#39;]
+
+print(process_paths(paths)) # Prints: [&#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\pystall&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\python-package-template&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Work&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter&#39;, &#39;C:\\Users\\Kieran\\Desktop\\sdu&#39;] 
+```
+
+See Also
+--------
+Glob module information: https://docs.python.org/3/library/glob.html
+
 &#34;&#34;&#34;
 
+# Standard lib dependencies
+import os
+import glob
+import copy
 import logging
 
-def preprocess_paths(paths:str) -&gt; str:
-    &#34;&#34;&#34;Preprocesses paths from input and splits + formats them
-    into a useable list for later parsing.
+
+def preprocess_paths(paths:list) -&gt; list:
+    &#34;&#34;&#34;Preprocesses paths to normalize them as standard unix-style paths.
+
+    Parameters
+    ----------
+    paths : (list|tuple)
+        A list or tuple of paths, can be relative or absolute. See Notes for details.
     
     Example
     -------
+    An example of the preprocessing function on a windows machine.
+
     ```
-    &gt;&gt; paths = &#39;~/Desktop/Development/Canadian Coding/SSB, C:\\Users\\Kieran\\Desktop\\Development\\*, ~\\Desktop\\Development\\Personal\\noter, .&#39;
+    paths = [&#39;~/Desktop/Development/Canadian Coding/SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\*&#39;, &#39;~\\Desktop\\Development\\Personal\\noter&#39;, &#39;.&#39;]
     
-    &gt;&gt; paths = _preprocess_paths(paths)
-    print(paths) # Prints: &#39;~/Desktop/Development/Canadian Coding/SSB,~/Desktop/Development/*,~/Desktop/Development/Personal/noter,.&#39;
+    print(preprocess_paths(paths)) # Prints: [&#39;~/Desktop/Development/Canadian Coding/SSB&#39;, &#39;~/Desktop/Development/*&#39; , &#39;~/Desktop/Development/Personal/noter&#39;, &#39;.&#39;]
     ```
+
+    Notes 
+    -----
+    - This function does not change &#39;.&#39; paths unless they include a relative path to a separate folder. i.e. a plain &#39;.&#39; is untouched but &#39;./folder-name&#39; is converted to an absolute path.
+    - This function leaves in *&#39;s, and brackets since the postprocessing function globs paths and uses those characters for processing.
+    - This function will take the HOME(*nix) or USERPROFILE(windows) environment variables and convert them to a ~
 
     Returns
     -------
-    str:
-        The preprocessed paths
+    list:
+        The normalized &amp; preprocessed paths
     &#34;&#34;&#34;
     logging.info(f&#34;Beginning path preprocessing on {paths}&#34;)
-    result = paths.split(&#34;,&#34;)
+    result = list(copy.deepcopy(paths))
     for index, directory in enumerate(result):
         directory = directory.strip()
         logging.debug(f&#34;Directory: {directory}&#34;)
@@ -84,32 +137,47 @@ def preprocess_paths(paths:str) -&gt; str:
             result[index] = directory
 
     logging.debug(f&#34;Result: {result}&#34;)
-    result = &#34;,&#34;.join(result)
 
     return result
 
-def postprocess_paths(paths:str) -&gt; list:
+def postprocess_paths(paths:list) -&gt; list:
     &#34;&#34;&#34;Postprocesses existing paths to be used by dispatcher.
     This means things like expanding wildcards, and processing correct path seperators.
     
+    Parameters
+    ----------
+    paths : (list|tuple)
+        A list or tuple of paths, can be relative or absolute. See Notes for details.
+
     Example
     -------
+    An example of the preprocessing to postprocessing pipeline on a windows machine (because of the wildcard and OS results will vary)
+
     ```
-    paths = &#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB, C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\website, ~/Desktop/Development/Personal/noter, C:\\Users\\Kieran\\Desktop\\Development\\*&#39;
+    paths = [&#39;~/Desktop/Development/Canadian Coding/SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\*&#39;, &#39;~\\Desktop\\Development\\Personal\\noter&#39;, &#39;.&#39;]
     
-    paths = _preprocess_paths(paths)
-    print(_postprocess_paths(paths)) 
-    # Prints: [&#39;C:/Users/Kieran/Desktop/Development/Canadian Coding/SSB&#39;, &#39; C:/Users/Kieran/Desktop/Development/Canadian Coding/website&#39;, &#39; C:/Users/Kieran/Desktop/Development/Personal/noter&#39;, &#39;C:/Users/Kieran/Desktop/Development/Canadian Coding&#39;, &#39;C:/Users/Kieran/Desktop/Development/Personal&#39;, &#39;C:/Users/Kieran/Desktop/Development/pystall&#39;, &#39;C:/Users/Kieran/Desktop/Development/python-package-template&#39;, &#39;C:/Users/Kieran/Desktop/Development/Work&#39;]
+    print(preprocess_paths(paths)) # Prints: [&#39;~/Desktop/Development/Canadian Coding/SSB&#39;, &#39;~/Desktop/Development/*&#39; , &#39;~/Desktop/Development/Personal/noter&#39;, &#39;.&#39;]
+    print(postprocess_paths(paths)) # Prints: [&#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\pystall&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\python-package-template&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Work&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter&#39;, &#39;C:\\Users\\Kieran\\Desktop\\sdu&#39;] 
     ```
+
+    Notes
+    -----
+    - In most cases you don&#39;t explicitly need to preprocess paths if they are unix paths,
+        but I would recommend it since the function is designed to work on preprocessed paths.
+    - Entering in raw windows paths as arguments will likely result in partially, or fully garbled paths.
+        Although in some cases python will interpret the data properly and work, it is better to always use the preprocessor.
 
     Returns
     -------
     list:
-        The list of useable paths (post-normalization)
+        The list of useable paths (post-normalization &amp; globing)
+
+    See Also
+    --------
+    Glob module information: https://docs.python.org/3/library/glob.html
     &#34;&#34;&#34;
     logging.info(f&#34;Beginning path postprocessing on {paths}&#34;)
 
-    paths = paths.split(&#34;,&#34;)
     result = []
     for directory in paths:
         directory = directory.strip()
@@ -135,12 +203,50 @@ def postprocess_paths(paths:str) -&gt; list:
             wildcard_paths = glob.glob(directory.strip())
 
             for wildcard_directory in wildcard_paths:
-                wildcard_directory = wildcard_directory.replace(&#34;\\&#34;, &#34;/&#34;)
                 result.append(wildcard_directory)
         else:
             result.append(directory)
 
     logging.debug(f&#34;Result: {result}&#34;)
+    return result
+
+def process_paths(paths:list) -&gt; list:
+    &#34;&#34;&#34;Takes a list or tuple of paths and normalizes and globs them. See notes for details.
+
+    Parameters
+    ----------
+    paths : (list|tuple)
+        A list or tuple of paths, can be relative or absolute. See Notes for details.
+
+    Example
+    -------
+    An example of path processing on a windows machine (because of the wildcard and OS results will vary)
+
+    ```
+    paths = [&#39;~/Desktop/Development/Canadian Coding/SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\*&#39;, &#39;~\\Desktop\\Development\\Personal\\noter&#39;, &#39;.&#39;]
+    
+    print(process_paths(paths)) # Prints: [&#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\pystall&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\python-package-template&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Work&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter&#39;, &#39;C:\\Users\\Kieran\\Desktop\\sdu&#39;] 
+    ```
+
+    Notes
+    -----
+    - Since this function runs the preprocess_paths() &amp; postprocess_paths() functions all 
+        implications are carried through to this function including:
+
+        - This function does not change &#39;.&#39; paths unless they include a relative path to a separate folder. i.e. a plain &#39;.&#39; is untouched but &#39;./folder-name&#39; is converted to an absolute path.
+        - This function leaves in *&#39;s, and brackets and globs paths using those characters for processing.
+        - This function will take the HOME(*nix) or USERPROFILE(windows) environment variables and interpret them appropriately per OS.
+    
+    See Also
+    --------
+    Glob module information: https://docs.python.org/3/library/glob.html
+    &#34;&#34;&#34;
+
+    if not type(paths) == list and not type(paths) == tuple:
+        raise ValueError(&#34;Paths must be specified as a list or tuple&#34;)
+    result = copy.deepcopy(paths)
+    result = preprocess_paths(result)
+    result = postprocess_paths(result)
     return result</code></pre>
 </details>
 </section>
@@ -157,44 +263,74 @@ def postprocess_paths(paths:str) -&gt; list:
 <dd>
 <section class="desc"><p>Postprocesses existing paths to be used by dispatcher.
 This means things like expanding wildcards, and processing correct path seperators.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>paths</code></strong> :&ensp;(<code>list</code>|<code>tuple</code>)</dt>
+<dd>A list or tuple of paths, can be relative or absolute. See Notes for details.</dd>
+</dl>
 <h2 id="example">Example</h2>
-<pre><code>paths = 'C:\Users\Kieran\Desktop\Development\Canadian Coding\SSB, C:\Users\Kieran\Desktop\Development\Canadian Coding\website, ~/Desktop/Development/Personal/noter, C:\Users\Kieran\Desktop\Development\*'
+<p>An example of the preprocessing to postprocessing pipeline on a windows machine (because of the wildcard and OS results will vary)</p>
+<pre><code>paths = ['~/Desktop/Development/Canadian Coding/SSB', 'C:\Users\Kieran\Desktop\Development\*', '~\Desktop\Development\Personal\noter', '.']
 
-paths = _preprocess_paths(paths)
-print(_postprocess_paths(paths)) 
-# Prints: ['C:/Users/Kieran/Desktop/Development/Canadian Coding/SSB', ' C:/Users/Kieran/Desktop/Development/Canadian Coding/website', ' C:/Users/Kieran/Desktop/Development/Personal/noter', 'C:/Users/Kieran/Desktop/Development/Canadian Coding', 'C:/Users/Kieran/Desktop/Development/Personal', 'C:/Users/Kieran/Desktop/Development/pystall', 'C:/Users/Kieran/Desktop/Development/python-package-template', 'C:/Users/Kieran/Desktop/Development/Work']
+print(preprocess_paths(paths)) # Prints: ['~/Desktop/Development/Canadian Coding/SSB', '~/Desktop/Development/*' , '~/Desktop/Development/Personal/noter', '.']
+print(postprocess_paths(paths)) # Prints: ['C:\Users\Kieran\Desktop\Development\Canadian Coding\SSB', 'C:\Users\Kieran\Desktop\Development\Canadian Coding', 'C:\Users\Kieran\Desktop\Development\Personal', 'C:\Users\Kieran\Desktop\Development\pystall', 'C:\Users\Kieran\Desktop\Development\python-package-template', 'C:\Users\Kieran\Desktop\Development\Work', 'C:\Users\Kieran\Desktop\Development\Personal\noter', 'C:\Users\Kieran\Desktop\sdu'] 
 </code></pre>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>In most cases you don't explicitly need to preprocess paths if they are unix paths,
+but I would recommend it since the function is designed to work on preprocessed paths.</li>
+<li>Entering in raw windows paths as arguments will likely result in partially, or fully garbled paths.
+Although in some cases python will interpret the data properly and work, it is better to always use the preprocessor.</li>
+</ul>
 <h2 id="returns">Returns</h2>
 <dl>
 <dt><code>list</code>:</dt>
-<dd>The list of useable paths (post-normalization)</dd>
-</dl></section>
+<dd>The list of useable paths (post-normalization &amp; globing)</dd>
+</dl>
+<h2 id="see-also">See Also</h2>
+<p><code>Glob module information: &lt;https://docs.python.org/3/library/glob.html&gt;</code></p></section>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def postprocess_paths(paths:str) -&gt; list:
+<pre><code class="python">def postprocess_paths(paths:list) -&gt; list:
     &#34;&#34;&#34;Postprocesses existing paths to be used by dispatcher.
     This means things like expanding wildcards, and processing correct path seperators.
     
+    Parameters
+    ----------
+    paths : (list|tuple)
+        A list or tuple of paths, can be relative or absolute. See Notes for details.
+
     Example
     -------
+    An example of the preprocessing to postprocessing pipeline on a windows machine (because of the wildcard and OS results will vary)
+
     ```
-    paths = &#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB, C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\website, ~/Desktop/Development/Personal/noter, C:\\Users\\Kieran\\Desktop\\Development\\*&#39;
+    paths = [&#39;~/Desktop/Development/Canadian Coding/SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\*&#39;, &#39;~\\Desktop\\Development\\Personal\\noter&#39;, &#39;.&#39;]
     
-    paths = _preprocess_paths(paths)
-    print(_postprocess_paths(paths)) 
-    # Prints: [&#39;C:/Users/Kieran/Desktop/Development/Canadian Coding/SSB&#39;, &#39; C:/Users/Kieran/Desktop/Development/Canadian Coding/website&#39;, &#39; C:/Users/Kieran/Desktop/Development/Personal/noter&#39;, &#39;C:/Users/Kieran/Desktop/Development/Canadian Coding&#39;, &#39;C:/Users/Kieran/Desktop/Development/Personal&#39;, &#39;C:/Users/Kieran/Desktop/Development/pystall&#39;, &#39;C:/Users/Kieran/Desktop/Development/python-package-template&#39;, &#39;C:/Users/Kieran/Desktop/Development/Work&#39;]
+    print(preprocess_paths(paths)) # Prints: [&#39;~/Desktop/Development/Canadian Coding/SSB&#39;, &#39;~/Desktop/Development/*&#39; , &#39;~/Desktop/Development/Personal/noter&#39;, &#39;.&#39;]
+    print(postprocess_paths(paths)) # Prints: [&#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\pystall&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\python-package-template&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Work&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter&#39;, &#39;C:\\Users\\Kieran\\Desktop\\sdu&#39;] 
     ```
+
+    Notes
+    -----
+    - In most cases you don&#39;t explicitly need to preprocess paths if they are unix paths,
+        but I would recommend it since the function is designed to work on preprocessed paths.
+    - Entering in raw windows paths as arguments will likely result in partially, or fully garbled paths.
+        Although in some cases python will interpret the data properly and work, it is better to always use the preprocessor.
 
     Returns
     -------
     list:
-        The list of useable paths (post-normalization)
+        The list of useable paths (post-normalization &amp; globing)
+
+    See Also
+    --------
+    Glob module information: https://docs.python.org/3/library/glob.html
     &#34;&#34;&#34;
     logging.info(f&#34;Beginning path postprocessing on {paths}&#34;)
 
-    paths = paths.split(&#34;,&#34;)
     result = []
     for directory in paths:
         directory = directory.strip()
@@ -220,7 +356,6 @@ print(_postprocess_paths(paths))
             wildcard_paths = glob.glob(directory.strip())
 
             for wildcard_directory in wildcard_paths:
-                wildcard_directory = wildcard_directory.replace(&#34;\\&#34;, &#34;/&#34;)
                 result.append(wildcard_directory)
         else:
             result.append(directory)
@@ -233,43 +368,64 @@ print(_postprocess_paths(paths))
 <span>def <span class="ident">preprocess_paths</span></span>(<span>paths)</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Preprocesses paths from input and splits + formats them
-into a useable list for later parsing.</p>
+<section class="desc"><p>Preprocesses paths to normalize them as standard unix-style paths.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>paths</code></strong> :&ensp;(<code>list</code>|<code>tuple</code>)</dt>
+<dd>A list or tuple of paths, can be relative or absolute. See Notes for details.</dd>
+</dl>
 <h2 id="example">Example</h2>
-<pre><code>&gt;&gt; paths = '~/Desktop/Development/Canadian Coding/SSB, C:\Users\Kieran\Desktop\Development\*, ~\Desktop\Development\Personal\noter, .'
+<p>An example of the preprocessing function on a windows machine.</p>
+<pre><code>paths = ['~/Desktop/Development/Canadian Coding/SSB', 'C:\Users\Kieran\Desktop\Development\*', '~\Desktop\Development\Personal\noter', '.']
 
-&gt;&gt; paths = _preprocess_paths(paths)
-print(paths) # Prints: '~/Desktop/Development/Canadian Coding/SSB,~/Desktop/Development/*,~/Desktop/Development/Personal/noter,.'
+print(preprocess_paths(paths)) # Prints: ['~/Desktop/Development/Canadian Coding/SSB', '~/Desktop/Development/*' , '~/Desktop/Development/Personal/noter', '.']
 </code></pre>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>This function does not change '.' paths unless they include a relative path to a separate folder. i.e. a plain '.' is untouched but './folder-name' is converted to an absolute path.</li>
+<li>This function leaves in *'s, and brackets since the postprocessing function globs paths and uses those characters for processing.</li>
+<li>This function will take the HOME(*nix) or USERPROFILE(windows) environment variables and convert them to a ~</li>
+</ul>
 <h2 id="returns">Returns</h2>
 <dl>
-<dt><code>str</code>:</dt>
-<dd>The preprocessed paths</dd>
+<dt><code>list</code>:</dt>
+<dd>The normalized &amp; preprocessed paths</dd>
 </dl></section>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def preprocess_paths(paths:str) -&gt; str:
-    &#34;&#34;&#34;Preprocesses paths from input and splits + formats them
-    into a useable list for later parsing.
+<pre><code class="python">def preprocess_paths(paths:list) -&gt; list:
+    &#34;&#34;&#34;Preprocesses paths to normalize them as standard unix-style paths.
+
+    Parameters
+    ----------
+    paths : (list|tuple)
+        A list or tuple of paths, can be relative or absolute. See Notes for details.
     
     Example
     -------
+    An example of the preprocessing function on a windows machine.
+
     ```
-    &gt;&gt; paths = &#39;~/Desktop/Development/Canadian Coding/SSB, C:\\Users\\Kieran\\Desktop\\Development\\*, ~\\Desktop\\Development\\Personal\\noter, .&#39;
+    paths = [&#39;~/Desktop/Development/Canadian Coding/SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\*&#39;, &#39;~\\Desktop\\Development\\Personal\\noter&#39;, &#39;.&#39;]
     
-    &gt;&gt; paths = _preprocess_paths(paths)
-    print(paths) # Prints: &#39;~/Desktop/Development/Canadian Coding/SSB,~/Desktop/Development/*,~/Desktop/Development/Personal/noter,.&#39;
+    print(preprocess_paths(paths)) # Prints: [&#39;~/Desktop/Development/Canadian Coding/SSB&#39;, &#39;~/Desktop/Development/*&#39; , &#39;~/Desktop/Development/Personal/noter&#39;, &#39;.&#39;]
     ```
+
+    Notes 
+    -----
+    - This function does not change &#39;.&#39; paths unless they include a relative path to a separate folder. i.e. a plain &#39;.&#39; is untouched but &#39;./folder-name&#39; is converted to an absolute path.
+    - This function leaves in *&#39;s, and brackets since the postprocessing function globs paths and uses those characters for processing.
+    - This function will take the HOME(*nix) or USERPROFILE(windows) environment variables and convert them to a ~
 
     Returns
     -------
-    str:
-        The preprocessed paths
+    list:
+        The normalized &amp; preprocessed paths
     &#34;&#34;&#34;
     logging.info(f&#34;Beginning path preprocessing on {paths}&#34;)
-    result = paths.split(&#34;,&#34;)
+    result = list(copy.deepcopy(paths))
     for index, directory in enumerate(result):
         directory = directory.strip()
         logging.debug(f&#34;Directory: {directory}&#34;)
@@ -288,8 +444,81 @@ print(paths) # Prints: '~/Desktop/Development/Canadian Coding/SSB,~/Desktop/Deve
             result[index] = directory
 
     logging.debug(f&#34;Result: {result}&#34;)
-    result = &#34;,&#34;.join(result)
 
+    return result</code></pre>
+</details>
+</dd>
+<dt id="sdu.paths.process_paths"><code class="name flex">
+<span>def <span class="ident">process_paths</span></span>(<span>paths)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Takes a list or tuple of paths and normalizes and globs them. See notes for details.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>paths</code></strong> :&ensp;(<code>list</code>|<code>tuple</code>)</dt>
+<dd>A list or tuple of paths, can be relative or absolute. See Notes for details.</dd>
+</dl>
+<h2 id="example">Example</h2>
+<p>An example of path processing on a windows machine (because of the wildcard and OS results will vary)</p>
+<pre><code>paths = ['~/Desktop/Development/Canadian Coding/SSB', 'C:\Users\Kieran\Desktop\Development\*', '~\Desktop\Development\Personal\noter', '.']
+
+print(process_paths(paths)) # Prints: ['C:\Users\Kieran\Desktop\Development\Canadian Coding\SSB', 'C:\Users\Kieran\Desktop\Development\Canadian Coding', 'C:\Users\Kieran\Desktop\Development\Personal', 'C:\Users\Kieran\Desktop\Development\pystall', 'C:\Users\Kieran\Desktop\Development\python-package-template', 'C:\Users\Kieran\Desktop\Development\Work', 'C:\Users\Kieran\Desktop\Development\Personal\noter', 'C:\Users\Kieran\Desktop\sdu'] 
+</code></pre>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>
+<p>Since this function runs the preprocess_paths() &amp; postprocess_paths() functions all
+implications are carried through to this function including:</p>
+<ul>
+<li>This function does not change '.' paths unless they include a relative path to a separate folder. i.e. a plain '.' is untouched but './folder-name' is converted to an absolute path.</li>
+<li>This function leaves in *'s, and brackets and globs paths using those characters for processing.</li>
+<li>This function will take the HOME(*nix) or USERPROFILE(windows) environment variables and interpret them appropriately per OS.</li>
+</ul>
+</li>
+</ul>
+<h2 id="see-also">See Also</h2>
+<p><code>Glob module information: &lt;https://docs.python.org/3/library/glob.html&gt;</code></p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def process_paths(paths:list) -&gt; list:
+    &#34;&#34;&#34;Takes a list or tuple of paths and normalizes and globs them. See notes for details.
+
+    Parameters
+    ----------
+    paths : (list|tuple)
+        A list or tuple of paths, can be relative or absolute. See Notes for details.
+
+    Example
+    -------
+    An example of path processing on a windows machine (because of the wildcard and OS results will vary)
+
+    ```
+    paths = [&#39;~/Desktop/Development/Canadian Coding/SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\*&#39;, &#39;~\\Desktop\\Development\\Personal\\noter&#39;, &#39;.&#39;]
+    
+    print(process_paths(paths)) # Prints: [&#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\pystall&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\python-package-template&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Work&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter&#39;, &#39;C:\\Users\\Kieran\\Desktop\\sdu&#39;] 
+    ```
+
+    Notes
+    -----
+    - Since this function runs the preprocess_paths() &amp; postprocess_paths() functions all 
+        implications are carried through to this function including:
+
+        - This function does not change &#39;.&#39; paths unless they include a relative path to a separate folder. i.e. a plain &#39;.&#39; is untouched but &#39;./folder-name&#39; is converted to an absolute path.
+        - This function leaves in *&#39;s, and brackets and globs paths using those characters for processing.
+        - This function will take the HOME(*nix) or USERPROFILE(windows) environment variables and interpret them appropriately per OS.
+    
+    See Also
+    --------
+    Glob module information: https://docs.python.org/3/library/glob.html
+    &#34;&#34;&#34;
+
+    if not type(paths) == list and not type(paths) == tuple:
+        raise ValueError(&#34;Paths must be specified as a list or tuple&#34;)
+    result = copy.deepcopy(paths)
+    result = preprocess_paths(result)
+    result = postprocess_paths(result)
     return result</code></pre>
 </details>
 </dd>
@@ -303,6 +532,8 @@ print(paths) # Prints: '~/Desktop/Development/Canadian Coding/SSB,~/Desktop/Deve
 <div class="toc">
 <ul>
 <li><a href="#functions">Functions</a></li>
+<li><a href="#examples">Examples</a></li>
+<li><a href="#see-also">See Also</a></li>
 </ul>
 </div>
 <ul id="index">
@@ -315,6 +546,7 @@ print(paths) # Prints: '~/Desktop/Development/Canadian Coding/SSB,~/Desktop/Deve
 <ul class="">
 <li><code><a title="sdu.paths.postprocess_paths" href="#sdu.paths.postprocess_paths">postprocess_paths</a></code></li>
 <li><code><a title="sdu.paths.preprocess_paths" href="#sdu.paths.preprocess_paths">preprocess_paths</a></code></li>
+<li><code><a title="sdu.paths.process_paths" href="#sdu.paths.process_paths">process_paths</a></code></li>
 </ul>
 </li>
 </ul>
