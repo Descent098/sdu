@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.7.4" />
 <title>sdu API documentation</title>
-<meta name="description" content="A set of utilites to make developing scripts simpler and easier …" />
+<meta name="description" content="A set of utilities to make developing scripts simpler and easier …" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -20,7 +20,18 @@
 <h1 class="title">Module <code>sdu</code></h1>
 </header>
 <section id="section-intro">
-<p>A set of utilites to make developing scripts simpler and easier</p>
+<p>A set of utilities to make developing scripts simpler and easier</p>
+<h2 id="installation">Installation</h2>
+<p><strong>From PyPi:</strong></p>
+<pre><code>Run ```pip install sdu``` or ```sudo pip3 install sdu```
+</code></pre>
+<p><strong>From source:</strong></p>
+<ol>
+<li>Clone the repo:
+<code>git clone &lt;https://github.com/Descent098/sdu</code>&gt;</li>
+<li>CD into the <strong>/sdu</strong> directory and run:
+<code>pip install .</code> or <code>sudo pip3 install .</code></li>
+</ol>
 <h2 id="modules">Modules</h2>
 <p>paths:
 This module contains many useful utilities for dealing with system paths.</p>
@@ -28,11 +39,45 @@ This module contains many useful utilities for dealing with system paths.</p>
 A module for helpful utilities with generating CLI's</p>
 <p>validation:
 Contains a set of common validation schemes.</p>
+<h2 id="examples">Examples</h2>
+<p>A random number guessing game using sdu validation.</p>
+<pre><code>import random
+
+from sdu.validation import validate_number_selection
+
+number = random.randint(0,10)
+
+selection = validate_number_selection(maximum = 10, minimum = 0, message=&quot;guess a number between 0-10: &quot;)
+
+while selection != number:
+    if selection &lt; number:
+        print('Too Low')
+
+    elif selection &gt; number:
+        print('Too High')
+
+    selection = validate_number_selection(maximum = 10, minimum = 0, message=&quot;guess a number between 0-10: &quot;)
+
+print('You win!') # After number has been guessed correctly
+</code></pre>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">&#34;&#34;&#34;A set of utilites to make developing scripts simpler and easier
+<pre><code class="python">&#34;&#34;&#34;A set of utilities to make developing scripts simpler and easier
+
+Installation
+-----------
+**From PyPi:**
+
+    Run ```pip install sdu``` or ```sudo pip3 install sdu```
+
+**From source:**
+
+1. Clone the repo:
+    ```git clone https://github.com/Descent098/sdu```
+2. CD into the **/sdu** directory and run:
+    ```pip install .``` or ```sudo pip3 install .```
 
 Modules
 -------
@@ -45,6 +90,31 @@ terminal:
 validation:
     Contains a set of common validation schemes.
 
+Examples
+--------
+A random number guessing game using sdu validation.
+
+```
+import random
+
+from sdu.validation import validate_number_selection
+
+number = random.randint(0,10)
+
+selection = validate_number_selection(maximum = 10, minimum = 0, message=&#34;guess a number between 0-10: &#34;)
+
+while selection != number:
+    if selection &lt; number:
+        print(&#39;Too Low&#39;)
+
+    elif selection &gt; number:
+        print(&#39;Too High&#39;)
+
+    selection = validate_number_selection(maximum = 10, minimum = 0, message=&#34;guess a number between 0-10: &#34;)
+
+print(&#39;You win!&#39;) # After number has been guessed correctly
+```
+
 &#34;&#34;&#34;</code></pre>
 </details>
 </section>
@@ -53,15 +123,15 @@ validation:
 <dl>
 <dt><code class="name"><a title="sdu.paths" href="paths.html">sdu.paths</a></code></dt>
 <dd>
-<section class="desc"><p>This module contains many useful utilities for dealing with system paths …</p></section>
+<section class="desc"><p>Utilities for dealing with system paths …</p></section>
 </dd>
 <dt><code class="name"><a title="sdu.terminal" href="terminal.html">sdu.terminal</a></code></dt>
 <dd>
-<section class="desc"><p>A module for helpful utilities with generating CLI's …</p></section>
+<section class="desc"><p>Utilities for generating CLI's …</p></section>
 </dd>
 <dt><code class="name"><a title="sdu.validation" href="validation.html">sdu.validation</a></code></dt>
 <dd>
-<section class="desc"><p>Contains a set of common validation schemes …</p></section>
+<section class="desc"><p>A set of common validation schemes …</p></section>
 </dd>
 </dl>
 </section>
@@ -76,7 +146,9 @@ validation:
 <h1>Index</h1>
 <div class="toc">
 <ul>
+<li><a href="#installation">Installation</a></li>
 <li><a href="#modules">Modules</a></li>
+<li><a href="#examples">Examples</a></li>
 </ul>
 </div>
 <ul id="index">
