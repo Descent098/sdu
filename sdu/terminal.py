@@ -1,4 +1,4 @@
-"""Utilities for generating CLI's
+r"""Utilities for generating CLI's
 
 Functions
 ---------
@@ -11,6 +11,34 @@ select_directory -> str:
 center_text -> str:
     Takes a string and returns the centered result as a string.
 
+Examples
+--------
+Clearing terminal after filling it with hello's
+
+```
+from sdu.terminal import clear_terminal
+
+print('hello\n'*250) # Fill screen with hello's
+
+clear_terminal() # Clears the terminal NOTE: cross platform
+```
+
+Ask someone if they want fries with that.
+
+```
+from sdu.terminal import confirm
+
+with_fries = confirm('Do you want fries with that?')
+
+if with_fries:
+    print('Here are your fries')
+else:
+    print('No fry for you')
+```
+
+Notes
+-----
+- Unless otherwise specified all functions are cross-platform (*nix/MacOS & Windows)
 """
 
 # Standard lib dependencies
@@ -18,6 +46,9 @@ import os
 
 # Internal Dependencies
 from .validation import validate_number_selection
+
+# External Dependencies
+import colored
 
 def clear_terminal() -> None:
     """Clears the current terminal.
@@ -168,6 +199,47 @@ def center_text(message = "Hello World!") -> str:
     columns = shutil.get_terminal_size().columns
     return(message.center(columns))
 
+def confirm(message:str) -> bool:
+    """Used to validate users input is yes or no.
+    
+    Parameters
+    ----------
+    message: (str)
+        The message to display for confirmation
+
+    Examples
+    --------
+    Ask someone if they want fries with that.
+
+    ```
+    from sdu.terminal import confirm
+
+    with_fries = confirm('Do you want fries with that?')
+
+    if with_fries:
+        print('Here are your fries')
+    else:
+        print('No fry for you')
+    ```
+
+    Returns
+    -------
+    bool:
+        Returns True if response is yes and False if no."""
+
+    validators = ["y", "yes"]
+    invalidators = ["n", "no"]
+    valid_input = False
+
+    while not valid_input:
+        response = input(message + "(y or n): ")
+        if response.lower().strip() in validators:
+            return True
+        elif response.lower().strip() in invalidators:
+            return False
+        else:
+            print(f"{colored.fg(1)}Please respond with either yes or no\n{colored.fg(15)}")
+
 
 if __name__ == "__main__":
-    print(terminal_pathfind())
+    confirm("Yeet?")

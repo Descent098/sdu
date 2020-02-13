@@ -19,7 +19,7 @@ def get_content(*filename):
 
 setuptools.setup(
     name = "sdu", 
-    version = "0.0.1", 
+    version = "0.1.0", 
     author = "Kieran Wood",
     author_email = "kieran@canadiancoding.ca",
     description = "A set of utilites to make developing scripts simpler and easier",
