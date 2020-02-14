@@ -25,18 +25,70 @@
 <p>validate_number_selection -&gt; int|float:
 Used to validate user input is within range minimum &lt; input &lt; maximum. Keeps user in loop
 until input is within range.</p>
+<h2 id="examples">Examples</h2>
+<p>Random number guessing game</p>
+<pre><code>import random
+
+from sdu.validation import validate_number_selection
+
+number = random.randint(0,10)
+
+selection = -1 # initialize variable
+
+while selection != number:
+    selection = validate_number_selection(maximum = 10, minimum = 0, message=&quot;guess a number between 0-10: &quot;)
+
+print('You win!')
+</code></pre>
+<p>Asking user which condiment they want</p>
+<pre><code>from sdu.validation import validate_choices
+
+# Stays in loop until user enters one of the valid_choices
+condiment = validate_choices('What condiment do you want', valid_choices=['Ketchup', 'Mayo'])
+</code></pre>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">&#34;&#34;&#34;A set of common validation schemes.
+<pre><code class="python">r&#34;&#34;&#34;A set of common validation schemes.
 
 Functions
 ---------
 validate_number_selection -&gt; int|float:
     Used to validate user input is within range minimum &lt; input &lt; maximum. Keeps user in loop
     until input is within range.
+
+Examples
+--------
+Random number guessing game
+
+```
+import random
+
+from sdu.validation import validate_number_selection
+
+number = random.randint(0,10)
+
+selection = -1 # initialize variable
+
+while selection != number:
+    selection = validate_number_selection(maximum = 10, minimum = 0, message=&#34;guess a number between 0-10: &#34;)
+
+print(&#39;You win!&#39;)
+```
+
+Asking user which condiment they want
+
+```
+from sdu.validation import validate_choices
+
+# Stays in loop until user enters one of the valid_choices
+condiment = validate_choices(&#39;What condiment do you want&#39;, valid_choices=[&#39;Ketchup&#39;, &#39;Mayo&#39;])
+```
+
 &#34;&#34;&#34;
+
+from .type_conversions import stringify_list
 
 def validate_number_selection(maximum = 1, minimum=0, message = &#34;Please select one of the above options: &#34;) -&gt; int:
     &#34;&#34;&#34;
@@ -54,30 +106,29 @@ def validate_number_selection(maximum = 1, minimum=0, message = &#34;Please sele
     message: (str)
         What to prompt user with when function is called
 
-    Returns
-    -------
-    int|float:
-        The validated result from the user
-
     Examples
     --------
     Random number guessing game
 
     ```
-    &gt;&gt; import random
+    import random
     
-    &gt;&gt; from sdu.validation import validate_number_selection
+    from sdu.validation import validate_number_selection
 
-    &gt;&gt; number = random.randint(0,10)
+    number = random.randint(0,10)
 
-    &gt;&gt; selection = -1 # initialize variable
+    selection = -1 # initialize variable
 
-    &gt;&gt; while selection != number:
+    while selection != number:
         selection = validate_number_selection(maximum = 10, minimum = 0, message=&#34;guess a number between 0-10: &#34;)
 
-    &gt;&gt; print(&#39;You win!&#39;)
+    print(&#39;You win!&#39;)
     ```
-
+    
+    Returns
+    -------
+    int|float:
+        The validated result from the user
     &#34;&#34;&#34;
 
     valid_answer = False
@@ -95,7 +146,62 @@ def validate_number_selection(maximum = 1, minimum=0, message = &#34;Please sele
             print(&#34;Invalid input the selection made was smaller than {}&#34;.format(minimum))
 
         else: # If answer is valid and in range
-            return selection</code></pre>
+            return selection
+
+
+
+def validate_choices(message:str, valid_choices:list, display_choices:bool = True) -&gt; str:
+    &#34;&#34;&#34;Used to validate users input is one of the validators.
+    
+    Parameters
+    ----------
+    message:  (str)
+        The message to print along with the choices on user prompt.
+
+    valid_choices: (list|tuple)
+        The valid choices the user can pick from
+
+    display_choices: (bool)
+        If True then on user prompt the choices will be displayed
+
+    Examples
+    --------
+    Asking user which condiment they want
+
+    ```
+    from sdu.validation import validate_choices
+
+    # Stays in loop until user enters one of the valid_choices
+    condiment = validate_choices(&#39;What condiment do you want&#39;, valid_choices=[&#39;Ketchup&#39;, &#39;Mayo&#39;])
+    ```
+
+    Notes
+    -----
+    - User input and choices are both stripped of whitespace and converted to lowercase
+    - If display_choicesis True then the a &#39;?:&#39; is appended to the end of the message
+
+    Returns
+    -------
+    str:
+        The valid choice the user selected
+    &#34;&#34;&#34;
+
+    for count, choice in enumerate(valid_choices): # Preprocessing choices to lowercase and stripping whitespace
+        valid_choices[count] = choice.lower().strip()
+    
+    stringified_choices = stringify_list(valid_choices, seperator=&#34; or&#34;)
+
+    while 1:
+        if display_choices:
+            response = input(message + f&#34;({stringified_choices})?: &#34;)
+
+        else:
+            response = input(message)
+
+        if response.lower().strip() in valid_choices:
+            return response
+        else:
+            print(f&#34;Message provided was not one of the choices; {stringified_choices}&#34;)</code></pre>
 </details>
 </section>
 <section>
@@ -105,6 +211,95 @@ def validate_number_selection(maximum = 1, minimum=0, message = &#34;Please sele
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
+<dt id="sdu.validation.validate_choices"><code class="name flex">
+<span>def <span class="ident">validate_choices</span></span>(<span>message, valid_choices, display_choices=True)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Used to validate users input is one of the validators.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>message</code></strong> :&ensp; (<code>str</code>)</dt>
+<dd>The message to print along with the choices on user prompt.</dd>
+<dt><strong><code>valid_choices</code></strong> :&ensp;(<code>list</code>|<code>tuple</code>)</dt>
+<dd>The valid choices the user can pick from</dd>
+<dt><strong><code>display_choices</code></strong> :&ensp;(<code>bool</code>)</dt>
+<dd>If True then on user prompt the choices will be displayed</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<p>Asking user which condiment they want</p>
+<pre><code>from sdu.validation import validate_choices
+
+# Stays in loop until user enters one of the valid_choices
+condiment = validate_choices('What condiment do you want', valid_choices=['Ketchup', 'Mayo'])
+</code></pre>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>User input and choices are both stripped of whitespace and converted to lowercase</li>
+<li>If display_choicesis True then the a '?:' is appended to the end of the message</li>
+</ul>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code>:</dt>
+<dd>The valid choice the user selected</dd>
+</dl></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def validate_choices(message:str, valid_choices:list, display_choices:bool = True) -&gt; str:
+    &#34;&#34;&#34;Used to validate users input is one of the validators.
+    
+    Parameters
+    ----------
+    message:  (str)
+        The message to print along with the choices on user prompt.
+
+    valid_choices: (list|tuple)
+        The valid choices the user can pick from
+
+    display_choices: (bool)
+        If True then on user prompt the choices will be displayed
+
+    Examples
+    --------
+    Asking user which condiment they want
+
+    ```
+    from sdu.validation import validate_choices
+
+    # Stays in loop until user enters one of the valid_choices
+    condiment = validate_choices(&#39;What condiment do you want&#39;, valid_choices=[&#39;Ketchup&#39;, &#39;Mayo&#39;])
+    ```
+
+    Notes
+    -----
+    - User input and choices are both stripped of whitespace and converted to lowercase
+    - If display_choicesis True then the a &#39;?:&#39; is appended to the end of the message
+
+    Returns
+    -------
+    str:
+        The valid choice the user selected
+    &#34;&#34;&#34;
+
+    for count, choice in enumerate(valid_choices): # Preprocessing choices to lowercase and stripping whitespace
+        valid_choices[count] = choice.lower().strip()
+    
+    stringified_choices = stringify_list(valid_choices, seperator=&#34; or&#34;)
+
+    while 1:
+        if display_choices:
+            response = input(message + f&#34;({stringified_choices})?: &#34;)
+
+        else:
+            response = input(message)
+
+        if response.lower().strip() in valid_choices:
+            return response
+        else:
+            print(f&#34;Message provided was not one of the choices; {stringified_choices}&#34;)</code></pre>
+</details>
+</dd>
 <dt id="sdu.validation.validate_number_selection"><code class="name flex">
 <span>def <span class="ident">validate_number_selection</span></span>(<span>maximum=1, minimum=0, message='Please select one of the above options: ')</span>
 </code></dt>
@@ -120,26 +315,26 @@ until input is within range.</p>
 <dt><strong><code>message</code></strong> :&ensp;(<code>str</code>)</dt>
 <dd>What to prompt user with when function is called</dd>
 </dl>
+<h2 id="examples">Examples</h2>
+<p>Random number guessing game</p>
+<pre><code>import random
+
+from sdu.validation import validate_number_selection
+
+number = random.randint(0,10)
+
+selection = -1 # initialize variable
+
+while selection != number:
+    selection = validate_number_selection(maximum = 10, minimum = 0, message=&quot;guess a number between 0-10: &quot;)
+
+print('You win!')
+</code></pre>
 <h2 id="returns">Returns</h2>
 <dl>
 <dt><code>int</code>|<code>float</code>:</dt>
 <dd>The validated result from the user</dd>
-</dl>
-<h2 id="examples">Examples</h2>
-<p>Random number guessing game</p>
-<pre><code>&gt;&gt; import random
-
-&gt;&gt; from sdu.validation import validate_number_selection
-
-&gt;&gt; number = random.randint(0,10)
-
-&gt;&gt; selection = -1 # initialize variable
-
-&gt;&gt; while selection != number:
-    selection = validate_number_selection(maximum = 10, minimum = 0, message=&quot;guess a number between 0-10: &quot;)
-
-&gt;&gt; print('You win!')
-</code></pre></section>
+</dl></section>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -160,30 +355,29 @@ until input is within range.</p>
     message: (str)
         What to prompt user with when function is called
 
-    Returns
-    -------
-    int|float:
-        The validated result from the user
-
     Examples
     --------
     Random number guessing game
 
     ```
-    &gt;&gt; import random
+    import random
     
-    &gt;&gt; from sdu.validation import validate_number_selection
+    from sdu.validation import validate_number_selection
 
-    &gt;&gt; number = random.randint(0,10)
+    number = random.randint(0,10)
 
-    &gt;&gt; selection = -1 # initialize variable
+    selection = -1 # initialize variable
 
-    &gt;&gt; while selection != number:
+    while selection != number:
         selection = validate_number_selection(maximum = 10, minimum = 0, message=&#34;guess a number between 0-10: &#34;)
 
-    &gt;&gt; print(&#39;You win!&#39;)
+    print(&#39;You win!&#39;)
     ```
-
+    
+    Returns
+    -------
+    int|float:
+        The validated result from the user
     &#34;&#34;&#34;
 
     valid_answer = False
@@ -214,6 +408,7 @@ until input is within range.</p>
 <div class="toc">
 <ul>
 <li><a href="#functions">Functions</a></li>
+<li><a href="#examples">Examples</a></li>
 </ul>
 </div>
 <ul id="index">
@@ -224,6 +419,7 @@ until input is within range.</p>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
+<li><code><a title="sdu.validation.validate_choices" href="#sdu.validation.validate_choices">validate_choices</a></code></li>
 <li><code><a title="sdu.validation.validate_number_selection" href="#sdu.validation.validate_number_selection">validate_number_selection</a></code></li>
 </ul>
 </li>

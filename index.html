@@ -23,14 +23,20 @@
 <p>A set of utilities to make developing scripts simpler and easier</p>
 <h2 id="installation">Installation</h2>
 <p><strong>From PyPi:</strong></p>
-<pre><code>Run ```pip install sdu``` or ```sudo pip3 install sdu```
-</code></pre>
+<p>Run
+<code>pip install sdu</code> </p>
+<p>or </p>
+<p><code>sudo pip3 install sdu</code></p>
 <p><strong>From source:</strong></p>
 <ol>
-<li>Clone the repo:
-<code>git clone &lt;https://github.com/Descent098/sdu</code>&gt;</li>
-<li>CD into the <strong>/sdu</strong> directory and run:
-<code>pip install .</code> or <code>sudo pip3 install .</code></li>
+<li>
+<p>Clone the repo:</p>
+<p><code>git clone &lt;https://github.com/Descent098/sdu</code>&gt;</p>
+</li>
+<li>
+<p>CD into the <strong>/sdu</strong> directory and run:</p>
+<p><code>pip install .</code> or <code>sudo pip3 install .</code></p>
+</li>
 </ol>
 <h2 id="modules">Modules</h2>
 <p>paths:
@@ -39,8 +45,10 @@ This module contains many useful utilities for dealing with system paths.</p>
 A module for helpful utilities with generating CLI's</p>
 <p>validation:
 Contains a set of common validation schemes.</p>
+<p>type_conversions:
+This module is for quick and common conversions between types with sensible options</p>
 <h2 id="examples">Examples</h2>
-<p>A random number guessing game using sdu validation.</p>
+<p><strong>A random number guessing game using sdu validation.</strong></p>
 <pre><code>import random
 
 from sdu.validation import validate_number_selection
@@ -60,46 +68,61 @@ while selection != number:
 
 print('You win!') # After number has been guessed correctly
 </code></pre>
-<p>Clearing terminal after filling it with hello's</p>
+<p><strong>Clearing terminal after filling it with hello's</strong></p>
 <pre><code>from sdu.terminal import clear_terminal
 
-print('hello
-'*250) # Fill screen with hello's
+print('hello\n'*250) # Fill screen with hello's
 
 clear_terminal() # Clears the terminal NOTE: cross platform
 </code></pre>
-<p>An example of path processing on a windows machine (because of the wildcard and OS results will vary)</p>
+<p><strong>An example of path processing on a windows machine (because of the wildcard and OS results will vary)</strong></p>
 <pre><code>from sdu.paths import process_paths
 
-paths = ['~/Desktop/Development/Canadian Coding/SSB', 'C:\Users\Kieran\Desktop\Development\*', '~\Desktop\Development\Personal\noter', '.']
+paths = ['~/Desktop/Development/Canadian Coding/SSB', 'C:\\Users\\Kieran\\Desktop\\Development\\*', '~\\Desktop\\Development\\Personal\\noter', '.']
 
-print(process_paths(paths)) # Prints: ['C:\Users\Kieran\Desktop\Development\Canadian Coding\SSB', 'C:\Users\Kieran\Desktop\Development\Canadian Coding', 'C:\Users\Kieran\Desktop\Development\Personal', 'C:\Users\Kieran\Desktop\Development\pystall', 'C:\Users\Kieran\Desktop\Development\python-package-template', 'C:\Users\Kieran\Desktop\Development\Work', 'C:\Users\Kieran\Desktop\Development\Personal\noter', 'C:\Users\Kieran\Desktop\sdu'] 
+print(process_paths(paths)) # Prints: ['C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB', 'C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding', 'C:\\Users\\Kieran\\Desktop\\Development\\Personal', 'C:\\Users\\Kieran\\Desktop\\Development\\pystall', 'C:\\Users\\Kieran\\Desktop\\Development\\python-package-template', 'C:\\Users\\Kieran\\Desktop\\Development\\Work', 'C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter', 'C:\\Users\\Kieran\\Desktop\\sdu'] 
 </code></pre>
-<p>An example of the preprocessing to postprocessing pipeline on a windows machine (because of the wildcard and OS results will vary)</p>
+<p><strong>An example of the preprocessing to postprocessing pipeline on a windows machine (because of the wildcard and OS results will vary)</strong></p>
 <pre><code>from sdu.paths import preprocess_paths, postprocess_paths
 
-paths = ['~/Desktop/Development/Canadian Coding/SSB', 'C:\Users\Kieran\Desktop\Development\*', '~\Desktop\Development\Personal\noter', '.']
+paths = ['~/Desktop/Development/Canadian Coding/SSB', 'C:\\Users\\Kieran\\Desktop\\Development\\*', '~\\Desktop\\Development\\Personal\\noter', '.']
 
 print(preprocess_paths(paths)) # Prints: ['~/Desktop/Development/Canadian Coding/SSB', '~/Desktop/Development/*' , '~/Desktop/Development/Personal/noter', '.']
-print(postprocess_paths(paths)) # Prints: ['C:\Users\Kieran\Desktop\Development\Canadian Coding\SSB', 'C:\Users\Kieran\Desktop\Development\Canadian Coding', 'C:\Users\Kieran\Desktop\Development\Personal', 'C:\Users\Kieran\Desktop\Development\pystall', 'C:\Users\Kieran\Desktop\Development\python-package-template', 'C:\Users\Kieran\Desktop\Development\Work', 'C:\Users\Kieran\Desktop\Development\Personal\noter', 'C:\Users\Kieran\Desktop\sdu'] 
+
+print(postprocess_paths(paths)) # Prints: ['C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB', 'C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding', 'C:\\Users\\Kieran\\Desktop\\Development\\Personal', 'C:\\Users\\Kieran\\Desktop\\Development\\pystall', 'C:\\Users\\Kieran\\Desktop\\Development\\python-package-template', 'C:\\Users\\Kieran\\Desktop\\Development\\Work', 'C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter', 'C:\\Users\\Kieran\\Desktop\\sdu'] 
+</code></pre>
+<p><strong>Print a shopping list with each item on a new line</strong></p>
+<pre><code>from sdu.type_conversions import stringify_list
+
+shopping_list = [&quot;eggs&quot;, &quot;ham&quot;, &quot;spam&quot;]
+
+print((stringify_list(shopping_list, seperator='\n', spacing=0))) # Prints list with each item on new line
 </code></pre>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">&#34;&#34;&#34;A set of utilities to make developing scripts simpler and easier
+<pre><code class="python">r&#34;&#34;&#34;A set of utilities to make developing scripts simpler and easier
 
 Installation
 -----------
 **From PyPi:**
 
-    Run ```pip install sdu``` or ```sudo pip3 install sdu```
+Run 
+```pip install sdu``` 
+
+or 
+
+```sudo pip3 install sdu```
 
 **From source:**
 
 1. Clone the repo:
+
     ```git clone https://github.com/Descent098/sdu```
+
 2. CD into the **/sdu** directory and run:
+
     ```pip install .``` or ```sudo pip3 install .```
 
 Modules
@@ -113,9 +136,13 @@ terminal:
 validation:
     Contains a set of common validation schemes.
 
+type_conversions:
+    This module is for quick and common conversions between types with sensible options
+
 Examples
 --------
-A random number guessing game using sdu validation.
+
+**A random number guessing game using sdu validation.**
 
 ```
 import random
@@ -138,7 +165,8 @@ while selection != number:
 print(&#39;You win!&#39;) # After number has been guessed correctly
 ```
 
-Clearing terminal after filling it with hello&#39;s
+
+**Clearing terminal after filling it with hello&#39;s**
 
 ```
 from sdu.terminal import clear_terminal
@@ -148,7 +176,8 @@ print(&#39;hello\n&#39;*250) # Fill screen with hello&#39;s
 clear_terminal() # Clears the terminal NOTE: cross platform
 ```
 
-An example of path processing on a windows machine (because of the wildcard and OS results will vary)
+
+**An example of path processing on a windows machine (because of the wildcard and OS results will vary)**
 
 ```
 from sdu.paths import process_paths
@@ -158,7 +187,8 @@ paths = [&#39;~/Desktop/Development/Canadian Coding/SSB&#39;, &#39;C:\\Users\\Ki
 print(process_paths(paths)) # Prints: [&#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\pystall&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\python-package-template&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Work&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter&#39;, &#39;C:\\Users\\Kieran\\Desktop\\sdu&#39;] 
 ```
 
-An example of the preprocessing to postprocessing pipeline on a windows machine (because of the wildcard and OS results will vary)
+
+**An example of the preprocessing to postprocessing pipeline on a windows machine (because of the wildcard and OS results will vary)**
 
 ```
 from sdu.paths import preprocess_paths, postprocess_paths
@@ -166,9 +196,19 @@ from sdu.paths import preprocess_paths, postprocess_paths
 paths = [&#39;~/Desktop/Development/Canadian Coding/SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\*&#39;, &#39;~\\Desktop\\Development\\Personal\\noter&#39;, &#39;.&#39;]
 
 print(preprocess_paths(paths)) # Prints: [&#39;~/Desktop/Development/Canadian Coding/SSB&#39;, &#39;~/Desktop/Development/*&#39; , &#39;~/Desktop/Development/Personal/noter&#39;, &#39;.&#39;]
+
 print(postprocess_paths(paths)) # Prints: [&#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\pystall&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\python-package-template&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Work&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter&#39;, &#39;C:\\Users\\Kieran\\Desktop\\sdu&#39;] 
 ```
 
+
+**Print a shopping list with each item on a new line**
+```
+from sdu.type_conversions import stringify_list
+
+shopping_list = [&#34;eggs&#34;, &#34;ham&#34;, &#34;spam&#34;]
+
+print((stringify_list(shopping_list, seperator=&#39;\n&#39;, spacing=0))) # Prints list with each item on new line
+```
 &#34;&#34;&#34;</code></pre>
 </details>
 </section>
@@ -182,6 +222,10 @@ print(postprocess_paths(paths)) # Prints: [&#39;C:\\Users\\Kieran\\Desktop\\Deve
 <dt><code class="name"><a title="sdu.terminal" href="terminal.html">sdu.terminal</a></code></dt>
 <dd>
 <section class="desc"><p>Utilities for generating CLI's …</p></section>
+</dd>
+<dt><code class="name"><a title="sdu.type_conversions" href="type_conversions.html">sdu.type_conversions</a></code></dt>
+<dd>
+<section class="desc"><p>This module is for quick and common conversions between types with sensible options …</p></section>
 </dd>
 <dt><code class="name"><a title="sdu.validation" href="validation.html">sdu.validation</a></code></dt>
 <dd>
@@ -210,6 +254,7 @@ print(postprocess_paths(paths)) # Prints: [&#39;C:\\Users\\Kieran\\Desktop\\Deve
 <ul>
 <li><code><a title="sdu.paths" href="paths.html">sdu.paths</a></code></li>
 <li><code><a title="sdu.terminal" href="terminal.html">sdu.terminal</a></code></li>
+<li><code><a title="sdu.type_conversions" href="type_conversions.html">sdu.type_conversions</a></code></li>
 <li><code><a title="sdu.validation" href="validation.html">sdu.validation</a></code></li>
 </ul>
 </li>

@@ -22,22 +22,29 @@
 <section id="section-intro">
 <p>Utilities for dealing with system paths.</p>
 <h2 id="functions">Functions</h2>
-<p>preprocess_paths -&gt; str:
-Preprocesses paths from input and splits + formats them into a useable list for later parsing.</p>
+<p>preprocess_paths -&gt; list:
+Preprocesses paths to normalize them as standard unix-style paths. See notes for details</p>
 <p>postprocess_paths -&gt; list:
-Postprocesses existing paths to be useable by system. This means things like expanding wildcards,
-and processing correct path seperators (os agnostic).</p>
+Postprocesses existing paths to be used by dispatcher.
+This means things like expanding wildcards, and processing correct path seperators.</p>
+<p>process_paths -&gt; list:
+Takes a list or tuple of paths and normalizes and globs them. See notes for details.</p>
 <h2 id="examples">Examples</h2>
 <p>An example of the preprocessing to postprocessing pipeline on a windows machine (because of the wildcard and OS results will vary)</p>
-<pre><code>paths = ['~/Desktop/Development/Canadian Coding/SSB', 'C:\Users\Kieran\Desktop\Development\*', '~\Desktop\Development\Personal\noter', '.']
+<pre><code>from sdu.paths import preprocess_paths, postprocess_paths
+
+paths = ['~/Desktop/Development/Canadian Coding/SSB', 'C:\\Users\\Kieran\\Desktop\\Development\\*', '~\\Desktop\\Development\\Personal\\noter', '.']
 
 print(preprocess_paths(paths)) # Prints: ['~/Desktop/Development/Canadian Coding/SSB', '~/Desktop/Development/*' , '~/Desktop/Development/Personal/noter', '.']
-print(postprocess_paths(paths)) # Prints: ['C:\Users\Kieran\Desktop\Development\Canadian Coding\SSB', 'C:\Users\Kieran\Desktop\Development\Canadian Coding', 'C:\Users\Kieran\Desktop\Development\Personal', 'C:\Users\Kieran\Desktop\Development\pystall', 'C:\Users\Kieran\Desktop\Development\python-package-template', 'C:\Users\Kieran\Desktop\Development\Work', 'C:\Users\Kieran\Desktop\Development\Personal\noter', 'C:\Users\Kieran\Desktop\sdu'] 
+
+print(postprocess_paths(paths)) # Prints: ['C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB', 'C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding', 'C:\\Users\\Kieran\\Desktop\\Development\\Personal', 'C:\\Users\\Kieran\\Desktop\\Development\\pystall', 'C:\\Users\\Kieran\\Desktop\\Development\\python-package-template', 'C:\\Users\\Kieran\\Desktop\\Development\\Work', 'C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter', 'C:\\Users\\Kieran\\Desktop\\sdu'] 
 </code></pre>
 <p>An example of path processing on a windows machine (because of the wildcard and OS results will vary)</p>
-<pre><code>paths = ['~/Desktop/Development/Canadian Coding/SSB', 'C:\Users\Kieran\Desktop\Development\*', '~\Desktop\Development\Personal\noter', '.']
+<pre><code>from sdu.paths import process_paths
 
-print(process_paths(paths)) # Prints: ['C:\Users\Kieran\Desktop\Development\Canadian Coding\SSB', 'C:\Users\Kieran\Desktop\Development\Canadian Coding', 'C:\Users\Kieran\Desktop\Development\Personal', 'C:\Users\Kieran\Desktop\Development\pystall', 'C:\Users\Kieran\Desktop\Development\python-package-template', 'C:\Users\Kieran\Desktop\Development\Work', 'C:\Users\Kieran\Desktop\Development\Personal\noter', 'C:\Users\Kieran\Desktop\sdu'] 
+paths = ['~/Desktop/Development/Canadian Coding/SSB', 'C:\\Users\\Kieran\\Desktop\\Development\\*', '~\\Desktop\\Development\\Personal\\noter', '.']
+
+print(process_paths(paths)) # Prints: ['C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB', 'C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding', 'C:\\Users\\Kieran\\Desktop\\Development\\Personal', 'C:\\Users\\Kieran\\Desktop\\Development\\pystall', 'C:\\Users\\Kieran\\Desktop\\Development\\python-package-template', 'C:\\Users\\Kieran\\Desktop\\Development\\Work', 'C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter', 'C:\\Users\\Kieran\\Desktop\\sdu'] 
 </code></pre>
 <h2 id="see-also">See Also</h2>
 <p><code>Glob module information: &lt;https://docs.python.org/3/library/glob.html&gt;</code></p>
@@ -45,31 +52,39 @@ print(process_paths(paths)) # Prints: ['C:\Users\Kieran\Desktop\Development\Cana
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">&#34;&#34;&#34;Utilities for dealing with system paths.
+<pre><code class="python">r&#34;&#34;&#34;Utilities for dealing with system paths.
 
 Functions
 ---------
-preprocess_paths -&gt; str:
-    Preprocesses paths from input and splits + formats them into a useable list for later parsing.
+preprocess_paths -&gt; list:
+    Preprocesses paths to normalize them as standard unix-style paths. See notes for details
 
 postprocess_paths -&gt; list:
-    Postprocesses existing paths to be useable by system. This means things like expanding wildcards,
-     and processing correct path seperators (os agnostic).
+    Postprocesses existing paths to be used by dispatcher.
+        This means things like expanding wildcards, and processing correct path seperators.
+
+process_paths -&gt; list:
+    Takes a list or tuple of paths and normalizes and globs them. See notes for details.
 
 Examples
 --------
 An example of the preprocessing to postprocessing pipeline on a windows machine (because of the wildcard and OS results will vary)
 
 ```
+from sdu.paths import preprocess_paths, postprocess_paths
+
 paths = [&#39;~/Desktop/Development/Canadian Coding/SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\*&#39;, &#39;~\\Desktop\\Development\\Personal\\noter&#39;, &#39;.&#39;]
 
 print(preprocess_paths(paths)) # Prints: [&#39;~/Desktop/Development/Canadian Coding/SSB&#39;, &#39;~/Desktop/Development/*&#39; , &#39;~/Desktop/Development/Personal/noter&#39;, &#39;.&#39;]
+
 print(postprocess_paths(paths)) # Prints: [&#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\pystall&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\python-package-template&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Work&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter&#39;, &#39;C:\\Users\\Kieran\\Desktop\\sdu&#39;] 
 ```
 
 An example of path processing on a windows machine (because of the wildcard and OS results will vary)
 
 ```
+from sdu.paths import process_paths
+
 paths = [&#39;~/Desktop/Development/Canadian Coding/SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\*&#39;, &#39;~\\Desktop\\Development\\Personal\\noter&#39;, &#39;.&#39;]
 
 print(process_paths(paths)) # Prints: [&#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\pystall&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\python-package-template&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Work&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter&#39;, &#39;C:\\Users\\Kieran\\Desktop\\sdu&#39;] 
