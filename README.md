@@ -28,13 +28,6 @@ An API for accelerating script development and generalizing tedious tasks.
 See API documentation ([https://kieranwood.ca/sdu](https://kieranwood.ca/sdu)).
 
 
-
-## Additional Documentation
-
-API documentation can be found at [https://kieranwood.ca/sdu](https://kieranwood.ca/sdu).
-
-
-
 ## Development-Contribution guide
 
 
