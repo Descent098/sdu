@@ -157,7 +157,7 @@ def select_directory(gui=False) -> str:
     """
 
     if gui == False: #Terminal/cmd based path selector
-        return terminal_pathfind()
+        return _cli_directory()
 
     if gui == True: # GUI based file selector
         import tkinter as tk
