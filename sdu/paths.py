@@ -1,4 +1,4 @@
-r"""Utilities for dealing with system paths.
+"""Utilities for dealing with system paths.
 
 Functions
 ---------
@@ -43,6 +43,7 @@ Glob module information: https://docs.python.org/3/library/glob.html
 """
 
 # Standard lib dependencies
+import re
 import os
 import glob
 import copy
@@ -80,35 +81,52 @@ def preprocess_paths(paths:list) -> list:
     """
     logging.info(f"Beginning path preprocessing on {paths}")
     result = list(copy.deepcopy(paths))
+
     for index, directory in enumerate(result):
         directory = directory.strip()
         logging.debug(f"Directory: {directory}")
+        # Convert relative directories to absolute directories
         if directory.startswith(".") and (len(directory) > 1):
             directory = os.path.abspath(directory)
-        if not "~" in directory:
-            if os.name == "nt":
-                directory = directory.replace(os.getenv('USERPROFILE'),"~")
-
-            else:
+        # Replace HOME values
+        if not directory.startswith("~"):
+            if not os.name == "nt": # Not windows
                 directory = directory.replace(os.getenv('HOME'),"~")
-            directory = directory.replace("\\", "/")
-            result[index] = directory
-        else:
-            directory = directory.replace("\\", "/")
-            result[index] = directory
+
+        # Replace backslashes (windows) with slashes (*nix)
+        directory = directory.replace("\\", "/")
+
+        # Replace old path with preprocessed form
+        result[index] = directory
+
+    # Remove the %USERPROFILE% from windows paths
+    regex = r"([A-Z]:/Users/.*)"
+    matches = re.finditer(regex, "\n".join(result), re.MULTILINE | re.IGNORECASE)
+    matches = [match.group() for match in matches]
+    for path in matches:
+        path_index = result.index(path)
+        path = path.split("/")[2::] # Remove drive letter and username
+        path[0] = "~"
+        result[path_index] = "/".join(path)
 
     logging.debug(f"Result: {result}")
 
     return result
 
-def postprocess_paths(paths:list) -> list:
-    """Postprocesses existing paths to be used by dispatcher.
+def postprocess_paths(paths:list, include_files = False, silent = True) -> list:
+    """Postprocesses existing paths (assuming they've been preprocessed) for use in environment.
     This means things like expanding wildcards, and processing correct path seperators.
     
     Parameters
     ----------
     paths : (list|tuple)
         A list or tuple of paths, can be relative or absolute. See Notes for details.
+
+    include_files : (bool)
+        Whether to include file results into resulting list
+
+    silent : (bool)
+        Whether to throw an error if one of the paths is invalid
 
     Example
     -------
@@ -142,10 +160,8 @@ def postprocess_paths(paths:list) -> list:
     result = []
     for directory in paths:
         directory = directory.strip()
-
         if os.name == "nt":
             directory = directory.replace("/", "\\")
-
         if directory.startswith("."):
             try:
                 if directory[1] == "/" or directory[1] == "\\":
@@ -159,14 +175,17 @@ def postprocess_paths(paths:list) -> list:
             else:
                 directory = directory.replace("~", f"{os.getenv('HOME')}")
         
-        if "*" in directory:
-
+        if "*" in directory or "[" in directory:
             wildcard_paths = glob.glob(directory.strip())
-
             for wildcard_directory in wildcard_paths:
-                result.append(wildcard_directory)
+                if os.path.isdir(wildcard_directory):
+                    result.append(wildcard_directory)
         else:
-            result.append(directory)
+            if not silent:
+                if os.path.isdir(directory):
+                    raise NotADirectoryError(f"Directory was not found on system: {directory}")
+            if os.path.isdir(directory):
+                result.append(directory)
 
     logging.debug(f"Result: {result}")
     return result
@@ -209,3 +228,6 @@ def process_paths(paths:list) -> list:
     result = preprocess_paths(result)
     result = postprocess_paths(result)
     return result
+
+if __name__ == "__main__":
+    print(process_paths(['~/Desktop/Development/Canadian Coding/SSB', 'C:\\Users\\Kieran\\Desktop\\Development\\*', '~\\Desktop\\Development\\Personal\\noter', '.']))
