@@ -4,7 +4,9 @@
 Focus was on adding more functionality, and modernizing the package setup.
 
 ### Features
-- Added tests for ```paths``` ```type_conversions``` and ```validation```
+- Added tests for ```paths```, ```type_conversions``` and ```validation```
+- Removed ```type_conversion.stringify_list``` since functionality can be one-lined using ```str.join```
+- Added ```type_conversion.dict_to_defaultdict```; Takes in a dictionary, and a default Callable then converts the dict to a defaultdict
 
 ### Documentation Improvements
 - Changed to second point releases (from 0.0.x to 0.x.0)
