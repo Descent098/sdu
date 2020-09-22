@@ -1,4 +1,4 @@
-"""This set of test tests the paths module and it's functions"""
+"""This set of test to tests the paths module and it's functions"""
 
 import os
 
