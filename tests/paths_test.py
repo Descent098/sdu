@@ -1,10 +1,11 @@
 """This set of test to tests the paths module and it's functions"""
 
-import os
+# Standard Library Dependencies
+import os                # Used to validate paths
+import glob              # Used to glob (expand) paths
 
-import glob
-
-from sdu.paths import *
+# Internal Dependencies
+from sdu.paths import * # Functionality being tested
 
 def test_preprocess_paths():
     """Validates that input paths are serialized in a normalized format across OS's.
