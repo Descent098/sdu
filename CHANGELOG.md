@@ -11,6 +11,7 @@ Focus was on adding more functionality, and modernizing the package setup.
 - Added ```paths.add_to_path``` for adding specified paths to system paths
 - Added testing for ```sdu.paths```, ```sdu.validation```, ```sdu.autocomplete```, and ```sdu.type_conversions```
 - Changed ```sdu.terminal``` to ```sdu.cli```
+- Added ```sdu.autocomplete``` for generating bash autocomplete files
 
 ### Documentation Improvements
 - Changed to second point releases (from 0.0.x to 0.x.0)
