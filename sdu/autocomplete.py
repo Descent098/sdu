@@ -35,7 +35,22 @@ command = namedtuple("command", ["name", "arguments"])
 
 
 def _generate_root_autocomplete(root:str, commands:list , arguments:list = []) -> str:
-    """Generates the first portion of a bash autocomplete file"""
+    """Generates the first portion of a bash autocomplete file
+
+    Parameters
+    ----------
+    root : str
+        The root command name
+    command : str
+        The command to generate the autocomplete section for
+    arguments : list
+        The arguments that are possible for the command parameter
+
+    Returns
+    -------
+    str
+        The autocomplete section for the root command
+    """    
     logging.info("Beginning bash root command autocomplete generation")
     arguments = _stringify_list(arguments)
 
@@ -63,14 +78,27 @@ def _generate_root_autocomplete(root:str, commands:list , arguments:list = []) -
         fi
     }
     """
-
     logging.debug(f"Root Template: {root_template}")
-
-
     return root_template
 
+
 def _generate_command_autocomplete(root:str, command:str, arguments:list) -> str:
-    """Generates a bash autocomplete section for a single command"""
+    """Generates a bash autocomplete section for a single command
+
+    Parameters
+    ----------
+    root : str
+        The root command name
+    command : str
+        The command to generate the autocomplete section for
+    arguments : list
+        The arguments that are possible for the command parameter
+
+    Returns
+    -------
+    str
+        The autocomplete section for the command
+    """    
     logging.info(f"Beginning command autocomplete generation for command {command} with arguments {arguments}")
 
     if arguments:
@@ -87,14 +115,22 @@ def _generate_command_autocomplete(root:str, command:str, arguments:list) -> str
         fi
     }}
     """
-
     logging.debug(f"Command Result: {command_result}")
-
     return command_result
 
 
 def _stringify_list(arguments:list) -> str:
     """Takes a list and stringifies it to a useable format for autocomplete files
+
+    Parameters
+    ----------
+    arguments: (list)
+        The arguments that need to be converted to a string
+
+    Returns 
+    -------
+    str:
+        The string representation of the list
     
     Examples
     --------
@@ -110,9 +146,7 @@ def _stringify_list(arguments:list) -> str:
 
     for argument in arguments: # Preprocess arguments into appropriate string form
         stringified += f" {argument}"
-    
     logging.debug(f"Stringified: {stringified}")
-
     return stringified
 
 
@@ -129,6 +163,11 @@ def generate_bash_autocomplete(root:str, commands:list, write_file:bool = True) 
 
     write_file: (bool)
         When true will write a file to path that bash looks for autocomplete files, default is True
+
+    Returns
+    -------
+    str:
+        The text that would be written to a bash autocomplete file 
 
     Examples
     --------
@@ -147,11 +186,6 @@ def generate_bash_autocomplete(root:str, commands:list, write_file:bool = True) 
     generate_bash_autocomplete(root, commands)
     print(f"Bash autocompletion file written to /etc/bash_completion.d/{root}.sh Please restart shell for autocomplete to update")
     ```
-
-    Returns
-    -------
-    str:
-        The text that would be written to a bash autocomplete file 
     """
     logging.info("Beginning bash autocompletion generation")
 
@@ -171,7 +205,6 @@ def generate_bash_autocomplete(root:str, commands:list, write_file:bool = True) 
 
     for command in commands:
         autocomplete_text += _generate_command_autocomplete(root, command.name, command.arguments)
-
 
     autocomplete_text += f"\ncomplete -o bashdefault -o default -o filenames -F _{root} {root}\n"
 

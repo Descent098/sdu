@@ -45,6 +45,14 @@ print(preprocess_paths(paths)) # Prints: ['~/Desktop/Development/Canadian Coding
 print(postprocess_paths(paths)) # Prints: ['C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB', 'C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding', 'C:\\Users\\Kieran\\Desktop\\Development\\Personal', 'C:\\Users\\Kieran\\Desktop\\Development\\pystall', 'C:\\Users\\Kieran\\Desktop\\Development\\python-package-template', 'C:\\Users\\Kieran\\Desktop\\Development\\Work', 'C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter', 'C:\\Users\\Kieran\\Desktop\\sdu'] 
 ```
 
+### Add a folder in the downloads folder called /micro editor/micro-1.4.1
+```
+from sdu.paths import add_to_path, process_paths
+
+program_path = f"C:\\Users\\Kieran\\Downloads\\micro editor\\micro-1.4.1" # Path that contains the executeable
+add_to_path(program_path) # Adds the program_path to the path variable
+```
+
 See Also
 --------
 Glob module information - https://docs.python.org/3/library/glob.html
@@ -269,11 +277,12 @@ def add_to_path(program_path:str):
 
     Examples
     --------
+    Add a folder in the downloads folder called /micro editor/micro-1.4.1
     ```
     from sdu.paths import add_to_path, process_paths
 
     program_path = f"C:\\Users\\Kieran\\Downloads\\micro editor\\micro-1.4.1" # Path that contains the executeable
-    _add_to_path(program_path) # Adds the program_path to the path variable
+    add_to_path(program_path) # Adds the program_path to the path variable
     ```
     """
     program_path = os.path.abspath(program_path)
