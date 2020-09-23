@@ -70,9 +70,6 @@ remove_directory("/path/to/delete")
 import os  # Used to validate and grab paths
 from shutil import rmtree as remove_directory
 
-# Internal Dependencies
-from sdu.validation import validate_number_selection  # Used to validate number selections in functions
-
 # External Dependencies
 import colored  # Used to colour stdout output for emphasis
 
