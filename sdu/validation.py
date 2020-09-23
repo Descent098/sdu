@@ -103,15 +103,19 @@ def validate_number_selection(maximum = 1, minimum=0, message = "Please select o
 
     valid_answer = False
 
-    while valid_answer == False:
+    while not valid_answer:
         try: # Catches if answer is not int or float
-            selection = eval(input(message))
-        except:
+            selection = input(message)
+            if "." in selection:
+                if no_float:
+                    print("Decimal values are not permitted")
+                else:
+                    selection = float(selection)
+            else:
+                selection = int(selection)
+        except ValueError:
             print("Invalid input please try again")
 
-        if no_float and type(selection) == float:
-            print("Decimal values are not permitted")
-            continue
         if selection > maximum: # More than maximum
             print("Invalid input the selection made was larger than {}".format(maximum))
 

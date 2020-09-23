@@ -204,8 +204,11 @@ def postprocess_paths(paths:Union[list, tuple], include_files = False, silent = 
         if "*" in directory or "[" in directory:
             wildcard_paths = glob.glob(directory.strip())
             for wildcard_directory in wildcard_paths:
-                if os.path.isdir(wildcard_directory):
+                if include_files:
                     result.append(wildcard_directory)
+                else:
+                    if os.path.isdir(wildcard_directory):
+                        result.append(wildcard_directory)
 
         else: # Does not contain a tilde or glob character
             if not silent:

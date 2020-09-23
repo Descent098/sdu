@@ -34,7 +34,7 @@ from collections import namedtuple    # Used to setup command schema for feeding
 command = namedtuple("command", ["name", "arguments"])
 
 
-def _generate_root_autocomplete(root:str, commands:list , arguments:list = []) -> str:
+def _generate_root_autocomplete(root:str, commands:list , arguments:list) -> str:
     """Generates the first portion of a bash autocomplete file
 
     Parameters

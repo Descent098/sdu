@@ -130,7 +130,7 @@ def _cli_directory(starting_dir:str = ".") -> str:
     {colored.fg(2)}Type here or . to select current directory{colored.fg(15)}
     """
 
-    if not starting_dir == ".":
+    if starting_dir != ".":
         os.chdir(starting_dir)
 
     while not selected_directory:
@@ -153,10 +153,11 @@ def _cli_directory(starting_dir:str = ".") -> str:
                 print("Invalid selection made \nError: {}".format(identifier))
 
         elif choice.lower() == "here" or choice.lower() == ".":  # If they've selected the right folder
-            chosen_directory = os.getcwd()
+            chosen_directory = str(os.getcwd())  # Get the value of the selected directory
+            os.chdir(original_dir) # Change back to the original directory
             return chosen_directory
 
-        elif not choice.lower() == "here" or choice.lower() == ".":  # If user wants to navigate to a different folder
+        elif choice.lower() != "here" or choice.lower() == ".":  # If user wants to navigate to a different folder
             try:
                 os.chdir(choice)
             except NotADirectoryError:
@@ -197,16 +198,16 @@ def select_directory(gui:bool = False, starting_dir:str = ".") -> str:
         The path to the directory selected
     """
 
-    if gui == False: #Terminal/cmd based path selector
-        return _cli_directory(starting_dir = starting_dir)
-
-    if gui == True: # GUI based file selector
+    if gui:  # GUI based file selector
         import tkinter as tk
         from tkinter import filedialog
         root = tk.Tk()
         root.withdraw()
         file_path = str(filedialog.askdirectory(title="Specify Directory", mustexist = False, initialdir = starting_dir))
         return file_path
+    
+    else:  # Terminal/cmd based path selector
+        return _cli_directory(starting_dir = starting_dir)
 
 def center_text(message:str) -> str:
     """Takes a string and returns the centered result as a string.
