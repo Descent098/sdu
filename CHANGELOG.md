@@ -1,6 +1,6 @@
 # Changelog
 
-## V0.1.0; TBD
+## V0.1.0; September 24th
 Focus was on adding more functionality, and modernizing the package setup.
 
 ### Features
@@ -17,6 +17,7 @@ Focus was on adding more functionality, and modernizing the package setup.
 - Changed to second point releases (from 0.0.x to 0.x.0)
 - Improved the index documentation to be more clear and concise of an overview
 - Added bullet points to each package for a quick overview of what each module can be used for
+- Overhauled readme to be more useful
 
 ### Bug Fixes
 - Fixed some preprocessing bugs with windows in ```path.preprocess_paths()```
