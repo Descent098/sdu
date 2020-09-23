@@ -96,4 +96,4 @@ def test_bash_generation():
 complete -o bashdefault -o default -o filenames -F _ahd ahd
 '''
 
-    assert generate_bash_autocomplete("ahd", commands) == correct_output 
+    assert generate_bash_autocomplete("ahd", commands, write_file=False) == correct_output 

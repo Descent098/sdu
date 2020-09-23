@@ -10,7 +10,7 @@ command (namedtuple):
 Examples
 --------
 
-### Creating a bash autocomplete file
+### Generate bash autocomplete file for a command called 'command'
 ```
 from sdu.autocomplete import generate_bash_autocomplete, command
 
@@ -21,8 +21,8 @@ commands =  [ # Used for autocompletion generation
     command("register", [])
 ]
 
-# Output is too long to display in this docstring
-print(generate_bash_autocomplete(root, commands)) 
+generate_bash_autocomplete(root, commands)
+print(f"Bash autocompletion file written to /etc/bash_completion.d/{root}.sh \nPlease restart shell for autocomplete to update")
 ```
 """
 
@@ -116,9 +116,8 @@ def _stringify_list(arguments:list) -> str:
     return stringified
 
 
-def generate_bash_autocomplete(root:str, commands:list) -> str:
-    """Takes a list of commands (namedtuple type) and returns the text necessary
-    for a bash autocomplete file
+def generate_bash_autocomplete(root:str, commands:list, write_file:bool = True) -> str:
+    """Takes a list of commands (namedtuple type) and returns the text necessary for a bash autocomplete file
 
     Parameters
     ----------
@@ -127,18 +126,32 @@ def generate_bash_autocomplete(root:str, commands:list) -> str:
 
     commands: (list[namedtuple])
         A list of the commands to generate the autocomplete file for
-    
+
+    write_file: (bool)
+        When true will write a file to path that bash looks for autocomplete files, default is True
+
     Examples
     --------
+    Generate bash autocomplete file for a command called 'command'
+
     ```
-    >> commands =  [ # Used for autocompletion generation
+    from sdu.autocomplete import generate_bash_autocomplete, command
+
+    root = 'command' # Replace this with the name of your root command (what you type in terminal to use cli)
+
+    commands =  [ # Used for autocompletion generation
         command("docs", ["-a", "--api", "-o", "--offline"]),
         command("register", [])
     ]
 
-    >> # Output is too long to display in this docstring
-    >> print(generate_bash_autocomplete(commands)) 
+    generate_bash_autocomplete(root, commands)
+    print(f"Bash autocompletion file written to /etc/bash_completion.d/{root}.sh Please restart shell for autocomplete to update")
     ```
+
+    Returns
+    -------
+    str:
+        The text that would be written to a bash autocomplete file 
     """
     logging.info("Beginning bash autocompletion generation")
 
@@ -163,5 +176,9 @@ def generate_bash_autocomplete(root:str, commands:list) -> str:
     autocomplete_text += f"\ncomplete -o bashdefault -o default -o filenames -F _{root} {root}\n"
 
     logging.debug(f"Autocomplete Text: {autocomplete_text}")
+
+    if write_file:
+        with open(f"/etc/bash_completion.d/{root}.sh", "w") as autocomplete_file:
+                    autocomplete_file.write(autocomplete_text)
 
     return autocomplete_text

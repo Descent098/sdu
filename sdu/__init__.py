@@ -30,6 +30,16 @@ or
 
 Modules
 -------
+### autocomplete
+
+This module is used to generate autocomplete files for bash
+
+### cli
+
+A module for helpful utilities with generating CLI's such as:
+
+- Clearing the terminal
+
 ### paths
 
 This module contains many useful utilities for dealing with system paths such as:
@@ -37,11 +47,11 @@ This module contains many useful utilities for dealing with system paths such as
 - A pre and post processing pipeline for system paths
 - Ability to add paths to the PATH variable
 
-### cli
+### type_conversions
 
-A module for helpful utilities with generating CLI's such as:
+Quick and common conversions between types with sensible options such as:
 
-- Clearing the terminal
+- Converting a dictionary (and second dimension dictionary keys) to defaultdict(s)
 
 ### validation
 
@@ -50,9 +60,4 @@ Contains a set of common validation schemes such as:
 - Validating number input is between a set value at the command line
 - Validate provided string is an accepted value
 
-### type_conversions
-
-Quick and common conversions between types with sensible options such as:
-
-- Converting a dictionary (and second dimension dictionary keys) to defaultdict(s)
 """

@@ -1,4 +1,6 @@
-"""This module is for quick and common conversions between types with sensible options.
+"""This module is for quick and common conversions between types with sensible options such as:
+
+- Converting a dictionary to a defaultdictionary
 
 Functions
 ---------
@@ -7,8 +9,10 @@ dict_to_defaultdict -> defaultdict:
 
 Examples
 --------
-Convert a user dictionary to a defaultdict
+### Convert a user dictionary to a defaultdict
 ```
+from sdu.type_conversions import dict_to_defaultdict
+
 user = {'Name':'John',
 'Phone':{ # This will be converted to a defaultdict also
     'Manufacturer':'Nokia',
@@ -17,7 +21,7 @@ user = {'Name':'John',
     },
 'Age':13}
 
-print(dict_to_defaultdict(user))
+print(dict_to_defaultdict(user)) # defaultdict(<function <lambda> at 0x000002CF4C278E50>, {'Name': 'John', 'Phone': defaultdict(<function <lambda> at 0x000002CF4C278E50>, {'Manufacturer': 'Nokia', 'Model': 'Cityman 100', 'Release Date': 1998}), 'Age': 13})
 ```
 """
 
@@ -48,7 +52,10 @@ def dict_to_defaultdict(original_dict:dict, default:Callable = lambda:False) -> 
 
     Examples
     --------
+    Convert a user dictionary to a defaultdict
     ```
+    from sdu.type_conversions import dict_to_defaultdict
+
     user = {'Name':'John',
     'Phone':{ # This will be converted to a defaultdict also
         'Manufacturer':'Nokia',
@@ -57,7 +64,7 @@ def dict_to_defaultdict(original_dict:dict, default:Callable = lambda:False) -> 
         },
     'Age':13}
 
-    print(dict_to_defaultdict(user))
+    print(dict_to_defaultdict(user)) # defaultdict(<function <lambda> at 0x000002CF4C278E50>, {'Name': 'John', 'Phone': defaultdict(<function <lambda> at 0x000002CF4C278E50>, {'Manufacturer': 'Nokia', 'Model': 'Cityman 100', 'Release Date': 1998}), 'Age': 13})
     ```
     """
     logging.info(f"Beginning defaultdict conversion of {original_dict}")
