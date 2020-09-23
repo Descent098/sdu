@@ -1,3 +1,7 @@
+<img src="https://github.com/Descent098/sdu/blob/master/.github/sdu.png" alt="sdu logo" style="zoom:35%;" />
+
+![Test suite](https://github.com/Descent098/sdu/workflows/Test%20suite/badge.svg?branch=master&event=check_run)
+
 # Script Development Utilities
 
 A set of utilities to make developing scripts simpler and easier
