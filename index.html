@@ -3,24 +3,33 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.7.4" />
+<meta name="generator" content="pdoc 0.9.1" />
 <title>sdu API documentation</title>
 <meta name="description" content="A set of utilities to make developing scripts simpler and easier …" />
-<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
-<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
-<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{font-weight:bold}#index h4 + ul{margin-bottom:.6em}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
-<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
 <style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
 </head>
 <body>
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>sdu</code></h1>
+<h1 class="title">Package <code>sdu</code></h1>
 </header>
 <section id="section-intro">
 <p>A set of utilities to make developing scripts simpler and easier</p>
+<p>There are several goals with this project:</p>
+<ol>
+<li>Provide a useful API for well developed functions with error catching and testing for commonly annoying situations</li>
+<li>Provide cross-platform implementations of functions (where possible)</li>
+<li>Give people access to source code to learn how the functions work and just pull what's needed</li>
+<li>Serve as a repository of general knowledge to share solutions to issues with people</li>
+</ol>
 <h2 id="installation">Installation</h2>
 <p><strong>From PyPi:</strong></p>
 <p>Run
@@ -31,7 +40,7 @@
 <ol>
 <li>
 <p>Clone the repo:</p>
-<p><code>git clone &lt;https://github.com/Descent098/sdu</code>&gt;</p>
+<p><code>git clone https://github.com/Descent098/sdu</code></p>
 </li>
 <li>
 <p>CD into the <strong>/sdu</strong> directory and run:</p>
@@ -39,70 +48,42 @@
 </li>
 </ol>
 <h2 id="modules">Modules</h2>
-<p>paths:
-This module contains many useful utilities for dealing with system paths.</p>
-<p>terminal:
-A module for helpful utilities with generating CLI's</p>
-<p>validation:
-Contains a set of common validation schemes.</p>
-<p>type_conversions:
-This module is for quick and common conversions between types with sensible options</p>
-<h2 id="examples">Examples</h2>
-<p><strong>A random number guessing game using sdu validation.</strong></p>
-<pre><code>import random
-
-from sdu.validation import validate_number_selection
-
-number = random.randint(0,10)
-
-selection = validate_number_selection(maximum = 10, minimum = 0, message=&quot;guess a number between 0-10: &quot;)
-
-while selection != number:
-    if selection &lt; number:
-        print('Too Low')
-
-    elif selection &gt; number:
-        print('Too High')
-
-    selection = validate_number_selection(maximum = 10, minimum = 0, message=&quot;guess a number between 0-10: &quot;)
-
-print('You win!') # After number has been guessed correctly
-</code></pre>
-<p><strong>Clearing terminal after filling it with hello's</strong></p>
-<pre><code>from sdu.terminal import clear_terminal
-
-print('hello\n'*250) # Fill screen with hello's
-
-clear_terminal() # Clears the terminal NOTE: cross platform
-</code></pre>
-<p><strong>An example of path processing on a windows machine (because of the wildcard and OS results will vary)</strong></p>
-<pre><code>from sdu.paths import process_paths
-
-paths = ['~/Desktop/Development/Canadian Coding/SSB', 'C:\\Users\\Kieran\\Desktop\\Development\\*', '~\\Desktop\\Development\\Personal\\noter', '.']
-
-print(process_paths(paths)) # Prints: ['C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB', 'C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding', 'C:\\Users\\Kieran\\Desktop\\Development\\Personal', 'C:\\Users\\Kieran\\Desktop\\Development\\pystall', 'C:\\Users\\Kieran\\Desktop\\Development\\python-package-template', 'C:\\Users\\Kieran\\Desktop\\Development\\Work', 'C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter', 'C:\\Users\\Kieran\\Desktop\\sdu'] 
-</code></pre>
-<p><strong>An example of the preprocessing to postprocessing pipeline on a windows machine (because of the wildcard and OS results will vary)</strong></p>
-<pre><code>from sdu.paths import preprocess_paths, postprocess_paths
-
-paths = ['~/Desktop/Development/Canadian Coding/SSB', 'C:\\Users\\Kieran\\Desktop\\Development\\*', '~\\Desktop\\Development\\Personal\\noter', '.']
-
-print(preprocess_paths(paths)) # Prints: ['~/Desktop/Development/Canadian Coding/SSB', '~/Desktop/Development/*' , '~/Desktop/Development/Personal/noter', '.']
-
-print(postprocess_paths(paths)) # Prints: ['C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB', 'C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding', 'C:\\Users\\Kieran\\Desktop\\Development\\Personal', 'C:\\Users\\Kieran\\Desktop\\Development\\pystall', 'C:\\Users\\Kieran\\Desktop\\Development\\python-package-template', 'C:\\Users\\Kieran\\Desktop\\Development\\Work', 'C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter', 'C:\\Users\\Kieran\\Desktop\\sdu'] 
-</code></pre>
-<p><strong>Print a shopping list with each item on a new line</strong></p>
-<pre><code>from sdu.type_conversions import stringify_list
-
-shopping_list = [&quot;eggs&quot;, &quot;ham&quot;, &quot;spam&quot;]
-
-print((stringify_list(shopping_list, seperator='\n', spacing=0))) # Prints list with each item on new line
-</code></pre>
+<h3 id="autocomplete">autocomplete</h3>
+<p>This module is used to generate autocomplete files for bash</p>
+<h3 id="cli">cli</h3>
+<p>A module for helpful utilities with generating CLI's such as:</p>
+<ul>
+<li>Clearing the terminal</li>
+</ul>
+<h3 id="paths">paths</h3>
+<p>This module contains many useful utilities for dealing with system paths such as:</p>
+<ul>
+<li>A pre and post processing pipeline for system paths</li>
+<li>Ability to add paths to the PATH variable</li>
+</ul>
+<h3 id="type_conversions">type_conversions</h3>
+<p>Quick and common conversions between types with sensible options such as:</p>
+<ul>
+<li>Converting a dictionary (and second dimension dictionary keys) to defaultdict(s)</li>
+</ul>
+<h3 id="validation">validation</h3>
+<p>Contains a set of common validation schemes such as:</p>
+<ul>
+<li>Validating number input is between a set value at the command line</li>
+<li>Validate provided string is an accepted value</li>
+</ul>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">r&#34;&#34;&#34;A set of utilities to make developing scripts simpler and easier
+<pre><code class="python">&#34;&#34;&#34;A set of utilities to make developing scripts simpler and easier
+
+There are several goals with this project:
+
+1. Provide a useful API for well developed functions with error catching and testing for commonly annoying situations
+2. Provide cross-platform implementations of functions (where possible)
+3. Give people access to source code to learn how the functions work and just pull what&#39;s needed
+4. Serve as a repository of general knowledge to share solutions to issues with people
 
 Installation
 -----------
@@ -127,109 +108,61 @@ or
 
 Modules
 -------
-paths:
-    This module contains many useful utilities for dealing with system paths.
+### autocomplete
 
-terminal:
-    A module for helpful utilities with generating CLI&#39;s
+This module is used to generate autocomplete files for bash
 
-validation:
-    Contains a set of common validation schemes.
+### cli
 
-type_conversions:
-    This module is for quick and common conversions between types with sensible options
+A module for helpful utilities with generating CLI&#39;s such as:
 
-Examples
---------
+- Clearing the terminal
 
-**A random number guessing game using sdu validation.**
+### paths
 
-```
-import random
+This module contains many useful utilities for dealing with system paths such as:
 
-from sdu.validation import validate_number_selection
+- A pre and post processing pipeline for system paths
+- Ability to add paths to the PATH variable
 
-number = random.randint(0,10)
+### type_conversions
 
-selection = validate_number_selection(maximum = 10, minimum = 0, message=&#34;guess a number between 0-10: &#34;)
+Quick and common conversions between types with sensible options such as:
 
-while selection != number:
-    if selection &lt; number:
-        print(&#39;Too Low&#39;)
+- Converting a dictionary (and second dimension dictionary keys) to defaultdict(s)
 
-    elif selection &gt; number:
-        print(&#39;Too High&#39;)
+### validation
 
-    selection = validate_number_selection(maximum = 10, minimum = 0, message=&#34;guess a number between 0-10: &#34;)
+Contains a set of common validation schemes such as:
 
-print(&#39;You win!&#39;) # After number has been guessed correctly
-```
+- Validating number input is between a set value at the command line
+- Validate provided string is an accepted value
 
-
-**Clearing terminal after filling it with hello&#39;s**
-
-```
-from sdu.terminal import clear_terminal
-
-print(&#39;hello\n&#39;*250) # Fill screen with hello&#39;s
-
-clear_terminal() # Clears the terminal NOTE: cross platform
-```
-
-
-**An example of path processing on a windows machine (because of the wildcard and OS results will vary)**
-
-```
-from sdu.paths import process_paths
-
-paths = [&#39;~/Desktop/Development/Canadian Coding/SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\*&#39;, &#39;~\\Desktop\\Development\\Personal\\noter&#39;, &#39;.&#39;]
-
-print(process_paths(paths)) # Prints: [&#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\pystall&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\python-package-template&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Work&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter&#39;, &#39;C:\\Users\\Kieran\\Desktop\\sdu&#39;] 
-```
-
-
-**An example of the preprocessing to postprocessing pipeline on a windows machine (because of the wildcard and OS results will vary)**
-
-```
-from sdu.paths import preprocess_paths, postprocess_paths
-
-paths = [&#39;~/Desktop/Development/Canadian Coding/SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\*&#39;, &#39;~\\Desktop\\Development\\Personal\\noter&#39;, &#39;.&#39;]
-
-print(preprocess_paths(paths)) # Prints: [&#39;~/Desktop/Development/Canadian Coding/SSB&#39;, &#39;~/Desktop/Development/*&#39; , &#39;~/Desktop/Development/Personal/noter&#39;, &#39;.&#39;]
-
-print(postprocess_paths(paths)) # Prints: [&#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\pystall&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\python-package-template&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Work&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter&#39;, &#39;C:\\Users\\Kieran\\Desktop\\sdu&#39;] 
-```
-
-
-**Print a shopping list with each item on a new line**
-```
-from sdu.type_conversions import stringify_list
-
-shopping_list = [&#34;eggs&#34;, &#34;ham&#34;, &#34;spam&#34;]
-
-print((stringify_list(shopping_list, seperator=&#39;\n&#39;, spacing=0))) # Prints list with each item on new line
-```
 &#34;&#34;&#34;</code></pre>
 </details>
 </section>
 <section>
 <h2 class="section-title" id="header-submodules">Sub-modules</h2>
 <dl>
+<dt><code class="name"><a title="sdu.autocomplete" href="autocomplete.html">sdu.autocomplete</a></code></dt>
+<dd>
+<div class="desc"><p>This module is used to generate autocomplete files for various systems (bash, zsh etc.) …</p></div>
+</dd>
+<dt><code class="name"><a title="sdu.cli" href="cli.html">sdu.cli</a></code></dt>
+<dd>
+<div class="desc"><p>A module for helpful utilities with generating CLI's such as: …</p></div>
+</dd>
 <dt><code class="name"><a title="sdu.paths" href="paths.html">sdu.paths</a></code></dt>
 <dd>
-<section class="desc"><p>Utilities for dealing with system paths …</p></section>
-</dd>
-<dt><code class="name"><a title="sdu.terminal" href="terminal.html">sdu.terminal</a></code></dt>
-<dd>
-<section class="desc"><p>Utilities for generating CLI's …</p></section>
+<div class="desc"><p>This module contains many useful utilities for dealing with system paths such as: …</p></div>
 </dd>
 <dt><code class="name"><a title="sdu.type_conversions" href="type_conversions.html">sdu.type_conversions</a></code></dt>
 <dd>
-<section class="desc"><p>This module is for quick and common conversions between types with sensible options …</p></section>
+<div class="desc"><p>This module is for quick and common conversions between types with sensible options such as: …</p></div>
 </dd>
 <dt><code class="name"><a title="sdu.validation" href="validation.html">sdu.validation</a></code></dt>
 <dd>
-<section class="desc"><p>A set of common validation schemes …</p></section>
+<div class="desc"><p>Contains a set of common validation schemes such as: …</p></div>
 </dd>
 </dl>
 </section>
@@ -245,15 +178,22 @@ print((stringify_list(shopping_list, seperator=&#39;\n&#39;, spacing=0))) # Prin
 <div class="toc">
 <ul>
 <li><a href="#installation">Installation</a></li>
-<li><a href="#modules">Modules</a></li>
-<li><a href="#examples">Examples</a></li>
+<li><a href="#modules">Modules</a><ul>
+<li><a href="#autocomplete">autocomplete</a></li>
+<li><a href="#cli">cli</a></li>
+<li><a href="#paths">paths</a></li>
+<li><a href="#type_conversions">type_conversions</a></li>
+<li><a href="#validation">validation</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <ul id="index">
 <li><h3><a href="#header-submodules">Sub-modules</a></h3>
 <ul>
+<li><code><a title="sdu.autocomplete" href="autocomplete.html">sdu.autocomplete</a></code></li>
+<li><code><a title="sdu.cli" href="cli.html">sdu.cli</a></code></li>
 <li><code><a title="sdu.paths" href="paths.html">sdu.paths</a></code></li>
-<li><code><a title="sdu.terminal" href="terminal.html">sdu.terminal</a></code></li>
 <li><code><a title="sdu.type_conversions" href="type_conversions.html">sdu.type_conversions</a></code></li>
 <li><code><a title="sdu.validation" href="validation.html">sdu.validation</a></code></li>
 </ul>
@@ -262,9 +202,7 @@ print((stringify_list(shopping_list, seperator=&#39;\n&#39;, spacing=0))) # Prin
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.7.4</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.1</a>.</p>
 </footer>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad()</script>
 </body>
 </html>

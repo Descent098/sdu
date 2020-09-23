@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.1" />
+<title>sdu.cli API documentation</title>
+<meta name="description" content="A module for helpful utilities with generating CLI&#39;s such as: …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>sdu.cli</code></h1>
+</header>
+<section id="section-intro">
+<p>A module for helpful utilities with generating CLI's such as:</p>
+<ul>
+<li>Clearing the terminal</li>
+<li>Centering text</li>
+<li>Choosing a directory (from gui and CLI)</li>
+</ul>
+<h2 id="functions">Functions</h2>
+<p>clear_terminal:
+Clears the current terminal</p>
+<p>select_directory -&gt; str:
+Allows user to select a directory and returns the path as a string</p>
+<p>center_text -&gt; str:
+Takes a string and returns the centered result as a string</p>
+<h2 id="aliases">Aliases</h2>
+<p>All the functions below are aliases to existing functions to
+make usage simpler</p>
+<p>remove_directory:
+an alias for shutil.rmtree which deletes directories</p>
+<h2 id="examples">Examples</h2>
+<h3 id="clearing-terminal-after-filling-it-with-hellos">Clearing terminal after filling it with hello's</h3>
+<pre><code>from sdu.cli import clear_terminal
+
+print('hello
+'*250) # Fill screen with hello's
+
+clear_terminal()
+</code></pre>
+<h3 id="taking-input-to-save-content-to-a-directory">Taking input to save content to a directory</h3>
+<pre><code>import os
+from sdu.cli import select_directory
+
+save_folder = select_directory()
+
+with open(f'{save_folder}{os.sep}blah.txt', 'w') as output_file:
+    output_file.write('blah')
+</code></pre>
+<h3 id="printing-someones-name-centered-in-terminal">Printing someones name centered in terminal</h3>
+<pre><code>from sdu.cli import center_text
+
+name = input('what is your name?:')
+
+print(center_text(name))
+</code></pre>
+<h3 id="removing-a-directory">Removing a directory</h3>
+<pre><code>from sdu.cli import remove_directory
+
+remove_directory(&quot;/path/to/delete&quot;)
+</code></pre>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;A module for helpful utilities with generating CLI&#39;s such as:
+
+- Clearing the terminal
+- Centering text
+- Choosing a directory (from gui and CLI)
+
+Functions
+---------
+clear_terminal:
+    Clears the current terminal
+
+select_directory -&gt; str:
+    Allows user to select a directory and returns the path as a string
+
+center_text -&gt; str:
+    Takes a string and returns the centered result as a string
+
+Aliases
+-------
+All the functions below are aliases to existing functions to
+make usage simpler
+
+remove_directory:
+    an alias for shutil.rmtree which deletes directories
+
+Examples
+--------
+### Clearing terminal after filling it with hello&#39;s
+
+```
+from sdu.cli import clear_terminal
+
+print(&#39;hello\n&#39;*250) # Fill screen with hello&#39;s
+
+clear_terminal()
+```
+
+### Taking input to save content to a directory
+
+```
+import os
+from sdu.cli import select_directory
+
+save_folder = select_directory()
+
+with open(f&#39;{save_folder}{os.sep}blah.txt&#39;, &#39;w&#39;) as output_file:
+    output_file.write(&#39;blah&#39;)
+```
+
+### Printing someones name centered in terminal
+
+```
+from sdu.cli import center_text
+
+name = input(&#39;what is your name?:&#39;)
+
+print(center_text(name))
+```
+
+### Removing a directory
+
+```
+from sdu.cli import remove_directory
+
+remove_directory(&#34;/path/to/delete&#34;)
+```
+&#34;&#34;&#34;
+
+# Standard lib dependencies
+import os  # Used to validate and grab paths
+from shutil import rmtree as remove_directory
+
+# Internal Dependencies
+from sdu.validation import validate_number_selection  # Used to validate number selections in functions
+
+# External Dependencies
+import colored  # Used to colour stdout output for emphasis
+
+def clear_terminal() -&gt; None:
+    &#34;&#34;&#34;Clears the current terminal.
+    
+    Examples
+    --------
+    Clearing terminal after filling it with hello&#39;s
+
+    ```
+    from sdu.cli import clear_terminal
+    
+    print(&#39;hello&#39;*250) # Fill screen with hello&#39;s
+
+    clear_terminal() # Clears the terminal NOTE: cross platform
+    ```
+    &#34;&#34;&#34;
+    if os.name==&#39;nt&#39;: # PORT: Windows
+        os.system(&#39;cls&#39;)
+
+    else: # PORT: *nix
+        os.system(&#39;clear&#39;)
+
+def _cli_directory(starting_dir:str = &#34;.&#34;) -&gt; str:
+    &#34;&#34;&#34;Provides a full CLI for selecting and/or creating directories
+    
+    Examples
+    --------
+    Taking input to save content to a directory
+
+    ```
+    import os
+    from sdu.cli import _cli_directory
+
+    save_folder = _cli_directory()
+
+    with open(&#39;save_folder{}blah.txt&#39;.format(os.sep), &#39;w&#39;) as output_file:
+        output_file.write(&#39;blah&#39;)
+    ```
+
+    Returns
+    -------
+    str: 
+        The path to the directory chosen&#34;&#34;&#34;
+    selected_directory = False # Remains false while no existing directory has been selected
+    original_dir = os.path.abspath(&#34;.&#34;)
+    choice = &#34;&#34; # Initialize choice to an empty string
+    controls = f&#34;&#34;&#34;Controls: 
+    Type .. to go up a directory 
+    Type the name of a directory to change into it
+    Type mkdir to create a directory
+    Type ls to show all files in current folder
+
+    {colored.fg(2)}Type here or . to select current directory{colored.fg(15)}
+    &#34;&#34;&#34;
+
+    if not starting_dir == &#34;.&#34;:
+        os.chdir(starting_dir)
+
+    while not selected_directory:
+        if choice == &#34;ls&#34;:
+            current_dir_contents = &#39; | &#39;.join(map(str, [directory for directory in os.listdir()]))
+        else:
+            current_dir_contents = &#39; | &#39;.join(map(str, [directory for directory in os.listdir() if os.path.isdir(directory)]))
+        clear_terminal()
+
+        # Prints the current files and folders in directory
+        print(f&#34;{controls}\n\nCurrent directory is {os.getcwd()} \n\nThe directory contains: \n{current_dir_contents}&#34;)
+
+        choice = input(&#34;\n&gt; &#34;)
+
+        if &#34;mkdir&#34; in choice.lower():  # Create a directory Dialouge
+            directory_name = str(input(&#34;What would you like to call the directory?: &#34;))
+            try:
+                os.mkdir(directory_name)
+            except Exception as identifier:
+                print(&#34;Invalid selection made \nError: {}&#34;.format(identifier))
+
+        elif choice.lower() == &#34;here&#34; or choice.lower() == &#34;.&#34;:  # If they&#39;ve selected the right folder
+            chosen_directory = os.getcwd()
+            return chosen_directory
+
+        elif not choice.lower() == &#34;here&#34; or choice.lower() == &#34;.&#34;:  # If user wants to navigate to a different folder
+            try:
+                os.chdir(choice)
+            except NotADirectoryError:
+                continue
+            except FileNotFoundError:
+                continue
+
+
+def select_directory(gui:bool = False, starting_dir:str = &#34;.&#34;) -&gt; str:
+    &#34;&#34;&#34;Allows user to select a directory and returns the path as a string.
+
+    Parameters
+    ----------
+    gui:(bool)
+        Specify whether or not you want a tkinter dialogue box for picking
+        the directory or a cli based directory selection
+
+    starting_dir:(str)
+        The directory for the selection to start from
+
+    Examples
+    --------
+    Taking input to save content to a directory
+
+    ```
+    import os
+    from sdu.cli import select_directory
+
+    save_folder = select_directory()
+
+    with open(f&#39;{save_folder}{os.sep}blah.txt&#39;, &#39;w&#39;) as output_file:
+        output_file.write(&#39;blah&#39;)
+    ```
+
+    Returns
+    -------
+    str:
+        The path to the directory selected
+    &#34;&#34;&#34;
+
+    if gui == False: #Terminal/cmd based path selector
+        return _cli_directory(starting_dir = starting_dir)
+
+    if gui == True: # GUI based file selector
+        import tkinter as tk
+        from tkinter import filedialog
+        root = tk.Tk()
+        root.withdraw()
+        file_path = str(filedialog.askdirectory(title=&#34;Specify Directory&#34;, mustexist = False, initialdir = starting_dir))
+        return file_path
+
+def center_text(message:str) -&gt; str:
+    &#34;&#34;&#34;Takes a string and returns the centered result as a string.
+
+    Parameters
+    ----------
+    message: (str)
+        The message to center
+
+    Examples
+    --------
+    Printing someones name centered in terminal.
+
+    ```
+    from sdu.cli import center_text
+
+    name = input(&#39;what is your name?:&#39;)
+
+    print(center_text(name))
+    ```
+
+    Returns
+    -------
+    str:
+        The message string centered.
+
+    &#34;&#34;&#34;
+    import shutil
+    columns = shutil.get_terminal_size().columns
+    return(message.center(columns))
+
+if __name__ == &#34;__main__&#34;:
+    save_folder = select_directory(starting_dir=f&#34;{os.environ[&#39;USERPROFILE&#39;]}\\Desktop&#34;)
+
+    with open(f&#39;{save_folder}{os.sep}blah.txt&#39;, &#39;w&#39;) as output_file:
+        output_file.write(&#39;blah&#39;)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="sdu.cli.center_text"><code class="name flex">
+<span>def <span class="ident">center_text</span></span>(<span>message: str) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Takes a string and returns the centered result as a string.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>message</code></strong> :&ensp;<code>(str)</code></dt>
+<dd>The message to center</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<p>Printing someones name centered in terminal.</p>
+<pre><code>from sdu.cli import center_text
+
+name = input('what is your name?:')
+
+print(center_text(name))
+</code></pre>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str:</code></dt>
+<dd>The message string centered.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def center_text(message:str) -&gt; str:
+    &#34;&#34;&#34;Takes a string and returns the centered result as a string.
+
+    Parameters
+    ----------
+    message: (str)
+        The message to center
+
+    Examples
+    --------
+    Printing someones name centered in terminal.
+
+    ```
+    from sdu.cli import center_text
+
+    name = input(&#39;what is your name?:&#39;)
+
+    print(center_text(name))
+    ```
+
+    Returns
+    -------
+    str:
+        The message string centered.
+
+    &#34;&#34;&#34;
+    import shutil
+    columns = shutil.get_terminal_size().columns
+    return(message.center(columns))</code></pre>
+</details>
+</dd>
+<dt id="sdu.cli.clear_terminal"><code class="name flex">
+<span>def <span class="ident">clear_terminal</span></span>(<span>) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Clears the current terminal.</p>
+<h2 id="examples">Examples</h2>
+<p>Clearing terminal after filling it with hello's</p>
+<pre><code>from sdu.cli import clear_terminal
+
+print('hello'*250) # Fill screen with hello's
+
+clear_terminal() # Clears the terminal NOTE: cross platform
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def clear_terminal() -&gt; None:
+    &#34;&#34;&#34;Clears the current terminal.
+    
+    Examples
+    --------
+    Clearing terminal after filling it with hello&#39;s
+
+    ```
+    from sdu.cli import clear_terminal
+    
+    print(&#39;hello&#39;*250) # Fill screen with hello&#39;s
+
+    clear_terminal() # Clears the terminal NOTE: cross platform
+    ```
+    &#34;&#34;&#34;
+    if os.name==&#39;nt&#39;: # PORT: Windows
+        os.system(&#39;cls&#39;)
+
+    else: # PORT: *nix
+        os.system(&#39;clear&#39;)</code></pre>
+</details>
+</dd>
+<dt id="sdu.cli.select_directory"><code class="name flex">
+<span>def <span class="ident">select_directory</span></span>(<span>gui: bool = False, starting_dir: str = '.') ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Allows user to select a directory and returns the path as a string.</p>
+<h2 id="parameters">Parameters</h2>
+<p>gui:(bool)
+Specify whether or not you want a tkinter dialogue box for picking
+the directory or a cli based directory selection</p>
+<p>starting_dir:(str)
+The directory for the selection to start from</p>
+<h2 id="examples">Examples</h2>
+<p>Taking input to save content to a directory</p>
+<pre><code>import os
+from sdu.cli import select_directory
+
+save_folder = select_directory()
+
+with open(f'{save_folder}{os.sep}blah.txt', 'w') as output_file:
+    output_file.write('blah')
+</code></pre>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str:</code></dt>
+<dd>The path to the directory selected</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def select_directory(gui:bool = False, starting_dir:str = &#34;.&#34;) -&gt; str:
+    &#34;&#34;&#34;Allows user to select a directory and returns the path as a string.
+
+    Parameters
+    ----------
+    gui:(bool)
+        Specify whether or not you want a tkinter dialogue box for picking
+        the directory or a cli based directory selection
+
+    starting_dir:(str)
+        The directory for the selection to start from
+
+    Examples
+    --------
+    Taking input to save content to a directory
+
+    ```
+    import os
+    from sdu.cli import select_directory
+
+    save_folder = select_directory()
+
+    with open(f&#39;{save_folder}{os.sep}blah.txt&#39;, &#39;w&#39;) as output_file:
+        output_file.write(&#39;blah&#39;)
+    ```
+
+    Returns
+    -------
+    str:
+        The path to the directory selected
+    &#34;&#34;&#34;
+
+    if gui == False: #Terminal/cmd based path selector
+        return _cli_directory(starting_dir = starting_dir)
+
+    if gui == True: # GUI based file selector
+        import tkinter as tk
+        from tkinter import filedialog
+        root = tk.Tk()
+        root.withdraw()
+        file_path = str(filedialog.askdirectory(title=&#34;Specify Directory&#34;, mustexist = False, initialdir = starting_dir))
+        return file_path</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul>
+<li><a href="#functions">Functions</a></li>
+<li><a href="#aliases">Aliases</a></li>
+<li><a href="#examples">Examples</a><ul>
+<li><a href="#clearing-terminal-after-filling-it-with-hellos">Clearing terminal after filling it with hello's</a></li>
+<li><a href="#taking-input-to-save-content-to-a-directory">Taking input to save content to a directory</a></li>
+<li><a href="#printing-someones-name-centered-in-terminal">Printing someones name centered in terminal</a></li>
+<li><a href="#removing-a-directory">Removing a directory</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="sdu" href="index.html">sdu</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="sdu.cli.center_text" href="#sdu.cli.center_text">center_text</a></code></li>
+<li><code><a title="sdu.cli.clear_terminal" href="#sdu.cli.clear_terminal">clear_terminal</a></code></li>
+<li><code><a title="sdu.cli.select_directory" href="#sdu.cli.select_directory">select_directory</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.1</a>.</p>
+</footer>
+</body>
+</html>

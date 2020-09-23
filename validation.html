@@ -3,15 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.7.4" />
+<meta name="generator" content="pdoc 0.9.1" />
 <title>sdu.validation API documentation</title>
-<meta name="description" content="A set of common validation schemes …" />
-<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
-<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
-<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{font-weight:bold}#index h4 + ul{margin-bottom:.6em}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
-<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<meta name="description" content="Contains a set of common validation schemes such as: …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
 <style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
 </head>
 <body>
 <main>
@@ -20,77 +22,113 @@
 <h1 class="title">Module <code>sdu.validation</code></h1>
 </header>
 <section id="section-intro">
-<p>A set of common validation schemes.</p>
+<p>Contains a set of common validation schemes such as:</p>
+<ul>
+<li>Validating number input is between a set value at the command line</li>
+<li>Validate provided string is an accepted value</li>
+</ul>
 <h2 id="functions">Functions</h2>
-<p>validate_number_selection -&gt; int|float:
-Used to validate user input is within range minimum &lt; input &lt; maximum. Keeps user in loop
-until input is within range.</p>
+<p>validate_number_selection -&gt; int or float:
+Used to validate user input is within range <em>minimum &lt;= input &lt;= maximum</em></p>
+<p>validate_choices -&gt; str:
+Used to validate users input is one of the validators</p>
+<p>confirm -&gt; bool:
+Used to validate users input is yes or no</p>
 <h2 id="examples">Examples</h2>
-<p>Random number guessing game</p>
-<pre><code>import random
+<h3 id="validate-a-selection-between-option-1-or-2-and-exclude-floating-points">Validate a selection between option 1 or 2 and exclude floating points</h3>
+<pre><code>from sdu.validation import validate_number_selection
 
-from sdu.validation import validate_number_selection
+# Validates selection made between 1-2 and is not a floating point value
+selection = validate_number_selection(maximum = 2, minimum = 1, message=&quot;Select option 1 or 2: &quot;, no_float = True)
 
-number = random.randint(0,10)
+if selection == 1:
+    print('selection 1 made')
 
-selection = -1 # initialize variable
-
-while selection != number:
-    selection = validate_number_selection(maximum = 10, minimum = 0, message=&quot;guess a number between 0-10: &quot;)
-
-print('You win!')
+elif selection == 2:
+    print('selection 2 made')
 </code></pre>
-<p>Asking user which condiment they want</p>
+<h3 id="asking-user-which-condiment-they-want">Asking user which condiment they want</h3>
 <pre><code>from sdu.validation import validate_choices
 
 # Stays in loop until user enters one of the valid_choices
-condiment = validate_choices('What condiment do you want', valid_choices=['Ketchup', 'Mayo'])
+condiment = validate_choices('What condiment do you want', valid_choices=['Ketchup', 'Mayo']) # Prints: What condiment do you want?(ketchup or mayo)
+</code></pre>
+<h3 id="ask-someone-to-confirm-if-they-want-fries-with-that">Ask someone to confirm if they want fries with that</h3>
+<pre><code>from sdu.validation import confirm
+
+with_fries = confirm('Do you want fries with that?')
+
+if with_fries:
+    print('Here are your fries')
+else:
+    print('No fry for you')
 </code></pre>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">r&#34;&#34;&#34;A set of common validation schemes.
+<pre><code class="python">&#34;&#34;&#34;Contains a set of common validation schemes such as:
+
+- Validating number input is between a set value at the command line
+- Validate provided string is an accepted value
 
 Functions
 ---------
-validate_number_selection -&gt; int|float:
-    Used to validate user input is within range minimum &lt; input &lt; maximum. Keeps user in loop
-    until input is within range.
+validate_number_selection -&gt; int or float:
+    Used to validate user input is within range *minimum &lt;= input &lt;= maximum*
+
+validate_choices -&gt; str:
+    Used to validate users input is one of the validators
+
+confirm -&gt; bool:
+    Used to validate users input is yes or no
 
 Examples
 --------
-Random number guessing game
+### Validate a selection between option 1 or 2 and exclude floating points
 
 ```
-import random
-
 from sdu.validation import validate_number_selection
 
-number = random.randint(0,10)
+# Validates selection made between 1-2 and is not a floating point value
+selection = validate_number_selection(maximum = 2, minimum = 1, message=&#34;Select option 1 or 2: &#34;, no_float = True)
 
-selection = -1 # initialize variable
+if selection == 1:
+    print(&#39;selection 1 made&#39;)
 
-while selection != number:
-    selection = validate_number_selection(maximum = 10, minimum = 0, message=&#34;guess a number between 0-10: &#34;)
-
-print(&#39;You win!&#39;)
+elif selection == 2:
+    print(&#39;selection 2 made&#39;)
 ```
 
-Asking user which condiment they want
+### Asking user which condiment they want
 
 ```
 from sdu.validation import validate_choices
 
 # Stays in loop until user enters one of the valid_choices
-condiment = validate_choices(&#39;What condiment do you want&#39;, valid_choices=[&#39;Ketchup&#39;, &#39;Mayo&#39;])
+condiment = validate_choices(&#39;What condiment do you want&#39;, valid_choices=[&#39;Ketchup&#39;, &#39;Mayo&#39;]) # Prints: What condiment do you want?(ketchup or mayo)
+```
+
+### Ask someone to confirm if they want fries with that
+
+```
+from sdu.validation import confirm
+
+with_fries = confirm(&#39;Do you want fries with that?&#39;)
+
+if with_fries:
+    print(&#39;Here are your fries&#39;)
+else:
+    print(&#39;No fry for you&#39;)
 ```
 
 &#34;&#34;&#34;
 
-from .type_conversions import stringify_list
+from typing import Union
 
-def validate_number_selection(maximum = 1, minimum=0, message = &#34;Please select one of the above options: &#34;) -&gt; int:
+import colored
+
+def validate_number_selection(maximum = 1, minimum=0, message = &#34;Please select one of the above options: &#34;, no_float = False) -&gt; Union[int, float]:
     &#34;&#34;&#34;
     Used to validate user input is within range minimum &lt; input &lt; maximum. Keeps user in loop
     until input is within range.
@@ -106,29 +144,30 @@ def validate_number_selection(maximum = 1, minimum=0, message = &#34;Please sele
     message: (str)
         What to prompt user with when function is called
 
-    Examples
-    --------
-    Random number guessing game
+    no_float: bool
+        If true then floating point values are not allowed
 
-    ```
-    import random
-    
-    from sdu.validation import validate_number_selection
-
-    number = random.randint(0,10)
-
-    selection = -1 # initialize variable
-
-    while selection != number:
-        selection = validate_number_selection(maximum = 10, minimum = 0, message=&#34;guess a number between 0-10: &#34;)
-
-    print(&#39;You win!&#39;)
-    ```
-    
     Returns
     -------
-    int|float:
+    int or float:
         The validated result from the user
+
+    Examples
+    --------
+    Validate a selection between option 1 or 2 and exclude floating points
+
+    ```
+    from sdu.validation import validate_number_selection
+
+    # Validates selection made between 1-2 and is not a floating point value
+    selection = validate_number_selection(maximum = 2, minimum = 1, message=&#34;Select option 1 or 2: &#34;, no_float = True)
+
+    if selection == 1:
+        print(&#39;selection 1 made&#39;)
+
+    elif selection == 2:
+        print(&#39;selection 2 made&#39;)
+    ```
     &#34;&#34;&#34;
 
     valid_answer = False
@@ -139,6 +178,9 @@ def validate_number_selection(maximum = 1, minimum=0, message = &#34;Please sele
         except:
             print(&#34;Invalid input please try again&#34;)
 
+        if no_float and type(selection) == float:
+            print(&#34;Decimal values are not permitted&#34;)
+            continue
         if selection &gt; maximum: # More than maximum
             print(&#34;Invalid input the selection made was larger than {}&#34;.format(maximum))
 
@@ -147,7 +189,6 @@ def validate_number_selection(maximum = 1, minimum=0, message = &#34;Please sele
 
         else: # If answer is valid and in range
             return selection
-
 
 
 def validate_choices(message:str, valid_choices:list, display_choices:bool = True) -&gt; str:
@@ -172,7 +213,7 @@ def validate_choices(message:str, valid_choices:list, display_choices:bool = Tru
     from sdu.validation import validate_choices
 
     # Stays in loop until user enters one of the valid_choices
-    condiment = validate_choices(&#39;What condiment do you want&#39;, valid_choices=[&#39;Ketchup&#39;, &#39;Mayo&#39;])
+    condiment = validate_choices(&#39;What condiment do you want&#39;, valid_choices=[&#39;Ketchup&#39;, &#39;Mayo&#39;]) # Prints: What condiment do you want?(ketchup or mayo)
     ```
 
     Notes
@@ -189,7 +230,7 @@ def validate_choices(message:str, valid_choices:list, display_choices:bool = Tru
     for count, choice in enumerate(valid_choices): # Preprocessing choices to lowercase and stripping whitespace
         valid_choices[count] = choice.lower().strip()
     
-    stringified_choices = stringify_list(valid_choices, seperator=&#34; or&#34;)
+    stringified_choices = &#34; or &#34;.join(valid_choices)
 
     while 1:
         if display_choices:
@@ -201,7 +242,49 @@ def validate_choices(message:str, valid_choices:list, display_choices:bool = Tru
         if response.lower().strip() in valid_choices:
             return response
         else:
-            print(f&#34;Message provided was not one of the choices; {stringified_choices}&#34;)</code></pre>
+            print(f&#34;Selection provided was not one of the choices; {stringified_choices}&#34;)
+
+
+def confirm(message:str) -&gt; bool:
+    &#34;&#34;&#34;Used to validate users input is yes or no
+    
+    Parameters
+    ----------
+    message: (str)
+        The message to display for confirmation
+
+    Examples
+    --------
+    Ask someone if they want fries with that.
+
+    ```
+    from sdu.validation import confirm
+
+    with_fries = confirm(&#39;Do you want fries with that?&#39;)
+
+    if with_fries:
+        print(&#39;Here are your fries&#39;)
+    else:
+        print(&#39;No fry for you&#39;)
+    ```
+
+    Returns
+    -------
+    bool:
+        Returns True if response is yes and False if no.&#34;&#34;&#34;
+
+    validators = [&#34;y&#34;, &#34;yes&#34;]
+    invalidators = [&#34;n&#34;, &#34;no&#34;]
+    valid_input = False
+
+    while not valid_input:
+        response = input(message + &#34;(y or n): &#34;)
+        if response.lower().strip() in validators:
+            return True
+        elif response.lower().strip() in invalidators:
+            return False
+        else:
+            print(f&#34;{colored.fg(1)}Please respond with either yes or no\n{colored.fg(15)}&#34;)</code></pre>
 </details>
 </section>
 <section>
@@ -211,18 +294,90 @@ def validate_choices(message:str, valid_choices:list, display_choices:bool = Tru
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="sdu.validation.validate_choices"><code class="name flex">
-<span>def <span class="ident">validate_choices</span></span>(<span>message, valid_choices, display_choices=True)</span>
+<dt id="sdu.validation.confirm"><code class="name flex">
+<span>def <span class="ident">confirm</span></span>(<span>message: str) ‑> bool</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Used to validate users input is one of the validators.</p>
+<div class="desc"><p>Used to validate users input is yes or no</p>
 <h2 id="parameters">Parameters</h2>
 <dl>
-<dt><strong><code>message</code></strong> :&ensp; (<code>str</code>)</dt>
+<dt><strong><code>message</code></strong> :&ensp;<code>(str)</code></dt>
+<dd>The message to display for confirmation</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<p>Ask someone if they want fries with that.</p>
+<pre><code>from sdu.validation import confirm
+
+with_fries = confirm('Do you want fries with that?')
+
+if with_fries:
+    print('Here are your fries')
+else:
+    print('No fry for you')
+</code></pre>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>bool:</code></dt>
+<dd>Returns True if response is yes and False if no.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def confirm(message:str) -&gt; bool:
+    &#34;&#34;&#34;Used to validate users input is yes or no
+    
+    Parameters
+    ----------
+    message: (str)
+        The message to display for confirmation
+
+    Examples
+    --------
+    Ask someone if they want fries with that.
+
+    ```
+    from sdu.validation import confirm
+
+    with_fries = confirm(&#39;Do you want fries with that?&#39;)
+
+    if with_fries:
+        print(&#39;Here are your fries&#39;)
+    else:
+        print(&#39;No fry for you&#39;)
+    ```
+
+    Returns
+    -------
+    bool:
+        Returns True if response is yes and False if no.&#34;&#34;&#34;
+
+    validators = [&#34;y&#34;, &#34;yes&#34;]
+    invalidators = [&#34;n&#34;, &#34;no&#34;]
+    valid_input = False
+
+    while not valid_input:
+        response = input(message + &#34;(y or n): &#34;)
+        if response.lower().strip() in validators:
+            return True
+        elif response.lower().strip() in invalidators:
+            return False
+        else:
+            print(f&#34;{colored.fg(1)}Please respond with either yes or no\n{colored.fg(15)}&#34;)</code></pre>
+</details>
+</dd>
+<dt id="sdu.validation.validate_choices"><code class="name flex">
+<span>def <span class="ident">validate_choices</span></span>(<span>message: str, valid_choices: list, display_choices: bool = True) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Used to validate users input is one of the validators.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>message</code></strong> :&ensp;<code> (str)</code></dt>
 <dd>The message to print along with the choices on user prompt.</dd>
-<dt><strong><code>valid_choices</code></strong> :&ensp;(<code>list</code>|<code>tuple</code>)</dt>
+<dt><strong><code>valid_choices</code></strong> :&ensp;<code>(list|tuple)</code></dt>
 <dd>The valid choices the user can pick from</dd>
-<dt><strong><code>display_choices</code></strong> :&ensp;(<code>bool</code>)</dt>
+<dt><strong><code>display_choices</code></strong> :&ensp;<code>(bool)</code></dt>
 <dd>If True then on user prompt the choices will be displayed</dd>
 </dl>
 <h2 id="examples">Examples</h2>
@@ -230,7 +385,7 @@ def validate_choices(message:str, valid_choices:list, display_choices:bool = Tru
 <pre><code>from sdu.validation import validate_choices
 
 # Stays in loop until user enters one of the valid_choices
-condiment = validate_choices('What condiment do you want', valid_choices=['Ketchup', 'Mayo'])
+condiment = validate_choices('What condiment do you want', valid_choices=['Ketchup', 'Mayo']) # Prints: What condiment do you want?(ketchup or mayo)
 </code></pre>
 <h2 id="notes">Notes</h2>
 <ul>
@@ -239,9 +394,9 @@ condiment = validate_choices('What condiment do you want', valid_choices=['Ketch
 </ul>
 <h2 id="returns">Returns</h2>
 <dl>
-<dt><code>str</code>:</dt>
+<dt><code>str:</code></dt>
 <dd>The valid choice the user selected</dd>
-</dl></section>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -268,7 +423,7 @@ condiment = validate_choices('What condiment do you want', valid_choices=['Ketch
     from sdu.validation import validate_choices
 
     # Stays in loop until user enters one of the valid_choices
-    condiment = validate_choices(&#39;What condiment do you want&#39;, valid_choices=[&#39;Ketchup&#39;, &#39;Mayo&#39;])
+    condiment = validate_choices(&#39;What condiment do you want&#39;, valid_choices=[&#39;Ketchup&#39;, &#39;Mayo&#39;]) # Prints: What condiment do you want?(ketchup or mayo)
     ```
 
     Notes
@@ -285,7 +440,7 @@ condiment = validate_choices('What condiment do you want', valid_choices=['Ketch
     for count, choice in enumerate(valid_choices): # Preprocessing choices to lowercase and stripping whitespace
         valid_choices[count] = choice.lower().strip()
     
-    stringified_choices = stringify_list(valid_choices, seperator=&#34; or&#34;)
+    stringified_choices = &#34; or &#34;.join(valid_choices)
 
     while 1:
         if display_choices:
@@ -297,49 +452,49 @@ condiment = validate_choices('What condiment do you want', valid_choices=['Ketch
         if response.lower().strip() in valid_choices:
             return response
         else:
-            print(f&#34;Message provided was not one of the choices; {stringified_choices}&#34;)</code></pre>
+            print(f&#34;Selection provided was not one of the choices; {stringified_choices}&#34;)</code></pre>
 </details>
 </dd>
 <dt id="sdu.validation.validate_number_selection"><code class="name flex">
-<span>def <span class="ident">validate_number_selection</span></span>(<span>maximum=1, minimum=0, message='Please select one of the above options: ')</span>
+<span>def <span class="ident">validate_number_selection</span></span>(<span>maximum=1, minimum=0, message='Please select one of the above options: ', no_float=False) ‑> Union[int, float]</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Used to validate user input is within range minimum &lt; input &lt; maximum. Keeps user in loop
+<div class="desc"><p>Used to validate user input is within range minimum &lt; input &lt; maximum. Keeps user in loop
 until input is within range.</p>
 <h2 id="parameters">Parameters</h2>
 <dl>
-<dt><strong><code>maximum</code></strong> :&ensp; (<code>int</code>|<code>float</code>)</dt>
+<dt><strong><code>maximum</code></strong> :&ensp;<code>(int|float)</code></dt>
 <dd>The maximum value allowed</dd>
-<dt><strong><code>minimum</code></strong> :&ensp;(<code>int</code>|<code>float</code>)</dt>
+<dt><strong><code>minimum</code></strong> :&ensp;<code>(int|float)</code></dt>
 <dd>The minimum value allowed</dd>
-<dt><strong><code>message</code></strong> :&ensp;(<code>str</code>)</dt>
+<dt><strong><code>message</code></strong> :&ensp;<code>(str)</code></dt>
 <dd>What to prompt user with when function is called</dd>
+<dt><strong><code>no_float</code></strong> :&ensp;<code>bool</code></dt>
+<dd>If true then floating point values are not allowed</dd>
 </dl>
-<h2 id="examples">Examples</h2>
-<p>Random number guessing game</p>
-<pre><code>import random
-
-from sdu.validation import validate_number_selection
-
-number = random.randint(0,10)
-
-selection = -1 # initialize variable
-
-while selection != number:
-    selection = validate_number_selection(maximum = 10, minimum = 0, message=&quot;guess a number between 0-10: &quot;)
-
-print('You win!')
-</code></pre>
 <h2 id="returns">Returns</h2>
 <dl>
-<dt><code>int</code>|<code>float</code>:</dt>
+<dt><code>int</code> or <code>float:</code></dt>
 <dd>The validated result from the user</dd>
-</dl></section>
+</dl>
+<h2 id="examples">Examples</h2>
+<p>Validate a selection between option 1 or 2 and exclude floating points</p>
+<pre><code>from sdu.validation import validate_number_selection
+
+# Validates selection made between 1-2 and is not a floating point value
+selection = validate_number_selection(maximum = 2, minimum = 1, message=&quot;Select option 1 or 2: &quot;, no_float = True)
+
+if selection == 1:
+    print('selection 1 made')
+
+elif selection == 2:
+    print('selection 2 made')
+</code></pre></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def validate_number_selection(maximum = 1, minimum=0, message = &#34;Please select one of the above options: &#34;) -&gt; int:
+<pre><code class="python">def validate_number_selection(maximum = 1, minimum=0, message = &#34;Please select one of the above options: &#34;, no_float = False) -&gt; Union[int, float]:
     &#34;&#34;&#34;
     Used to validate user input is within range minimum &lt; input &lt; maximum. Keeps user in loop
     until input is within range.
@@ -355,29 +510,30 @@ print('You win!')
     message: (str)
         What to prompt user with when function is called
 
-    Examples
-    --------
-    Random number guessing game
+    no_float: bool
+        If true then floating point values are not allowed
 
-    ```
-    import random
-    
-    from sdu.validation import validate_number_selection
-
-    number = random.randint(0,10)
-
-    selection = -1 # initialize variable
-
-    while selection != number:
-        selection = validate_number_selection(maximum = 10, minimum = 0, message=&#34;guess a number between 0-10: &#34;)
-
-    print(&#39;You win!&#39;)
-    ```
-    
     Returns
     -------
-    int|float:
+    int or float:
         The validated result from the user
+
+    Examples
+    --------
+    Validate a selection between option 1 or 2 and exclude floating points
+
+    ```
+    from sdu.validation import validate_number_selection
+
+    # Validates selection made between 1-2 and is not a floating point value
+    selection = validate_number_selection(maximum = 2, minimum = 1, message=&#34;Select option 1 or 2: &#34;, no_float = True)
+
+    if selection == 1:
+        print(&#39;selection 1 made&#39;)
+
+    elif selection == 2:
+        print(&#39;selection 2 made&#39;)
+    ```
     &#34;&#34;&#34;
 
     valid_answer = False
@@ -388,6 +544,9 @@ print('You win!')
         except:
             print(&#34;Invalid input please try again&#34;)
 
+        if no_float and type(selection) == float:
+            print(&#34;Decimal values are not permitted&#34;)
+            continue
         if selection &gt; maximum: # More than maximum
             print(&#34;Invalid input the selection made was larger than {}&#34;.format(maximum))
 
@@ -408,7 +567,12 @@ print('You win!')
 <div class="toc">
 <ul>
 <li><a href="#functions">Functions</a></li>
-<li><a href="#examples">Examples</a></li>
+<li><a href="#examples">Examples</a><ul>
+<li><a href="#validate-a-selection-between-option-1-or-2-and-exclude-floating-points">Validate a selection between option 1 or 2 and exclude floating points</a></li>
+<li><a href="#asking-user-which-condiment-they-want">Asking user which condiment they want</a></li>
+<li><a href="#ask-someone-to-confirm-if-they-want-fries-with-that">Ask someone to confirm if they want fries with that</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <ul id="index">
@@ -419,6 +583,7 @@ print('You win!')
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
+<li><code><a title="sdu.validation.confirm" href="#sdu.validation.confirm">confirm</a></code></li>
 <li><code><a title="sdu.validation.validate_choices" href="#sdu.validation.validate_choices">validate_choices</a></code></li>
 <li><code><a title="sdu.validation.validate_number_selection" href="#sdu.validation.validate_number_selection">validate_number_selection</a></code></li>
 </ul>
@@ -427,9 +592,7 @@ print('You win!')
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.7.4</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.1</a>.</p>
 </footer>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad()</script>
 </body>
 </html>

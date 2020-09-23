@@ -3,15 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.7.4" />
+<meta name="generator" content="pdoc 0.9.1" />
 <title>sdu.paths API documentation</title>
-<meta name="description" content="Utilities for dealing with system paths …" />
-<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
-<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
-<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{font-weight:bold}#index h4 + ul{margin-bottom:.6em}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
-<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<meta name="description" content="This module contains many useful utilities for dealing with system paths such as: …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
 <style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
 </head>
 <body>
 <main>
@@ -20,57 +22,93 @@
 <h1 class="title">Module <code>sdu.paths</code></h1>
 </header>
 <section id="section-intro">
-<p>Utilities for dealing with system paths.</p>
+<p>This module contains many useful utilities for dealing with system paths such as:</p>
+<ul>
+<li>A pre and post processing pipeline for system paths</li>
+<li>Ability to add paths to the PATH variable</li>
+</ul>
 <h2 id="functions">Functions</h2>
 <p>preprocess_paths -&gt; list:
-Preprocesses paths to normalize them as standard unix-style paths. See notes for details</p>
+Preprocesses paths to normalize them as standard unix-style paths</p>
 <p>postprocess_paths -&gt; list:
-Postprocesses existing paths to be used by dispatcher.
-This means things like expanding wildcards, and processing correct path seperators.</p>
+Postprocesses existing paths (assuming they've been preprocessed) for use in environment</p>
 <p>process_paths -&gt; list:
-Takes a list or tuple of paths and normalizes and globs them. See notes for details.</p>
+Takes a list or tuple of paths and normalizes and globs them. See notes for details</p>
+<p>add_to_path :
+Takes in a path to a program and adds it to the sytem PATH variable</p>
+<h2 id="notes">Notes</h2>
+<h3 id="preprocessing-steps-include">Preprocessing steps include</h3>
+<ul>
+<li>Converting \ seperators to /</li>
+<li>Converting %USERPROFILE% values on windows to ~</li>
+</ul>
+<h3 id="postprocessing-steps-include">Postprocessing steps include</h3>
+<ul>
+<li>expanding wildcards (For directories, file paths are excluded)</li>
+<li>processing correct path seperators</li>
+<li>Regex selection expansion (For directories, file paths are excluded)</li>
+</ul>
 <h2 id="examples">Examples</h2>
-<p>An example of the preprocessing to postprocessing pipeline on a windows machine (because of the wildcard and OS results will vary)</p>
-<pre><code>from sdu.paths import preprocess_paths, postprocess_paths
+<h3 id="preprocessing-to-postprocessing-pipeline">Preprocessing to postprocessing pipeline</h3>
+<pre><code># Because of the wildcard and OS results will vary
+from sdu.paths import preprocess_paths, postprocess_paths
 
-paths = ['~/Desktop/Development/Canadian Coding/SSB', 'C:\\Users\\Kieran\\Desktop\\Development\\*', '~\\Desktop\\Development\\Personal\\noter', '.']
+paths = ['~/Desktop/Development/Canadian Coding/SSB', 'C:\Users\Kieran\Desktop\Development\*', '~\Desktop\Development\Personal\noter', '.']
 
 print(preprocess_paths(paths)) # Prints: ['~/Desktop/Development/Canadian Coding/SSB', '~/Desktop/Development/*' , '~/Desktop/Development/Personal/noter', '.']
 
-print(postprocess_paths(paths)) # Prints: ['C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB', 'C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding', 'C:\\Users\\Kieran\\Desktop\\Development\\Personal', 'C:\\Users\\Kieran\\Desktop\\Development\\pystall', 'C:\\Users\\Kieran\\Desktop\\Development\\python-package-template', 'C:\\Users\\Kieran\\Desktop\\Development\\Work', 'C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter', 'C:\\Users\\Kieran\\Desktop\\sdu'] 
+print(postprocess_paths(paths)) # Prints: ['C:\Users\Kieran\Desktop\Development\Canadian Coding\SSB', 'C:\Users\Kieran\Desktop\Development\Canadian Coding', 'C:\Users\Kieran\Desktop\Development\Personal', 'C:\Users\Kieran\Desktop\Development\pystall', 'C:\Users\Kieran\Desktop\Development\python-package-template', 'C:\Users\Kieran\Desktop\Development\Work', 'C:\Users\Kieran\Desktop\Development\Personal\noter', 'C:\Users\Kieran\Desktop\sdu'] 
 </code></pre>
-<p>An example of path processing on a windows machine (because of the wildcard and OS results will vary)</p>
-<pre><code>from sdu.paths import process_paths
+<h3 id="add-a-folder-in-the-downloads-folder-called-micro-editormicro-141">Add a folder in the downloads folder called /micro editor/micro-1.4.1</h3>
+<pre><code>from sdu.paths import add_to_path, process_paths
 
-paths = ['~/Desktop/Development/Canadian Coding/SSB', 'C:\\Users\\Kieran\\Desktop\\Development\\*', '~\\Desktop\\Development\\Personal\\noter', '.']
-
-print(process_paths(paths)) # Prints: ['C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB', 'C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding', 'C:\\Users\\Kieran\\Desktop\\Development\\Personal', 'C:\\Users\\Kieran\\Desktop\\Development\\pystall', 'C:\\Users\\Kieran\\Desktop\\Development\\python-package-template', 'C:\\Users\\Kieran\\Desktop\\Development\\Work', 'C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter', 'C:\\Users\\Kieran\\Desktop\\sdu'] 
+program_path = f&quot;C:\Users\Kieran\Downloads\micro editor\micro-1.4.1&quot; # Path that contains the executeable
+add_to_path(program_path) # Adds the program_path to the path variable
 </code></pre>
 <h2 id="see-also">See Also</h2>
-<p><code>Glob module information: &lt;https://docs.python.org/3/library/glob.html&gt;</code></p>
+<p><code>Glob module information - &lt;https://docs.python.org/3/library/glob.html&gt;</code></p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">r&#34;&#34;&#34;Utilities for dealing with system paths.
+<pre><code class="python">&#34;&#34;&#34;This module contains many useful utilities for dealing with system paths such as:
+
+- A pre and post processing pipeline for system paths
+- Ability to add paths to the PATH variable
 
 Functions
 ---------
 preprocess_paths -&gt; list:
-    Preprocesses paths to normalize them as standard unix-style paths. See notes for details
+    Preprocesses paths to normalize them as standard unix-style paths
 
 postprocess_paths -&gt; list:
-    Postprocesses existing paths to be used by dispatcher.
-        This means things like expanding wildcards, and processing correct path seperators.
+    Postprocesses existing paths (assuming they&#39;ve been preprocessed) for use in environment
 
 process_paths -&gt; list:
-    Takes a list or tuple of paths and normalizes and globs them. See notes for details.
+    Takes a list or tuple of paths and normalizes and globs them. See notes for details
+
+add_to_path :
+    Takes in a path to a program and adds it to the sytem PATH variable
+
+Notes
+-----
+### Preprocessing steps include
+
+- Converting \\ seperators to /
+- Converting %USERPROFILE% values on windows to ~
+
+### Postprocessing steps include
+
+- expanding wildcards (For directories, file paths are excluded)
+- processing correct path seperators
+- Regex selection expansion (For directories, file paths are excluded)
 
 Examples
 --------
-An example of the preprocessing to postprocessing pipeline on a windows machine (because of the wildcard and OS results will vary)
+### Preprocessing to postprocessing pipeline
 
 ```
+# Because of the wildcard and OS results will vary
 from sdu.paths import preprocess_paths, postprocess_paths
 
 paths = [&#39;~/Desktop/Development/Canadian Coding/SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\*&#39;, &#39;~\\Desktop\\Development\\Personal\\noter&#39;, &#39;.&#39;]
@@ -80,35 +118,39 @@ print(preprocess_paths(paths)) # Prints: [&#39;~/Desktop/Development/Canadian Co
 print(postprocess_paths(paths)) # Prints: [&#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\pystall&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\python-package-template&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Work&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter&#39;, &#39;C:\\Users\\Kieran\\Desktop\\sdu&#39;] 
 ```
 
-An example of path processing on a windows machine (because of the wildcard and OS results will vary)
-
+### Add a folder in the downloads folder called /micro editor/micro-1.4.1
 ```
-from sdu.paths import process_paths
+from sdu.paths import add_to_path, process_paths
 
-paths = [&#39;~/Desktop/Development/Canadian Coding/SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\*&#39;, &#39;~\\Desktop\\Development\\Personal\\noter&#39;, &#39;.&#39;]
-
-print(process_paths(paths)) # Prints: [&#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\pystall&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\python-package-template&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Work&#39;, &#39;C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter&#39;, &#39;C:\\Users\\Kieran\\Desktop\\sdu&#39;] 
+program_path = f&#34;C:\\Users\\Kieran\\Downloads\\micro editor\\micro-1.4.1&#34; # Path that contains the executeable
+add_to_path(program_path) # Adds the program_path to the path variable
 ```
 
 See Also
 --------
-Glob module information: https://docs.python.org/3/library/glob.html
+Glob module information - https://docs.python.org/3/library/glob.html
 
 &#34;&#34;&#34;
 
 # Standard lib dependencies
-import os
-import glob
-import copy
-import logging
+import re       # Used to pattern match with RegEx
+import os       # Used to validate system paths
+import glob     # Used to glob (expand) paths
+import copy     # Used to copy objects safely so no data is lost
+import logging  # Used to log information when debugging
+from typing import Union
 
 
-def preprocess_paths(paths:list) -&gt; list:
-    &#34;&#34;&#34;Preprocesses paths to normalize them as standard unix-style paths.
+def preprocess_paths(paths:Union[list, tuple]) -&gt; list:
+    &#34;&#34;&#34;Preprocesses paths to normalize them as standard unix-style paths
+
+    This means:
+        - Converting \\ seperators to /
+        - Converting %USERPROFILE% values on windows to ~
 
     Parameters
     ----------
-    paths : (list|tuple)
+    paths : (list or tuple)
         A list or tuple of paths, can be relative or absolute. See Notes for details.
     
     Example
@@ -134,35 +176,56 @@ def preprocess_paths(paths:list) -&gt; list:
     &#34;&#34;&#34;
     logging.info(f&#34;Beginning path preprocessing on {paths}&#34;)
     result = list(copy.deepcopy(paths))
+
     for index, directory in enumerate(result):
         directory = directory.strip()
         logging.debug(f&#34;Directory: {directory}&#34;)
+        # Convert relative directories to absolute directories
         if directory.startswith(&#34;.&#34;) and (len(directory) &gt; 1):
             directory = os.path.abspath(directory)
-        if not &#34;~&#34; in directory:
-            if os.name == &#34;nt&#34;:
-                directory = directory.replace(os.getenv(&#39;USERPROFILE&#39;),&#34;~&#34;)
-
-            else:
+        # Replace HOME values
+        if not directory.startswith(&#34;~&#34;):
+            if not os.name == &#34;nt&#34;: # Not windows
                 directory = directory.replace(os.getenv(&#39;HOME&#39;),&#34;~&#34;)
-            directory = directory.replace(&#34;\\&#34;, &#34;/&#34;)
-            result[index] = directory
-        else:
-            directory = directory.replace(&#34;\\&#34;, &#34;/&#34;)
-            result[index] = directory
+
+        # Replace backslashes (windows) with slashes (*nix)
+        directory = directory.replace(&#34;\\&#34;, &#34;/&#34;)
+
+        # Replace old path with preprocessed form
+        result[index] = directory
+
+    # Remove the %USERPROFILE% from windows paths
+    regex = r&#34;([A-Z]:/Users/.*)&#34;
+    matches = re.finditer(regex, &#34;\n&#34;.join(result), re.MULTILINE | re.IGNORECASE)
+    matches = [match.group() for match in matches]
+    for path in matches:
+        path_index = result.index(path)
+        path = path.split(&#34;/&#34;)[2::] # Remove drive letter and username
+        path[0] = &#34;~&#34;
+        result[path_index] = &#34;/&#34;.join(path)
 
     logging.debug(f&#34;Result: {result}&#34;)
 
     return result
 
-def postprocess_paths(paths:list) -&gt; list:
-    &#34;&#34;&#34;Postprocesses existing paths to be used by dispatcher.
-    This means things like expanding wildcards, and processing correct path seperators.
-    
+def postprocess_paths(paths:Union[list, tuple], include_files = False, silent = True) -&gt; list:
+    &#34;&#34;&#34;Postprocesses existing paths (assuming they&#39;ve been preprocessed) for use in environment
+
+    This postprocessing means:
+        - expanding wildcards
+        - processing correct path seperators
+        - Regex selection expansion
+
     Parameters
     ----------
-    paths : (list|tuple)
+    paths : (list or tuple)
         A list or tuple of paths, can be relative or absolute. See Notes for details.
+
+    include_files : (bool)
+        Whether to include file results into resulting list
+
+    silent : (bool)
+        Whether to throw an error if one of the paths is invalid
 
     Example
     -------
@@ -196,10 +259,8 @@ def postprocess_paths(paths:list) -&gt; list:
     result = []
     for directory in paths:
         directory = directory.strip()
-
         if os.name == &#34;nt&#34;:
             directory = directory.replace(&#34;/&#34;, &#34;\\&#34;)
-
         if directory.startswith(&#34;.&#34;):
             try:
                 if directory[1] == &#34;/&#34; or directory[1] == &#34;\\&#34;:
@@ -212,25 +273,29 @@ def postprocess_paths(paths:list) -&gt; list:
                 directory = directory.replace(&#34;~&#34;,f&#34;{os.getenv(&#39;USERPROFILE&#39;)}&#34;)
             else:
                 directory = directory.replace(&#34;~&#34;, f&#34;{os.getenv(&#39;HOME&#39;)}&#34;)
-        
-        if &#34;*&#34; in directory:
 
+        if &#34;*&#34; in directory or &#34;[&#34; in directory:
             wildcard_paths = glob.glob(directory.strip())
-
             for wildcard_directory in wildcard_paths:
-                result.append(wildcard_directory)
-        else:
-            result.append(directory)
+                if os.path.isdir(wildcard_directory):
+                    result.append(wildcard_directory)
+
+        else: # Does not contain a tilde or glob character
+            if not silent:
+                if os.path.isdir(directory):
+                    raise NotADirectoryError(f&#34;Directory was not found on system: {directory}&#34;)
+            if os.path.isdir(directory):
+                result.append(directory)
 
     logging.debug(f&#34;Result: {result}&#34;)
     return result
 
-def process_paths(paths:list) -&gt; list:
-    &#34;&#34;&#34;Takes a list or tuple of paths and normalizes and globs them. See notes for details.
+def process_paths(paths:Union[list, tuple]) -&gt; list:
+    &#34;&#34;&#34;Takes a list or tuple of paths and normalizes and globs them. See notes for details
 
     Parameters
     ----------
-    paths : (list|tuple)
+    paths : (list or tuple)
         A list or tuple of paths, can be relative or absolute. See Notes for details.
 
     Example
@@ -245,13 +310,12 @@ def process_paths(paths:list) -&gt; list:
 
     Notes
     -----
-    - Since this function runs the preprocess_paths() &amp; postprocess_paths() functions all 
-        implications are carried through to this function including:
+    Since this function runs the preprocess_paths() &amp; postprocess_paths() functions all implications are carried through to this function including:
 
-        - This function does not change &#39;.&#39; paths unless they include a relative path to a separate folder. i.e. a plain &#39;.&#39; is untouched but &#39;./folder-name&#39; is converted to an absolute path.
-        - This function leaves in *&#39;s, and brackets and globs paths using those characters for processing.
-        - This function will take the HOME(*nix) or USERPROFILE(windows) environment variables and interpret them appropriately per OS.
-    
+    - This function does not change &#39;.&#39; paths unless they include a relative path to a separate folder. i.e. a plain &#39;.&#39; is untouched but &#39;./folder-name&#39; is converted to an absolute path.
+    - This function leaves in *&#39;s, and brackets and globs paths using those characters for processing.
+    - This function will take the HOME(*nix) or USERPROFILE(windows) environment variables and interpret them appropriately per OS.
+
     See Also
     --------
     Glob module information: https://docs.python.org/3/library/glob.html
@@ -262,7 +326,64 @@ def process_paths(paths:list) -&gt; list:
     result = copy.deepcopy(paths)
     result = preprocess_paths(result)
     result = postprocess_paths(result)
-    return result</code></pre>
+    return result
+
+
+def add_to_path(program_path:str):
+    &#34;&#34;&#34;Takes in a path to a program and adds it to the sytem PATH variable
+
+    Parameters
+    ----------
+    program_path : str
+        The path to the installation folder of the application
+
+    Notes
+    -----
+    * The path must be an absolute path
+    * The linux version of the command assumes you&#39;re using ~/.bashrc
+    * Because there are so many possible ways this can fail, there are no catches in place
+
+    Raises
+    ------
+    ValueError:
+        If path provided is not a valid path to a directory
+
+    Examples
+    --------
+    Add a folder in the downloads folder called /micro editor/micro-1.4.1
+    ```
+    from sdu.paths import add_to_path, process_paths
+
+    program_path = f&#34;C:\\Users\\Kieran\\Downloads\\micro editor\\micro-1.4.1&#34; # Path that contains the executeable
+    add_to_path(program_path) # Adds the program_path to the path variable
+    ```
+    &#34;&#34;&#34;
+    program_path = os.path.abspath(program_path)
+    if not os.path.isdir(program_path):
+        raise ValueError(f&#34;Path provided is not a valid path: {program_path}&#34;)
+
+    if os.name == &#34;nt&#34;: # Windows systems
+        import winreg # Allows access to the windows registry
+        import ctypes # Allows interface with low-level C API&#39;s
+
+        with winreg.ConnectRegistry(None, winreg.HKEY_CURRENT_USER) as root: # Get the current user registry
+            with winreg.OpenKey(root, &#34;Environment&#34;, 0, winreg.KEY_ALL_ACCESS) as key: # Go to the environment key
+                existing_path_value = winreg.EnumValue(key, 3)[1] # Grab the current path value
+                new_path_value = existing_path_value + program_path + &#34;;&#34; # Takes the current path value and appends the new program path
+                winreg.SetValueEx(key, &#34;PATH&#34;, 0, winreg.REG_EXPAND_SZ, new_path_value) # Updated the path with the updated path
+
+            # Tell other processes to update their environment
+            HWND_BROADCAST = 0xFFFF
+            WM_SETTINGCHANGE = 0x1A
+            SMTO_ABORTIFHUNG = 0x0002
+            result = ctypes.c_long()
+            SendMessageTimeoutW = ctypes.windll.user32.SendMessageTimeoutW
+            SendMessageTimeoutW(HWND_BROADCAST, WM_SETTINGCHANGE, 0, u&#34;Environment&#34;, SMTO_ABORTIFHUNG, 5000, ctypes.byref(result),) 
+    else: # If system is *nix
+        with open(f&#34;{os.getenv(&#39;HOME&#39;)}/.bashrc&#34;, &#34;a&#34;) as bash_file:  # Open bashrc file
+            bash_file.write(f&#39;\nexport PATH=&#34;{program_path}:$PATH&#34;\n&#39;)  # Add program path to Path variable
+        os.system(f&#34;. {os.getenv(&#39;HOME&#39;)}/.bashrc&#34;)  # Update bash source
+    print(f&#34;Added {program_path} to path, please restart shell for changes to take effect&#34;)</code></pre>
 </details>
 </section>
 <section>
@@ -272,16 +393,110 @@ def process_paths(paths:list) -&gt; list:
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="sdu.paths.postprocess_paths"><code class="name flex">
-<span>def <span class="ident">postprocess_paths</span></span>(<span>paths)</span>
+<dt id="sdu.paths.add_to_path"><code class="name flex">
+<span>def <span class="ident">add_to_path</span></span>(<span>program_path: str)</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Postprocesses existing paths to be used by dispatcher.
-This means things like expanding wildcards, and processing correct path seperators.</p>
+<div class="desc"><p>Takes in a path to a program and adds it to the sytem PATH variable</p>
 <h2 id="parameters">Parameters</h2>
 <dl>
-<dt><strong><code>paths</code></strong> :&ensp;(<code>list</code>|<code>tuple</code>)</dt>
+<dt><strong><code>program_path</code></strong> :&ensp;<code>str</code></dt>
+<dd>The path to the installation folder of the application</dd>
+</dl>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>The path must be an absolute path</li>
+<li>The linux version of the command assumes you're using ~/.bashrc</li>
+<li>Because there are so many possible ways this can fail, there are no catches in place</li>
+</ul>
+<h2 id="raises">Raises</h2>
+<h2 id="valueerror">Valueerror</h2>
+<p>If path provided is not a valid path to a directory</p>
+<h2 id="examples">Examples</h2>
+<p>Add a folder in the downloads folder called /micro editor/micro-1.4.1</p>
+<pre><code>from sdu.paths import add_to_path, process_paths
+
+program_path = f&quot;C:\Users\Kieran\Downloads\micro editor\micro-1.4.1&quot; # Path that contains the executeable
+add_to_path(program_path) # Adds the program_path to the path variable
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_to_path(program_path:str):
+    &#34;&#34;&#34;Takes in a path to a program and adds it to the sytem PATH variable
+
+    Parameters
+    ----------
+    program_path : str
+        The path to the installation folder of the application
+
+    Notes
+    -----
+    * The path must be an absolute path
+    * The linux version of the command assumes you&#39;re using ~/.bashrc
+    * Because there are so many possible ways this can fail, there are no catches in place
+
+    Raises
+    ------
+    ValueError:
+        If path provided is not a valid path to a directory
+
+    Examples
+    --------
+    Add a folder in the downloads folder called /micro editor/micro-1.4.1
+    ```
+    from sdu.paths import add_to_path, process_paths
+
+    program_path = f&#34;C:\\Users\\Kieran\\Downloads\\micro editor\\micro-1.4.1&#34; # Path that contains the executeable
+    add_to_path(program_path) # Adds the program_path to the path variable
+    ```
+    &#34;&#34;&#34;
+    program_path = os.path.abspath(program_path)
+    if not os.path.isdir(program_path):
+        raise ValueError(f&#34;Path provided is not a valid path: {program_path}&#34;)
+
+    if os.name == &#34;nt&#34;: # Windows systems
+        import winreg # Allows access to the windows registry
+        import ctypes # Allows interface with low-level C API&#39;s
+
+        with winreg.ConnectRegistry(None, winreg.HKEY_CURRENT_USER) as root: # Get the current user registry
+            with winreg.OpenKey(root, &#34;Environment&#34;, 0, winreg.KEY_ALL_ACCESS) as key: # Go to the environment key
+                existing_path_value = winreg.EnumValue(key, 3)[1] # Grab the current path value
+                new_path_value = existing_path_value + program_path + &#34;;&#34; # Takes the current path value and appends the new program path
+                winreg.SetValueEx(key, &#34;PATH&#34;, 0, winreg.REG_EXPAND_SZ, new_path_value) # Updated the path with the updated path
+
+            # Tell other processes to update their environment
+            HWND_BROADCAST = 0xFFFF
+            WM_SETTINGCHANGE = 0x1A
+            SMTO_ABORTIFHUNG = 0x0002
+            result = ctypes.c_long()
+            SendMessageTimeoutW = ctypes.windll.user32.SendMessageTimeoutW
+            SendMessageTimeoutW(HWND_BROADCAST, WM_SETTINGCHANGE, 0, u&#34;Environment&#34;, SMTO_ABORTIFHUNG, 5000, ctypes.byref(result),) 
+    else: # If system is *nix
+        with open(f&#34;{os.getenv(&#39;HOME&#39;)}/.bashrc&#34;, &#34;a&#34;) as bash_file:  # Open bashrc file
+            bash_file.write(f&#39;\nexport PATH=&#34;{program_path}:$PATH&#34;\n&#39;)  # Add program path to Path variable
+        os.system(f&#34;. {os.getenv(&#39;HOME&#39;)}/.bashrc&#34;)  # Update bash source
+    print(f&#34;Added {program_path} to path, please restart shell for changes to take effect&#34;)</code></pre>
+</details>
+</dd>
+<dt id="sdu.paths.postprocess_paths"><code class="name flex">
+<span>def <span class="ident">postprocess_paths</span></span>(<span>paths: Union[list, tuple], include_files=False, silent=True) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Postprocesses existing paths (assuming they've been preprocessed) for use in environment</p>
+<p>This postprocessing means:
+- expanding wildcards
+- processing correct path seperators
+- Regex selection expansion</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>paths</code></strong> :&ensp;<code>(list</code> or <code>tuple)</code></dt>
 <dd>A list or tuple of paths, can be relative or absolute. See Notes for details.</dd>
+<dt><strong><code>include_files</code></strong> :&ensp;<code>(bool)</code></dt>
+<dd>Whether to include file results into resulting list</dd>
+<dt><strong><code>silent</code></strong> :&ensp;<code>(bool)</code></dt>
+<dd>Whether to throw an error if one of the paths is invalid</dd>
 </dl>
 <h2 id="example">Example</h2>
 <p>An example of the preprocessing to postprocessing pipeline on a windows machine (because of the wildcard and OS results will vary)</p>
@@ -299,23 +514,33 @@ Although in some cases python will interpret the data properly and work, it is b
 </ul>
 <h2 id="returns">Returns</h2>
 <dl>
-<dt><code>list</code>:</dt>
+<dt><code>list:</code></dt>
 <dd>The list of useable paths (post-normalization &amp; globing)</dd>
 </dl>
 <h2 id="see-also">See Also</h2>
-<p><code>Glob module information: &lt;https://docs.python.org/3/library/glob.html&gt;</code></p></section>
+<p><code>Glob module information: &lt;https://docs.python.org/3/library/glob.html&gt;</code></p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def postprocess_paths(paths:list) -&gt; list:
-    &#34;&#34;&#34;Postprocesses existing paths to be used by dispatcher.
-    This means things like expanding wildcards, and processing correct path seperators.
-    
+<pre><code class="python">def postprocess_paths(paths:Union[list, tuple], include_files = False, silent = True) -&gt; list:
+    &#34;&#34;&#34;Postprocesses existing paths (assuming they&#39;ve been preprocessed) for use in environment
+
+    This postprocessing means:
+        - expanding wildcards
+        - processing correct path seperators
+        - Regex selection expansion
+
     Parameters
     ----------
-    paths : (list|tuple)
+    paths : (list or tuple)
         A list or tuple of paths, can be relative or absolute. See Notes for details.
+
+    include_files : (bool)
+        Whether to include file results into resulting list
+
+    silent : (bool)
+        Whether to throw an error if one of the paths is invalid
 
     Example
     -------
@@ -349,10 +574,8 @@ Although in some cases python will interpret the data properly and work, it is b
     result = []
     for directory in paths:
         directory = directory.strip()
-
         if os.name == &#34;nt&#34;:
             directory = directory.replace(&#34;/&#34;, &#34;\\&#34;)
-
         if directory.startswith(&#34;.&#34;):
             try:
                 if directory[1] == &#34;/&#34; or directory[1] == &#34;\\&#34;:
@@ -365,28 +588,35 @@ Although in some cases python will interpret the data properly and work, it is b
                 directory = directory.replace(&#34;~&#34;,f&#34;{os.getenv(&#39;USERPROFILE&#39;)}&#34;)
             else:
                 directory = directory.replace(&#34;~&#34;, f&#34;{os.getenv(&#39;HOME&#39;)}&#34;)
-        
-        if &#34;*&#34; in directory:
 
+        if &#34;*&#34; in directory or &#34;[&#34; in directory:
             wildcard_paths = glob.glob(directory.strip())
-
             for wildcard_directory in wildcard_paths:
-                result.append(wildcard_directory)
-        else:
-            result.append(directory)
+                if os.path.isdir(wildcard_directory):
+                    result.append(wildcard_directory)
+
+        else: # Does not contain a tilde or glob character
+            if not silent:
+                if os.path.isdir(directory):
+                    raise NotADirectoryError(f&#34;Directory was not found on system: {directory}&#34;)
+            if os.path.isdir(directory):
+                result.append(directory)
 
     logging.debug(f&#34;Result: {result}&#34;)
     return result</code></pre>
 </details>
 </dd>
 <dt id="sdu.paths.preprocess_paths"><code class="name flex">
-<span>def <span class="ident">preprocess_paths</span></span>(<span>paths)</span>
+<span>def <span class="ident">preprocess_paths</span></span>(<span>paths: Union[list, tuple]) ‑> list</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Preprocesses paths to normalize them as standard unix-style paths.</p>
+<div class="desc"><p>Preprocesses paths to normalize them as standard unix-style paths</p>
+<p>This means:
+- Converting \ seperators to /
+- Converting %USERPROFILE% values on windows to ~</p>
 <h2 id="parameters">Parameters</h2>
 <dl>
-<dt><strong><code>paths</code></strong> :&ensp;(<code>list</code>|<code>tuple</code>)</dt>
+<dt><strong><code>paths</code></strong> :&ensp;<code>(list</code> or <code>tuple)</code></dt>
 <dd>A list or tuple of paths, can be relative or absolute. See Notes for details.</dd>
 </dl>
 <h2 id="example">Example</h2>
@@ -403,19 +633,23 @@ print(preprocess_paths(paths)) # Prints: ['~/Desktop/Development/Canadian Coding
 </ul>
 <h2 id="returns">Returns</h2>
 <dl>
-<dt><code>list</code>:</dt>
+<dt><code>list:</code></dt>
 <dd>The normalized &amp; preprocessed paths</dd>
-</dl></section>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def preprocess_paths(paths:list) -&gt; list:
-    &#34;&#34;&#34;Preprocesses paths to normalize them as standard unix-style paths.
+<pre><code class="python">def preprocess_paths(paths:Union[list, tuple]) -&gt; list:
+    &#34;&#34;&#34;Preprocesses paths to normalize them as standard unix-style paths
+
+    This means:
+        - Converting \\ seperators to /
+        - Converting %USERPROFILE% values on windows to ~
 
     Parameters
     ----------
-    paths : (list|tuple)
+    paths : (list or tuple)
         A list or tuple of paths, can be relative or absolute. See Notes for details.
     
     Example
@@ -441,22 +675,33 @@ print(preprocess_paths(paths)) # Prints: ['~/Desktop/Development/Canadian Coding
     &#34;&#34;&#34;
     logging.info(f&#34;Beginning path preprocessing on {paths}&#34;)
     result = list(copy.deepcopy(paths))
+
     for index, directory in enumerate(result):
         directory = directory.strip()
         logging.debug(f&#34;Directory: {directory}&#34;)
+        # Convert relative directories to absolute directories
         if directory.startswith(&#34;.&#34;) and (len(directory) &gt; 1):
             directory = os.path.abspath(directory)
-        if not &#34;~&#34; in directory:
-            if os.name == &#34;nt&#34;:
-                directory = directory.replace(os.getenv(&#39;USERPROFILE&#39;),&#34;~&#34;)
-
-            else:
+        # Replace HOME values
+        if not directory.startswith(&#34;~&#34;):
+            if not os.name == &#34;nt&#34;: # Not windows
                 directory = directory.replace(os.getenv(&#39;HOME&#39;),&#34;~&#34;)
-            directory = directory.replace(&#34;\\&#34;, &#34;/&#34;)
-            result[index] = directory
-        else:
-            directory = directory.replace(&#34;\\&#34;, &#34;/&#34;)
-            result[index] = directory
+
+        # Replace backslashes (windows) with slashes (*nix)
+        directory = directory.replace(&#34;\\&#34;, &#34;/&#34;)
+
+        # Replace old path with preprocessed form
+        result[index] = directory
+
+    # Remove the %USERPROFILE% from windows paths
+    regex = r&#34;([A-Z]:/Users/.*)&#34;
+    matches = re.finditer(regex, &#34;\n&#34;.join(result), re.MULTILINE | re.IGNORECASE)
+    matches = [match.group() for match in matches]
+    for path in matches:
+        path_index = result.index(path)
+        path = path.split(&#34;/&#34;)[2::] # Remove drive letter and username
+        path[0] = &#34;~&#34;
+        result[path_index] = &#34;/&#34;.join(path)
 
     logging.debug(f&#34;Result: {result}&#34;)
 
@@ -464,13 +709,13 @@ print(preprocess_paths(paths)) # Prints: ['~/Desktop/Development/Canadian Coding
 </details>
 </dd>
 <dt id="sdu.paths.process_paths"><code class="name flex">
-<span>def <span class="ident">process_paths</span></span>(<span>paths)</span>
+<span>def <span class="ident">process_paths</span></span>(<span>paths: Union[list, tuple]) ‑> list</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Takes a list or tuple of paths and normalizes and globs them. See notes for details.</p>
+<div class="desc"><p>Takes a list or tuple of paths and normalizes and globs them. See notes for details</p>
 <h2 id="parameters">Parameters</h2>
 <dl>
-<dt><strong><code>paths</code></strong> :&ensp;(<code>list</code>|<code>tuple</code>)</dt>
+<dt><strong><code>paths</code></strong> :&ensp;<code>(list</code> or <code>tuple)</code></dt>
 <dd>A list or tuple of paths, can be relative or absolute. See Notes for details.</dd>
 </dl>
 <h2 id="example">Example</h2>
@@ -480,29 +725,24 @@ print(preprocess_paths(paths)) # Prints: ['~/Desktop/Development/Canadian Coding
 print(process_paths(paths)) # Prints: ['C:\Users\Kieran\Desktop\Development\Canadian Coding\SSB', 'C:\Users\Kieran\Desktop\Development\Canadian Coding', 'C:\Users\Kieran\Desktop\Development\Personal', 'C:\Users\Kieran\Desktop\Development\pystall', 'C:\Users\Kieran\Desktop\Development\python-package-template', 'C:\Users\Kieran\Desktop\Development\Work', 'C:\Users\Kieran\Desktop\Development\Personal\noter', 'C:\Users\Kieran\Desktop\sdu'] 
 </code></pre>
 <h2 id="notes">Notes</h2>
-<ul>
-<li>
-<p>Since this function runs the preprocess_paths() &amp; postprocess_paths() functions all
-implications are carried through to this function including:</p>
+<p>Since this function runs the preprocess_paths() &amp; postprocess_paths() functions all implications are carried through to this function including:</p>
 <ul>
 <li>This function does not change '.' paths unless they include a relative path to a separate folder. i.e. a plain '.' is untouched but './folder-name' is converted to an absolute path.</li>
 <li>This function leaves in *'s, and brackets and globs paths using those characters for processing.</li>
 <li>This function will take the HOME(*nix) or USERPROFILE(windows) environment variables and interpret them appropriately per OS.</li>
 </ul>
-</li>
-</ul>
 <h2 id="see-also">See Also</h2>
-<p><code>Glob module information: &lt;https://docs.python.org/3/library/glob.html&gt;</code></p></section>
+<p><code>Glob module information: &lt;https://docs.python.org/3/library/glob.html&gt;</code></p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def process_paths(paths:list) -&gt; list:
-    &#34;&#34;&#34;Takes a list or tuple of paths and normalizes and globs them. See notes for details.
+<pre><code class="python">def process_paths(paths:Union[list, tuple]) -&gt; list:
+    &#34;&#34;&#34;Takes a list or tuple of paths and normalizes and globs them. See notes for details
 
     Parameters
     ----------
-    paths : (list|tuple)
+    paths : (list or tuple)
         A list or tuple of paths, can be relative or absolute. See Notes for details.
 
     Example
@@ -517,13 +757,12 @@ implications are carried through to this function including:</p>
 
     Notes
     -----
-    - Since this function runs the preprocess_paths() &amp; postprocess_paths() functions all 
-        implications are carried through to this function including:
+    Since this function runs the preprocess_paths() &amp; postprocess_paths() functions all implications are carried through to this function including:
 
-        - This function does not change &#39;.&#39; paths unless they include a relative path to a separate folder. i.e. a plain &#39;.&#39; is untouched but &#39;./folder-name&#39; is converted to an absolute path.
-        - This function leaves in *&#39;s, and brackets and globs paths using those characters for processing.
-        - This function will take the HOME(*nix) or USERPROFILE(windows) environment variables and interpret them appropriately per OS.
-    
+    - This function does not change &#39;.&#39; paths unless they include a relative path to a separate folder. i.e. a plain &#39;.&#39; is untouched but &#39;./folder-name&#39; is converted to an absolute path.
+    - This function leaves in *&#39;s, and brackets and globs paths using those characters for processing.
+    - This function will take the HOME(*nix) or USERPROFILE(windows) environment variables and interpret them appropriately per OS.
+
     See Also
     --------
     Glob module information: https://docs.python.org/3/library/glob.html
@@ -547,7 +786,16 @@ implications are carried through to this function including:</p>
 <div class="toc">
 <ul>
 <li><a href="#functions">Functions</a></li>
-<li><a href="#examples">Examples</a></li>
+<li><a href="#notes">Notes</a><ul>
+<li><a href="#preprocessing-steps-include">Preprocessing steps include</a></li>
+<li><a href="#postprocessing-steps-include">Postprocessing steps include</a></li>
+</ul>
+</li>
+<li><a href="#examples">Examples</a><ul>
+<li><a href="#preprocessing-to-postprocessing-pipeline">Preprocessing to postprocessing pipeline</a></li>
+<li><a href="#add-a-folder-in-the-downloads-folder-called-micro-editormicro-141">Add a folder in the downloads folder called /micro editor/micro-1.4.1</a></li>
+</ul>
+</li>
 <li><a href="#see-also">See Also</a></li>
 </ul>
 </div>
@@ -559,6 +807,7 @@ implications are carried through to this function including:</p>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
+<li><code><a title="sdu.paths.add_to_path" href="#sdu.paths.add_to_path">add_to_path</a></code></li>
 <li><code><a title="sdu.paths.postprocess_paths" href="#sdu.paths.postprocess_paths">postprocess_paths</a></code></li>
 <li><code><a title="sdu.paths.preprocess_paths" href="#sdu.paths.preprocess_paths">preprocess_paths</a></code></li>
 <li><code><a title="sdu.paths.process_paths" href="#sdu.paths.process_paths">process_paths</a></code></li>
@@ -568,9 +817,7 @@ implications are carried through to this function including:</p>
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.7.4</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.1</a>.</p>
 </footer>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad()</script>
 </body>
 </html>
