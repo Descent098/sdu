@@ -1,4 +1,11 @@
-r"""A set of utilities to make developing scripts simpler and easier
+"""A set of utilities to make developing scripts simpler and easier
+
+There are several goals with this project:
+
+1. Provide a useful API for well developed functions with error catching and testing for commonly annoying situations
+2. Provide cross-platform implementations of functions (where possible)
+3. Give people access to source code to learn how the functions work and just pull what's needed
+4. Serve as a repository of general knowledge to share solutions to issues with people
 
 Installation
 -----------
@@ -23,86 +30,29 @@ or
 
 Modules
 -------
-paths:
-    This module contains many useful utilities for dealing with system paths.
+### paths
 
-terminal:
-    A module for helpful utilities with generating CLI's
+This module contains many useful utilities for dealing with system paths such as:
 
-validation:
-    Contains a set of common validation schemes.
+- A pre and post processing pipeline for system paths
+- Ability to add paths to the PATH variable
 
-type_conversions:
-    This module is for quick and common conversions between types with sensible options
+### cli
 
-Examples
---------
+A module for helpful utilities with generating CLI's such as:
 
-**A random number guessing game using sdu validation.**
+- Clearing the terminal
 
-```
-import random
+### validation
 
-from sdu.validation import validate_number_selection
+Contains a set of common validation schemes such as:
 
-number = random.randint(0,10)
+- Validating number input is between a set value at the command line
+- Validate provided string is an accepted value
 
-selection = validate_number_selection(maximum = 10, minimum = 0, message="guess a number between 0-10: ")
+### type_conversions
 
-while selection != number:
-    if selection < number:
-        print('Too Low')
+Quick and common conversions between types with sensible options such as:
 
-    elif selection > number:
-        print('Too High')
-
-    selection = validate_number_selection(maximum = 10, minimum = 0, message="guess a number between 0-10: ")
-
-print('You win!') # After number has been guessed correctly
-```
-
-
-**Clearing terminal after filling it with hello's**
-
-```
-from sdu.terminal import clear_terminal
-
-print('hello\n'*250) # Fill screen with hello's
-
-clear_terminal() # Clears the terminal NOTE: cross platform
-```
-
-
-**An example of path processing on a windows machine (because of the wildcard and OS results will vary)**
-
-```
-from sdu.paths import process_paths
-
-paths = ['~/Desktop/Development/Canadian Coding/SSB', 'C:\\Users\\Kieran\\Desktop\\Development\\*', '~\\Desktop\\Development\\Personal\\noter', '.']
-
-print(process_paths(paths)) # Prints: ['C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB', 'C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding', 'C:\\Users\\Kieran\\Desktop\\Development\\Personal', 'C:\\Users\\Kieran\\Desktop\\Development\\pystall', 'C:\\Users\\Kieran\\Desktop\\Development\\python-package-template', 'C:\\Users\\Kieran\\Desktop\\Development\\Work', 'C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter', 'C:\\Users\\Kieran\\Desktop\\sdu'] 
-```
-
-
-**An example of the preprocessing to postprocessing pipeline on a windows machine (because of the wildcard and OS results will vary)**
-
-```
-from sdu.paths import preprocess_paths, postprocess_paths
-
-paths = ['~/Desktop/Development/Canadian Coding/SSB', 'C:\\Users\\Kieran\\Desktop\\Development\\*', '~\\Desktop\\Development\\Personal\\noter', '.']
-
-print(preprocess_paths(paths)) # Prints: ['~/Desktop/Development/Canadian Coding/SSB', '~/Desktop/Development/*' , '~/Desktop/Development/Personal/noter', '.']
-
-print(postprocess_paths(paths)) # Prints: ['C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding\\SSB', 'C:\\Users\\Kieran\\Desktop\\Development\\Canadian Coding', 'C:\\Users\\Kieran\\Desktop\\Development\\Personal', 'C:\\Users\\Kieran\\Desktop\\Development\\pystall', 'C:\\Users\\Kieran\\Desktop\\Development\\python-package-template', 'C:\\Users\\Kieran\\Desktop\\Development\\Work', 'C:\\Users\\Kieran\\Desktop\\Development\\Personal\\noter', 'C:\\Users\\Kieran\\Desktop\\sdu'] 
-```
-
-
-**Print a shopping list with each item on a new line**
-```
-from sdu.type_conversions import stringify_list
-
-shopping_list = ["eggs", "ham", "spam"]
-
-print((stringify_list(shopping_list, seperator='\n', spacing=0))) # Prints list with each item on new line
-```
+- Converting a dictionary (and second dimension dictionary keys) to defaultdict(s)
 """
