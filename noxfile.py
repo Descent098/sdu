@@ -1,15 +1,5 @@
 import nox
-
-def confirm(message:str, validators:list = ["y", "yes"]):
-    """Used to confirm you have done what is being asked"""
-    valid_input = False
-
-    while not valid_input:
-        response = input(message + str(validators).replace(","," or").replace("[","(").replace("]",")").replace("'",""))
-        if response in validators:
-            valid_input = True
-        else:
-            raise ValueError(f"Failed to confirm; {message}")
+from sdu.validation import confirm
 
 @nox.session
 def build(session):
@@ -40,7 +30,7 @@ def release(session):
 @nox.session(python=["3.5", "3.6", "3.7", "3.8"])
 def test(session):
     """Runs tests defined in tests folder against all installed versions
-       of python from 3.5-3.8"""
+        of python from 3.5-3.8"""
     session.install('.')
     session.install('pytest')
     session.run('pytest')

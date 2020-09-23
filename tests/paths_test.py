@@ -1,10 +1,11 @@
-"""This set of test tests the paths module and it's functions"""
+"""This set of test to tests the paths module and it's functions"""
 
-import os
+# Standard Library Dependencies
+import os                # Used to validate paths
+import glob              # Used to glob (expand) paths
 
-import glob
-
-from sdu.paths import *
+# Internal Dependencies
+from sdu.paths import * # Functionality being tested
 
 def test_preprocess_paths():
     """Validates that input paths are serialized in a normalized format across OS's.
@@ -19,14 +20,14 @@ def test_preprocess_paths():
     """
 
     if os.name == "nt": # Test windows cases
-        win_paths = ['~/Desktop/Development/Canadian Coding/SSB', f'{os.getenv("USERPROFILE")}\\Desktop\\Development\\*', '~\\Desktop\\Development\\Personal\\noter', '.']
+        win_paths = ['~/Documents', f'{os.getenv("USERPROFILE")}\\Desktop\\Development\\*', '~\\Downloads', '.']
         
-        assert preprocess_paths(win_paths) == ["~/Desktop/Development/Canadian Coding/SSB","~/Desktop/Development/*","~/Desktop/Development/Personal/noter","."]
+        assert preprocess_paths(win_paths) == ["~/Documents","~/Desktop/Development/*","~/Downloads","."]
     
     else: # Test *nix cases
-        nix_paths = ['~/Desktop/Development/Canadian Coding/SSB', f"{os.getenv('HOME')}/Desktop/Development/*", '~/Desktop/Development/Personal/noter', '.']
+        nix_paths = ['~/Documents', f"{os.getenv('HOME')}/Desktop/Development/*", '~/Downloads', '.']
 
-        assert preprocess_paths(nix_paths) == ["~/Desktop/Development/Canadian Coding/SSB","~/Desktop/Development/*","~/Desktop/Development/Personal/noter","."]
+        assert preprocess_paths(nix_paths) == ["~/Documents","~/Desktop/Development/*","~/Downloads","."]
 
 
 def test_postprocess_paths():
@@ -41,21 +42,23 @@ def test_postprocess_paths():
     - *nix/MacOS (only on *nix/MacOS machine)
     """
     
-    paths = ['~/Desktop/Development/Canadian Coding/SSB', '~/Desktop/*' , '~/Desktop/Development/Personal/noter' , '.']
+    paths = ['~/Documents', '~/Desktop/*' , '~/Downloads' , '.']
     
     if os.name == "nt": # Windows case
-        correct_paths = [f"{os.getenv('USERPROFILE')}\\Desktop\\Development\\Canadian Coding\\SSB"]
+        correct_paths = [f"{os.getenv('USERPROFILE')}\\Documents"]
         for current_path in glob.glob(f"{os.getenv('USERPROFILE')}\\Desktop\\*"):
-            correct_paths.append(current_path)
-        correct_paths.append(f"{os.getenv('USERPROFILE')}\\Desktop\\Development\\Personal\\noter")
+            if os.path.isdir(current_path):
+                correct_paths.append(current_path)
+        correct_paths.append(f"{os.getenv('USERPROFILE')}\\Downloads")
         correct_paths.append(os.path.abspath("."))
         assert postprocess_paths(paths) == correct_paths
     
     else: # Test *nix cases
-        correct_paths = [f"{os.getenv('HOME')}/Desktop/Development/Canadian Coding/SSB"]
+        correct_paths = [f"{os.getenv('HOME')}/Documents"]
         for current_path in glob.glob(f"{os.getenv('HOME')}/Desktop/*"):
-            correct_paths.append(current_path)
-        correct_paths.append(f"{os.getenv('HOME')}/Desktop/Development/Personal/noter")
+            if os.path.isdir(current_path):
+                correct_paths.append(current_path)
+        correct_paths.append(f"{os.getenv('HOME')}/Downloads")
         correct_paths.append(os.path.abspath("."))
         assert postprocess_paths(paths) == correct_paths
 
@@ -71,20 +74,22 @@ def test_process_paths():
     - *nix/MacOS (only on *nix/MacOS machine)
     """
 
-    paths = ['~/Desktop/Development/Canadian Coding/SSB', '~/Desktop/*' , '~/Desktop/Development/Personal/noter' , '.']
+    paths = ['~/Documents', '~/Desktop/*' , '~\\Downloads' , '.']
     
     if os.name == "nt": # Windows case
-        correct_paths = [f"{os.getenv('USERPROFILE')}\\Desktop\\Development\\Canadian Coding\\SSB"]
+        correct_paths = [f"{os.getenv('USERPROFILE')}\\Documents"]
         for current_path in glob.glob(f"{os.getenv('USERPROFILE')}\\Desktop\\*"):
-            correct_paths.append(current_path)
-        correct_paths.append(f"{os.getenv('USERPROFILE')}\\Desktop\\Development\\Personal\\noter")
+            if os.path.isdir(current_path):
+                correct_paths.append(current_path)
+        correct_paths.append(f"{os.getenv('USERPROFILE')}\\Downloads")
         correct_paths.append(os.path.abspath("."))
         assert process_paths(paths) == correct_paths
     
     else: # Test *nix cases
-        correct_paths = [f"{os.getenv('HOME')}/Desktop/Development/Canadian Coding/SSB"]
+        correct_paths = [f"{os.getenv('HOME')}/Documents"]
         for current_path in glob.glob(f"{os.getenv('HOME')}/Desktop/*"):
-            correct_paths.append(current_path)
-        correct_paths.append(f"{os.getenv('HOME')}/Desktop/Development/Personal/noter")
+            if os.path.isdir(current_path):
+                correct_paths.append(current_path)
+        correct_paths.append(f"{os.getenv('HOME')}/Downloads")
         correct_paths.append(os.path.abspath("."))
         assert process_paths(paths) == correct_paths

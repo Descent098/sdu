@@ -1,44 +1,65 @@
-r"""A set of common validation schemes.
+"""Contains a set of common validation schemes such as:
+
+- Validating number input is between a set value at the command line
+- Validate provided string is an accepted value
 
 Functions
 ---------
-validate_number_selection -> int|float:
-    Used to validate user input is within range minimum < input < maximum. Keeps user in loop
-    until input is within range.
+validate_number_selection -> int or float:
+    Used to validate user input is within range *minimum <= input <= maximum*
+
+validate_choices -> str:
+    Used to validate users input is one of the validators
+
+confirm -> bool:
+    Used to validate users input is yes or no
 
 Examples
 --------
-Random number guessing game
+### Validate a selection between option 1 or 2 and exclude floating points
 
 ```
-import random
-
 from sdu.validation import validate_number_selection
 
-number = random.randint(0,10)
+# Validates selection made between 1-2 and is not a floating point value
+selection = validate_number_selection(maximum = 2, minimum = 1, message="Select option 1 or 2: ", no_float = True)
 
-selection = -1 # initialize variable
+if selection == 1:
+    print('selection 1 made')
 
-while selection != number:
-    selection = validate_number_selection(maximum = 10, minimum = 0, message="guess a number between 0-10: ")
-
-print('You win!')
+elif selection == 2:
+    print('selection 2 made')
 ```
 
-Asking user which condiment they want
+### Asking user which condiment they want
 
 ```
 from sdu.validation import validate_choices
 
 # Stays in loop until user enters one of the valid_choices
-condiment = validate_choices('What condiment do you want', valid_choices=['Ketchup', 'Mayo'])
+condiment = validate_choices('What condiment do you want', valid_choices=['Ketchup', 'Mayo']) # Prints: What condiment do you want?(ketchup or mayo)
+```
+
+### Ask someone to confirm if they want fries with that
+
+```
+from sdu.validation import confirm
+
+with_fries = confirm('Do you want fries with that?')
+
+if with_fries:
+    print('Here are your fries')
+else:
+    print('No fry for you')
 ```
 
 """
 
-from .type_conversions import stringify_list
+from typing import Union
 
-def validate_number_selection(maximum = 1, minimum=0, message = "Please select one of the above options: ") -> int:
+import colored
+
+def validate_number_selection(maximum = 1, minimum=0, message = "Please select one of the above options: ", no_float = False) -> Union[int, float]:
     """
     Used to validate user input is within range minimum < input < maximum. Keeps user in loop
     until input is within range.
@@ -54,29 +75,30 @@ def validate_number_selection(maximum = 1, minimum=0, message = "Please select o
     message: (str)
         What to prompt user with when function is called
 
-    Examples
-    --------
-    Random number guessing game
+    no_float: bool
+        If true then floating point values are not allowed
 
-    ```
-    import random
-    
-    from sdu.validation import validate_number_selection
-
-    number = random.randint(0,10)
-
-    selection = -1 # initialize variable
-
-    while selection != number:
-        selection = validate_number_selection(maximum = 10, minimum = 0, message="guess a number between 0-10: ")
-
-    print('You win!')
-    ```
-    
     Returns
     -------
-    int|float:
+    int or float:
         The validated result from the user
+
+    Examples
+    --------
+    Validate a selection between option 1 or 2 and exclude floating points
+
+    ```
+    from sdu.validation import validate_number_selection
+
+    # Validates selection made between 1-2 and is not a floating point value
+    selection = validate_number_selection(maximum = 2, minimum = 1, message="Select option 1 or 2: ", no_float = True)
+
+    if selection == 1:
+        print('selection 1 made')
+
+    elif selection == 2:
+        print('selection 2 made')
+    ```
     """
 
     valid_answer = False
@@ -87,6 +109,9 @@ def validate_number_selection(maximum = 1, minimum=0, message = "Please select o
         except:
             print("Invalid input please try again")
 
+        if no_float and type(selection) == float:
+            print("Decimal values are not permitted")
+            continue
         if selection > maximum: # More than maximum
             print("Invalid input the selection made was larger than {}".format(maximum))
 
@@ -95,7 +120,6 @@ def validate_number_selection(maximum = 1, minimum=0, message = "Please select o
 
         else: # If answer is valid and in range
             return selection
-
 
 
 def validate_choices(message:str, valid_choices:list, display_choices:bool = True) -> str:
@@ -120,7 +144,7 @@ def validate_choices(message:str, valid_choices:list, display_choices:bool = Tru
     from sdu.validation import validate_choices
 
     # Stays in loop until user enters one of the valid_choices
-    condiment = validate_choices('What condiment do you want', valid_choices=['Ketchup', 'Mayo'])
+    condiment = validate_choices('What condiment do you want', valid_choices=['Ketchup', 'Mayo']) # Prints: What condiment do you want?(ketchup or mayo)
     ```
 
     Notes
@@ -137,7 +161,7 @@ def validate_choices(message:str, valid_choices:list, display_choices:bool = Tru
     for count, choice in enumerate(valid_choices): # Preprocessing choices to lowercase and stripping whitespace
         valid_choices[count] = choice.lower().strip()
     
-    stringified_choices = stringify_list(valid_choices, seperator=" or")
+    stringified_choices = " or ".join(valid_choices)
 
     while 1:
         if display_choices:
@@ -149,4 +173,46 @@ def validate_choices(message:str, valid_choices:list, display_choices:bool = Tru
         if response.lower().strip() in valid_choices:
             return response
         else:
-            print(f"Message provided was not one of the choices; {stringified_choices}")
+            print(f"Selection provided was not one of the choices; {stringified_choices}")
+
+
+def confirm(message:str) -> bool:
+    """Used to validate users input is yes or no
+    
+    Parameters
+    ----------
+    message: (str)
+        The message to display for confirmation
+
+    Examples
+    --------
+    Ask someone if they want fries with that.
+
+    ```
+    from sdu.validation import confirm
+
+    with_fries = confirm('Do you want fries with that?')
+
+    if with_fries:
+        print('Here are your fries')
+    else:
+        print('No fry for you')
+    ```
+
+    Returns
+    -------
+    bool:
+        Returns True if response is yes and False if no."""
+
+    validators = ["y", "yes"]
+    invalidators = ["n", "no"]
+    valid_input = False
+
+    while not valid_input:
+        response = input(message + "(y or n): ")
+        if response.lower().strip() in validators:
+            return True
+        elif response.lower().strip() in invalidators:
+            return False
+        else:
+            print(f"{colored.fg(1)}Please respond with either yes or no\n{colored.fg(15)}")
