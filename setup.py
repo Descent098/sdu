@@ -41,6 +41,6 @@ setuptools.setup(
     classifiers = [
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",
-        "Development Status :: 1 - Planning"
+        "Development Status :: 4 - Beta"
     ],
 )
