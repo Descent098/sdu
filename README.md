@@ -1,4 +1,4 @@
-<img src="https://github.com/Descent098/sdu/blob/master/.github/sdu.png" alt="sdu logo" style="zoom:35%;" />
+![sdu logo](https://github.com/Descent098/sdu/blob/master/sdu.png)
 
 [![DeepSource](https://deepsource.io/gh/Descent098/sdu.svg/?label=active+issues&show_trend=true)](https://deepsource.io/gh/Descent098/sdu/?ref=repository-badge)
 

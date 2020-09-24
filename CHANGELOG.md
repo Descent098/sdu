@@ -1,5 +1,13 @@
 # Changelog
 
+## V0.1.1; September 24th
+
+Fixing logo on pypi :)
+
+### Bug fixes
+
+- Fixed logo 404 on PyPi 
+
 ## V0.1.0; September 24th
 Focus was on adding more functionality, and modernizing the package setup.
 
